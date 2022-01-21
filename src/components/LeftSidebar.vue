@@ -6,6 +6,7 @@
 
     <div class="playlists-wrapper">
       <!-- Playlist Link Card Start -->
+      <!-- We're rendering router-link as adiv rather than an anchor -->
       <router-link
         :to="`/playlist/${playlist.name}`"
         custom
@@ -13,7 +14,6 @@
         :key="index"
         v-slot="{ navigate }"
       >
-        <!-- We're rendering router-link as adiv rather than an anchor -->
         <div
           :class="
             $route.path === `/playlist/${playlist.name}` ? 'active-card' : ''
