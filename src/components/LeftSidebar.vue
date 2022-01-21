@@ -3,16 +3,32 @@
     <center>
       <div id="logo"><img src="../assets/logo.png" alt="" /></div>
     </center>
+
     <div class="playlists-wrapper">
-      <div
-        class="playlist-card"
+      <!-- Playlist Link Card Start -->
+      <router-link
+        :to="`/playlist/${playlist.name}`"
+        custom
         v-for="(playlist, index) in playlists"
         :key="index"
+        v-slot="{ navigate }"
       >
-        <span class="text">
-          {{ playlist.name }}
-        </span>
-      </div>
+        <!-- We're rendering router-link as adiv rather than an anchor -->
+        <div
+          :class="
+            $route.path === `/playlist/${playlist.name}` ? 'active-card' : ''
+          "
+          class="playlist-card link"
+          @click="navigate"
+          @keypress.enter="navigate"
+          role="link"
+        >
+          <span class="text">
+            {{ playlist.name }}
+          </span>
+        </div>
+      </router-link>
+      <!-- Playlist Link Card End -->
     </div>
   </div>
 </template>
@@ -69,6 +85,9 @@ export default {
   background-color: rgb(248, 248, 248);
 }
 
+.active-card {
+  background: black !important;
+}
 .text {
   padding-left: 35px;
   /* font-weight: bold; */

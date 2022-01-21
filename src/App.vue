@@ -33,7 +33,6 @@ export default {
     this.createPlaylist("Playlist-3", ["song1", "song2"]);
     this.createPlaylist("Playlist-4", ["song1", "song2"]);
     this.createPlaylist("Playlist-5", ["song1", "song2"]);
-    this.createPlaylist("Playlist-5", ["song1", "song2"]);
   },
 };
 </script>
@@ -62,5 +61,8 @@ export default {
 .container-flex {
   display: flex;
   flex-direction: row;
+}
+.link {
+  cursor: pointer;
 }
 </style>
