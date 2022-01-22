@@ -46,6 +46,21 @@ export default {
   --left-sidebar-width: 350px;
   --cyan: #35e6da;
   --blue: #0496ff;
+  --primary-gradient: linear-gradient(
+    93.64deg,
+    #35e6da 0.98%,
+    rgba(5, 145, 245, 0.42) 119.65%
+  );
+  --active-gradient: linear-gradient(
+    93.64deg,
+    rgba(63, 50, 77, 0.83) 0.98%,
+    #004b81 119.65%
+  );
+  --hover-gradient: linear-gradient(
+    93.64deg,
+    #35e6da 0.98%,
+    rgba(10, 5, 245, 0.42) 119.65%
+  );
 }
 
 /* Removing margin and padding from all elements */
@@ -57,6 +72,7 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #f4f5fe;
 }
 .container-flex {
   display: flex;

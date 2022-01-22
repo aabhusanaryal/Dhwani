@@ -1,7 +1,11 @@
 <template>
   <div class="left-sidebar">
     <center>
-      <div id="logo"><img src="../assets/logo.png" alt="" /></div>
+      <div id="logo">
+        <router-link to="/"
+          ><img src="../assets/logo.png" alt="Dhwani Logo"
+        /></router-link>
+      </div>
     </center>
 
     <div class="playlists-wrapper">
@@ -52,11 +56,7 @@ export default {
   left: 0;
   min-width: var(--left-sidebar-width);
   min-height: 100vh;
-  background: linear-gradient(
-    85.47deg,
-    rgba(53, 230, 218, 0.65) 10.3%,
-    rgba(5, 145, 245, 0.47) 95.71%
-  );
+  background: white;
   /* text-align: center; */
 }
 .playlists-wrapper {
@@ -72,25 +72,26 @@ export default {
   font-family: "Roboto", sans-serif;
   font-size: 25px;
   width: 80%;
-  background-color: #fff;
+  background: var(--primary-gradient);
   /* padding-left: 90px; */
   margin: 10px 0;
-  border-radius: 40px;
-  height: 50px;
+  border-radius: 15px;
+  height: 60px;
   /* Centers the text inside the card vertically. The value should be same as height */
-  line-height: 50px;
+  line-height: 60px;
+  transition: 0.3s;
 }
 
 .playlist-card:hover {
-  background-color: rgb(248, 248, 248);
+  background: var(--hover-gradient);
 }
 
 .active-card {
-  background: black !important;
+  background: var(--active-gradient) !important;
 }
 .text {
   padding-left: 35px;
   /* font-weight: bold; */
-  color: var(--cyan);
+  color: white;
 }
 </style>
