@@ -75,7 +75,7 @@ export default {
   background: var(--primary-gradient);
   /* padding-left: 90px; */
   margin: 10px 0;
-  border-radius: 15px;
+  border-radius: 10px;
   height: 60px;
   /* Centers the text inside the card vertically. The value should be same as height */
   line-height: 60px;
