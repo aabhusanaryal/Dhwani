@@ -1,22 +1,19 @@
 <template>
-  <!-- <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div> -->
   <div class="container-flex">
     <LeftSidebar :playlists="playlists" />
     <router-view />
-
     <RightSidebar :genre="genre" />
   </div>
+  <Player />
 </template>
 
 <script>
 import LeftSidebar from "@/components/LeftSidebar.vue";
 import RightSidebar from "@/components/RightSidebar.vue";
+import Player from "@/components/Player.vue";
 
 export default {
-  components: { LeftSidebar, RightSidebar },
+  components: { LeftSidebar, RightSidebar, Player },
   data() {
     return {
       playlists: [],
@@ -36,6 +33,7 @@ export default {
     this.createPlaylist("Playlist-3", ["song1", "song2"]);
     this.createPlaylist("Playlist-4", ["song1", "song2"]);
     this.createPlaylist("Playlist-5", ["song1", "song2"]);
+    this.createPlaylist("Playlist-6", ["song1", "song2"]);
   },
 };
 </script>
