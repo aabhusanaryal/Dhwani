@@ -6,6 +6,7 @@
   <div class="container-flex">
     <LeftSidebar :playlists="playlists" />
     <router-view />
+
     <RightSidebar :genre="genre" />
   </div>
 </template>
@@ -53,15 +54,22 @@ export default {
     #35e6da 0.98%,
     rgba(5, 145, 245, 0.42) 119.65%
   );
-  --active-gradient: linear-gradient(
-    93.64deg,
-    rgba(63, 50, 77, 0.83) 0.98%,
-    #004b81 119.65%
-  );
   --hover-gradient: linear-gradient(
     93.64deg,
     #35e6da 0.98%,
     rgba(10, 5, 245, 0.42) 119.65%
+  );
+  --merged-gradient: linear-gradient(
+    93.64deg,
+    #35e6da 0.98%,
+    rgba(5, 145, 245, 0.42),
+    #35e6da 0.98%,
+    rgba(16, 55, 245, 0.5) 119.65%
+  );
+  --active-gradient: linear-gradient(
+    93.64deg,
+    rgba(63, 50, 77, 0.83) 0.98%,
+    #004b81 119.65%
   );
 }
 
@@ -70,6 +78,27 @@ export default {
   margin: 0;
   padding: 0;
 }
+html {
+  overflow: hidden; /* Removing scrollbar from the main html element */
+}
+
+/* Making the scrollbar look pretty (like myself - Aabhusan) */
+::-webkit-scrollbar {
+  width: 20px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #e6e6f1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #d4d4da;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

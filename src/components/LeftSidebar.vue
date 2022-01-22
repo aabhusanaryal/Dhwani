@@ -3,7 +3,7 @@
     <center>
       <div id="logo">
         <router-link to="/"
-          ><img src="../assets/logo.png" alt="Dhwani Logo"
+          ><img src="../assets/logo.svg" alt="Dhwani Logo"
         /></router-link>
       </div>
     </center>
@@ -71,18 +71,22 @@ export default {
   font-family: "Roboto", sans-serif;
   font-size: 25px;
   width: 80%;
-  background: var(--primary-gradient);
+  background-image: var(--merged-gradient);
+  background-size: 200%;
+  background-position: left;
   /* padding-left: 90px; */
   margin: 10px 0;
   border-radius: 10px;
   height: 60px;
   /* Centers the text inside the card vertically. The value should be same as height */
   line-height: 60px;
-  transition: 0.3s;
+  transition: 0.5s;
 }
 
-.playlist-card:hover {
-  background: var(--hover-gradient);
+.playlist-card:hover,
+.playlist-card:focus {
+  background-position: right;
+  /* background: var(--hover-gradient); */
 }
 
 .active-card {
