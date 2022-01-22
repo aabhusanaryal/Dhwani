@@ -1,5 +1,7 @@
 <template>
-  <h1>{{ name }}</h1>
+  <div class="center-container">
+    <h1>{{ name }}</h1>
+  </div>
 </template>
 
 <script>
@@ -16,4 +18,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.center-container {
+  margin: 100px;
+  font-size: 25px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 100vh;
+}
+</style>

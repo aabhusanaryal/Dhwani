@@ -6,15 +6,16 @@
   <div class="container-flex">
     <LeftSidebar :playlists="playlists" />
     <router-view />
-    <div style="min-width: var(--left-sidebar-width)" dummy-div></div>
+    <RightSidebar />
   </div>
 </template>
 
 <script>
 import LeftSidebar from "@/components/LeftSidebar.vue";
+import RightSidebar from "@/components/RightSidebar.vue";
 
 export default {
-  components: { LeftSidebar },
+  components: { LeftSidebar, RightSidebar },
   data() {
     return {
       playlists: [],
@@ -80,5 +81,8 @@ export default {
 }
 .link {
   cursor: pointer;
+}
+.right-sidebar {
+  margin-left: auto; /* Sticks it to the right side */
 }
 </style>

@@ -53,7 +53,6 @@ export default {
   margin: 50px auto;
 }
 .left-sidebar {
-  left: 0;
   min-width: var(--left-sidebar-width);
   min-height: 100vh;
   background: white;
