@@ -6,7 +6,7 @@
   <div class="container-flex">
     <LeftSidebar :playlists="playlists" />
     <router-view />
-    <RightSidebar />
+    <RightSidebar :genre="genre" />
   </div>
 </template>
 
@@ -19,6 +19,7 @@ export default {
   data() {
     return {
       playlists: [],
+      genre: ["Chill", "LoFi", "EDM", "Romance", "Country", "Pop"],
     };
   },
   methods: {
@@ -40,7 +41,7 @@ export default {
 
 <style>
 /* Importing fonts */
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
 
 /* Setting variables */
 :root {
@@ -84,5 +85,8 @@ export default {
 }
 .right-sidebar {
   margin-left: auto; /* Sticks it to the right side */
+}
+.center-container {
+  min-width: 40%;
 }
 </style>
