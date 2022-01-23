@@ -1,5 +1,5 @@
 <template>
-  <div class="center-container">Hello this is home</div>
+  <div class="center-container">Hello this is home. lorem1000</div>
 </template>
 
 <script>

@@ -157,6 +157,9 @@ export default {
   height: 12px;
   width: 12px;
 }
+.slider::-moz-range-progress {
+  background-color: #43e5f7;
+}
 .medium-icon {
   width: 25px;
   height: 25px;
