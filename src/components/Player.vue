@@ -178,4 +178,30 @@ img {
 #next {
   margin-right: 20px;
 }
+
+/* For medium sized devices: */
+@media (max-width: 1350px) {
+  .player-wrapper {
+    width: 80%;
+  }
+}
+/* For small sized devices: */
+@media (max-width: 980px) {
+  .player-wrapper {
+    width: 90%;
+  }
+  .large-icon {
+    width: 40px;
+    height: 40px;
+  }
+  #previous {
+    margin-left: 5px;
+  }
+  #next {
+    margin-right: 5px;
+  }
+  .right {
+    display: none; /* Hiding volume controls in mobile devices */
+  }
+}
 </style>
