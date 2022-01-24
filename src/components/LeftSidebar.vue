@@ -1,5 +1,5 @@
 <template>
-  <div class="left-sidebar">
+  <div class="left-sidebar" role="navigation">
     <center>
       <div id="logo">
         <router-link to="/"
@@ -26,6 +26,7 @@
           @click="navigate"
           @keypress.enter="navigate"
           role="link"
+          tabindex="0"
         >
           <span class="text">
             {{ playlist.name }}
