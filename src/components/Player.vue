@@ -16,14 +16,25 @@
             <img
               class="medium-icon"
               id="previous"
+              @click="playPrevious"
               src="../assets/icons/previous.svg"
             />
           </div>
           <div>
-            <img class="large-icon" id="play" src="../assets/icons/play.svg" />
+            <img
+              class="large-icon"
+              id="play"
+              @click="playpause"
+              :src="require(`../assets/icons/${playpauseicon}.svg`)"
+            />
           </div>
           <div>
-            <img class="medium-icon" id="next" src="../assets/icons/next.svg" />
+            <img
+              class="medium-icon"
+              id="next"
+              @click="playNext"
+              src="../assets/icons/next.svg"
+            />
           </div>
 
           <div><img src="../assets/icons/shuffle.svg" /></div>
@@ -46,10 +57,10 @@
             class="seek-bar-input slider"
             min="0"
             max="100"
-            value="50"
+            v-model="seekSliderPosition"
           />
         </div>
-        <div class="timestamp">time2</div>
+        <div class="timestamp">{{ secondsToMinutes(currentTime) }}</div>
       </div>
     </div>
   </div>
@@ -58,6 +69,96 @@
 <script>
 export default {
   name: "Player",
+  props: ["playlists"],
+  data() {
+    return {
+      queue: [],
+      nowPlaying: 0,
+      paused: true,
+      seekSliderPosition: 0, // between 0 to 100
+      currentTime: 0, // audio duration in seconds
+    };
+  },
+
+  methods: {
+    playpause() {
+      // Playing if paused
+      if (this.paused) {
+        this.queue[this.nowPlaying].play();
+        this.paused = false;
+      }
+      // Pausing if playing
+      else {
+        this.queue[this.nowPlaying].pause();
+        this.paused = true;
+      }
+    },
+    playNext() {
+      this.queue[this.nowPlaying].pause();
+      this.nowPlaying++;
+      this.queue[this.nowPlaying].currentTime = 0;
+      this.queue[this.nowPlaying].play();
+      this.paused = false;
+    },
+    playPrevious() {
+      this.queue[this.nowPlaying].pause();
+      this.nowPlaying--;
+      this.queue[this.nowPlaying].currentTime = 0;
+      this.queue[this.nowPlaying].play();
+      this.paused = false;
+    },
+    secondsToMinutes(seconds) {
+      let minutes;
+      minutes = Math.floor(seconds / 60);
+      seconds -= minutes * 60;
+      minutes = minutes.toLocaleString("en-US", {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      });
+      seconds = seconds.toLocaleString("en-US", {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      });
+      return `${minutes}:${seconds}`;
+    },
+  },
+  mounted() {
+    // WEIRD CIRCULAR BUG
+    // setInterval(() => {
+    //   if (!this.paused) {
+    //     this.seekSliderPosition =
+    //       (this.queue[this.nowPlaying].currentTime /
+    //         this.queue[this.nowPlaying].duration) *
+    //       100;
+    //   }
+    // }, 500);
+    // Creating audio instance of all songs
+    this.playlists[0].songs.forEach((song) => {
+      let audio = new Audio(require(`@/assets/songs/${song}.mp3`));
+      this.queue.push(audio);
+    });
+  },
+  computed: {
+    playpauseicon() {
+      return this.paused ? "play" : "pause";
+    },
+    // currentTime() {
+    //   try {
+    //     return this.queue[this.nowPlaying].currentTime;
+    //   } catch {
+    //     return 0;
+    //   }
+    // },
+  },
+  watch: {
+    seekSliderPosition: function () {
+      this.currentTime = Math.floor(
+        (this.queue[this.nowPlaying].duration * this.seekSliderPosition) / 100
+      );
+      this.queue[this.nowPlaying].currentTime = this.currentTime;
+      console.log(this.currentTime);
+    },
+  },
 };
 </script>
 

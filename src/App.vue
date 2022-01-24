@@ -4,7 +4,8 @@
     <router-view />
     <RightSidebar :genre="genre" />
   </div>
-  <Player />
+  <!-- Only rendering the player if there's any song in it -->
+  <Player :playlists="playlists" v-if="playlists[0]" />
 </template>
 
 <script>
@@ -28,7 +29,10 @@ export default {
   },
   mounted() {
     // Creating fake playlists
-    this.createPlaylist("Playlist-1", ["song1", "song2"]);
+    this.createPlaylist("Playlist-1", [
+      "02. Paul Flint - Savage",
+      "03. Retrovision - Puzzle",
+    ]);
     this.createPlaylist("Playlist-2", ["song1", "song2"]);
     this.createPlaylist("Playlist-3", ["song1", "song2"]);
     this.createPlaylist("Playlist-4", ["song1", "song2"]);
