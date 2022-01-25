@@ -43,24 +43,31 @@
         <div class="right flex">
           <div><img src="../assets/icons/volume_low.svg" /></div>
           <div class="volume-bar-div">
-            <input type="range" class="volume-bar-input slider" />
+            <input
+              type="range"
+              class="volume-bar-input slider"
+              v-model="volume"
+            />
           </div>
           <div><img src="../assets/icons/volume_high.svg" /></div>
         </div>
       </div>
       <!-- Bottom bar contains audio timestamp and seek controls -->
       <div class="bottom-bar flex">
-        <div class="timestamp">time1</div>
+        <div class="timestamp">{{ secondsToMinutes(currentTime) }}</div>
         <div class="seek-bar-div">
           <input
             type="range"
             class="seek-bar-input slider"
             min="0"
-            max="100"
+            :max="seekBarMaxRange"
             v-model="seekSliderPosition"
+            @input="seekTrack"
           />
         </div>
-        <div class="timestamp">{{ secondsToMinutes(currentTime) }}</div>
+        <div class="timestamp">
+          {{ secondsToMinutes(queue[nowPlaying].duration - currentTime) }}
+        </div>
       </div>
     </div>
   </div>
@@ -74,9 +81,12 @@ export default {
     return {
       queue: [],
       nowPlaying: 0,
+      nowPlayingAduio: null,
       paused: true,
       seekSliderPosition: 0, // between 0 to 100
       currentTime: 0, // audio duration in seconds
+      seekBarMaxRange: 1000, // higher the better
+      volume: 5,
     };
   },
 
@@ -84,28 +94,42 @@ export default {
     playpause() {
       // Playing if paused
       if (this.paused) {
-        this.queue[this.nowPlaying].play();
+        this.nowPlayingAudio = this.queue[this.nowPlaying];
+        this.nowPlayingAudio.volume = this.volume / 100;
+        this.nowPlayingAudio.play();
         this.paused = false;
       }
       // Pausing if playing
       else {
-        this.queue[this.nowPlaying].pause();
+        this.nowPlayingAudio.pause();
         this.paused = true;
       }
     },
     playNext() {
-      this.queue[this.nowPlaying].pause();
+      if (!this.paused) this.nowPlayingAudio.pause();
       this.nowPlaying++;
-      this.queue[this.nowPlaying].currentTime = 0;
-      this.queue[this.nowPlaying].play();
+      this.nowPlayingAudio = this.queue[this.nowPlaying];
+      this.nowPlayingAudio.currentTime = 0;
+      this.nowPlayingAudio.volume = this.volume / 100;
+      this.nowPlayingAudio.play();
       this.paused = false;
     },
     playPrevious() {
-      this.queue[this.nowPlaying].pause();
+      if (!this.paused) this.nowPlayingAudio.pause();
       this.nowPlaying--;
-      this.queue[this.nowPlaying].currentTime = 0;
-      this.queue[this.nowPlaying].play();
+      this.nowPlayingAudio = this.queue[this.nowPlaying];
+      this.nowPlayingAudio.currentTime = 0;
+      this.nowPlayingAudio.volume = this.volume / 100;
+      this.nowPlayingAudio.play();
       this.paused = false;
+    },
+    seekTrack() {
+      this.currentTime = Math.floor(
+        (this.nowPlayingAudio.duration * this.seekSliderPosition) /
+          this.seekBarMaxRange
+      );
+      this.nowPlayingAudio.currentTime = this.currentTime;
+      console.log(this.currentTime);
     },
     secondsToMinutes(seconds) {
       let minutes;
@@ -115,23 +139,27 @@ export default {
         minimumIntegerDigits: 2,
         useGrouping: false,
       });
-      seconds = seconds.toLocaleString("en-US", {
+      seconds = Math.floor(seconds).toLocaleString("en-US", {
         minimumIntegerDigits: 2,
         useGrouping: false,
       });
       return `${minutes}:${seconds}`;
     },
   },
-  mounted() {
+  created() {
     // WEIRD CIRCULAR BUG
-    // setInterval(() => {
-    //   if (!this.paused) {
-    //     this.seekSliderPosition =
-    //       (this.queue[this.nowPlaying].currentTime /
-    //         this.queue[this.nowPlaying].duration) *
-    //       100;
-    //   }
-    // }, 500);
+    setInterval(() => {
+      if (!this.paused) {
+        this.seekSliderPosition =
+          (this.nowPlayingAudio.currentTime / this.nowPlayingAudio.duration) *
+          this.seekBarMaxRange;
+        this.currentTime = this.nowPlayingAudio.currentTime;
+        if (this.nowPlayingAudio.ended) {
+          // i.e after one song finishes playing, play next song
+          this.playNext();
+        }
+      }
+    }, 250);
     // Creating audio instance of all songs
     this.playlists[0].songs.forEach((song) => {
       let audio = new Audio(require(`@/assets/songs/${song}.mp3`));
@@ -142,21 +170,17 @@ export default {
     playpauseicon() {
       return this.paused ? "play" : "pause";
     },
-    // currentTime() {
-    //   try {
-    //     return this.queue[this.nowPlaying].currentTime;
-    //   } catch {
-    //     return 0;
-    //   }
-    // },
+    currentComputedTime() {
+      try {
+        return this.nowPlayingAudio.currentTime;
+      } catch {
+        return 0;
+      }
+    },
   },
   watch: {
-    seekSliderPosition: function () {
-      this.currentTime = Math.floor(
-        (this.queue[this.nowPlaying].duration * this.seekSliderPosition) / 100
-      );
-      this.queue[this.nowPlaying].currentTime = this.currentTime;
-      console.log(this.currentTime);
+    volume: function () {
+      this.nowPlayingAudio.volume = this.volume / 100;
     },
   },
 };
@@ -272,6 +296,7 @@ export default {
 img {
   width: 20px;
   height: 20px;
+  cursor: pointer;
 }
 #previous {
   margin-left: 20px;
