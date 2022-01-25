@@ -11,6 +11,7 @@
 import LeftSidebar from "@/components/LeftSidebar.vue";
 import RightSidebar from "@/components/RightSidebar.vue";
 import Player from "@/components/Player.vue";
+import DLL from "/src/assets/LinkedList.js"
 
 export default {
   components: { LeftSidebar, RightSidebar, Player },
@@ -18,6 +19,7 @@ export default {
     return {
       playlists: [],
       genre: ["Chill", "LoFi", "EDM", "Romance", "Country", "Pop"],
+      random: new DLL()
     };
   },
   methods: {
@@ -25,6 +27,17 @@ export default {
       let playlist = { name, songs };
       this.playlists.push(playlist);
     },
+    // addSong(){
+    //   let audio=new Audio(require('@/assets/one.mp3'))
+    //   this.random.insertEnd(audio);
+    // },
+    // playSong(){
+    //   this.playlists=this.random.getArray()
+    // },
+    // addafterId(){
+    //   let audio=new Audio(require('@/assets/one.mp3'))
+    //   this.random.addArray([audio,audio,audio]);  
+    // }
   },
   mounted() {
     // Creating fake playlists
