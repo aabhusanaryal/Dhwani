@@ -104,6 +104,8 @@ export default class DLL{
         let obj={}
         let arr=[]
         let ptr=this.start
+        if(ptr==null)
+            return arr
         while(ptr.next!=this.start){
             obj={
                 id:ptr.id,
@@ -126,6 +128,9 @@ export default class DLL{
     prevNode(){
         this.start=this.start.prev
         return this.start
+    }
+    clear(){
+        this.start=null
     }
 
 }

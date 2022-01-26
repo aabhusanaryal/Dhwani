@@ -59,6 +59,13 @@ export default {
     this.createPlaylist("Playlist-4", ["song1", "song2"]);
     this.createPlaylist("Playlist-5", ["song1", "song2"]);
     this.createPlaylist("Playlist-6", ["song1", "song2"]);
+    this.random.addArray([1,2,3,4])
+    console.log(this.random.getArray())
+    this.random.clear()
+    console.log(this.random.getArray())
+    this.random.addArray([4,5,6,7])
+    console.log(this.random.getArray())
+
   },
 };
 </script>
