@@ -1,6 +1,10 @@
 <template>
   <div class="container-flex">
     <LeftSidebar :playlists="playlists" />
+    <!-- <button @click="addSongend">Add end</button>
+    <button @click="addArray">Add array</button>
+    <button @click="getArray">Get array</button>
+    <button @click="deleteId">Delet</button> -->
     <router-view />
     <RightSidebar :genre="genre" />
   </div>
@@ -29,14 +33,22 @@ export default {
     },
     // addSong(){
     //   let audio=new Audio(require('@/assets/one.mp3'))
+    //   this.random.insertAfter(2,audio);
+    // },
+    // addSongend(){
+    //   let audio=new Audio(require('@/assets/one.mp3'))
     //   this.random.insertEnd(audio);
     // },
-    // playSong(){
+    // getArray(){
     //   this.playlists=this.random.getArray()
     // },
-    // addafterId(){
+    // addArray(){
     //   let audio=new Audio(require('@/assets/one.mp3'))
     //   this.random.addArray([audio,audio,audio]);  
+    //   this.random.addArray([audio,audio,audio]);  
+    // },
+    // deleteId(){
+    //   this.random.deleteId(2)
     // }
   },
   mounted() {
