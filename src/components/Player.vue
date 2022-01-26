@@ -298,6 +298,10 @@ img {
   height: 20px;
   cursor: pointer;
 }
+img:hover {
+  filter: invert(47%) sepia(1%) saturate(1663%) hue-rotate(20deg)
+    brightness(91%) contrast(94%);
+}
 #previous {
   margin-left: 20px;
 }
