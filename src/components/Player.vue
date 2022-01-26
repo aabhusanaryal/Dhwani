@@ -5,16 +5,22 @@
       <div class="top-bar grid">
         <!-- Left contains favourite, add to playlist -->
         <div class="left flex">
-          <div><img src="../assets/icons/heart.svg" /></div>
-          <div><img src="../assets/icons/playlist_add.svg" /></div>
+          <div><img
+                  class = "color-change" 
+                  src="../assets/icons/heart.svg" /></div>
+          <div><img
+                class = "color-change" 
+                src="../assets/icons/playlist_add.svg" /></div>
         </div>
         <!-- Center contains music controls -->
         <div class="center flex">
-          <div><img src="../assets/icons/loop.svg" /></div>
+          <div><img
+                  class="color-change" 
+                  src="../assets/icons/loop.svg" /></div>
 
           <div>
             <img
-              class="medium-icon"
+              class="medium-icon color-change"
               id="previous"
               @click="playPrevious"
               src="../assets/icons/previous.svg"
@@ -22,7 +28,7 @@
           </div>
           <div>
             <img
-              class="large-icon"
+              class="large-icon color-change"
               id="play"
               @click="playpause"
               :src="require(`../assets/icons/${playpauseicon}.svg`)"
@@ -30,14 +36,18 @@
           </div>
           <div>
             <img
-              class="medium-icon"
+              class="medium-icon color-change"
               id="next"
               @click="playNext"
               src="../assets/icons/next.svg"
             />
           </div>
 
-          <div><img src="../assets/icons/shuffle.svg" /></div>
+            <div>
+            <img  
+              class = "color-change"
+              src="../assets/icons/shuffle.svg" />
+            </div>
         </div>
         <!-- Right contains volume controls -->
         <div class="right flex">
@@ -285,6 +295,7 @@ export default {
 .slider::-moz-range-progress {
   background-color: #43e5f7;
 }
+
 .medium-icon {
   width: 25px;
   height: 25px;
@@ -298,8 +309,10 @@ img {
   height: 20px;
   cursor: pointer;
 }
-#previous {
-  margin-left: 20px;
+
+.color-change:hover{
+  filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
+  transition: ease-in 0.02s;
 }
 #next {
   margin-right: 20px;
