@@ -159,10 +159,10 @@ export default {
       this.paused = false;
     },
     seekTrack() {
-      this.currentTime = Math.floor(
+      this.currentTime =
         (this.nowPlaying.duration * this.seekSliderPosition) /
-          this.seekBarMaxRange
-      );
+        this.seekBarMaxRange;
+
       this.nowPlaying.currentTime = this.currentTime;
       // console.log(this.currentTime);
     },
@@ -187,9 +187,6 @@ export default {
     },
   },
   created() {
-    document.addEventListener("keydown", (e) => {
-      if (e.code == "Space") this.playpause();
-    });
     setInterval(() => {
       if (!this.paused) {
         this.seekSliderPosition =
@@ -206,6 +203,33 @@ export default {
     // console.log(this.playlists[0].songs);
     this.queuePlaylist(this.playlists[0]);
     this.play(this.queue.head());
+    // FIXME: remove pause
+
+    // Keyboard Shortcuts
+
+    document.addEventListener("keydown", (e) => {
+      // Play pause with spacebar start
+      if (e.code == "Space") this.playpause();
+      // Play pause with spacebar end
+
+      // Volume up and down with Ctrl + UP / DOWN start
+      if (e.ctrlKey && e.code == "ArrowUp")
+        this.volume < 90 ? (this.volume += 10) : (this.volume = 100);
+      if (e.ctrlKey && e.code == "ArrowDown")
+        this.volume > 10 ? (this.volume -= 10) : (this.volume = 0);
+      // Volume up and down with Ctrl + UP / DOWN end
+
+      // VSeek with Ctrl + LEFT/RIGHT start
+      if (e.ctrlKey && e.code == "ArrowRight") {
+        console.log("this ran");
+        this.seekSliderPosition += 30;
+        this.seekTrack();
+      }
+      if (e.ctrlKey && e.code == "ArrowLeft") {
+        this.seekSliderPosition -= 30;
+        this.seekTrack();
+      }
+    });
   },
   computed: {
     playpauseicon() {
