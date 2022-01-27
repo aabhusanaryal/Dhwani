@@ -117,6 +117,7 @@ export default {
       seekBarMaxRange: 1000, // higher the better
       volume: 5,
       metadata: {},
+      audioArr: [],
     };
   },
 
@@ -228,7 +229,9 @@ export default {
       // Preloading content
       document.onload = async () => {
         this.queue.getArray().forEach((songObj) => {
-          new Audio(require(`@/assets/songs/${songObj.path}.mp3`));
+          this.audioArr.push(
+            new Audio(require(`@/assets/songs/${songObj.path}.mp3`))
+          );
         });
       };
     });
