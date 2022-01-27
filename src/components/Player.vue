@@ -46,6 +46,7 @@
             <input
               type="range"
               class="volume-bar-input slider"
+              :style="`background-size: ${volume}% 100%;`"
               v-model="volume"
             />
           </div>
@@ -59,6 +60,9 @@
           <input
             type="range"
             class="seek-bar-input slider"
+            :style="`background-size: ${
+              (seekSliderPosition / seekBarMaxRange) * 100
+            }% 100%;`"
             min="0"
             :max="seekBarMaxRange"
             v-model="seekSliderPosition"
@@ -87,7 +91,7 @@ export default {
       queue: new DLL(),
       nowPlaying: null,
       paused: true,
-      seekSliderPosition: 0, // between 0 to 100
+      seekSliderPosition: 0, // between 0 to seekBarMaxRange
       currentTime: 0, // audio duration in seconds
       seekBarMaxRange: 1000, // higher the better
       volume: 5,
@@ -131,7 +135,7 @@ export default {
           this.seekBarMaxRange
       );
       this.nowPlaying.currentTime = this.currentTime;
-      console.log(this.currentTime);
+      // console.log(this.currentTime);
     },
     secondsToMinutes(seconds) {
       let minutes;
@@ -276,6 +280,8 @@ export default {
   transition: opacity 0.2s;
   /* border-radius: 50%; */
   cursor: pointer;
+  background-image: linear-gradient(black, black);
+  background-repeat: no-repeat;
 }
 
 .slider::-webkit-slider-thumb {
