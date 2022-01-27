@@ -29,18 +29,34 @@ export default {
   },
   mounted() {
     // Creating fake playlists
-    this.createPlaylist("Playlist-1", [
-      "02. Paul Flint - Savage",
-      "03. Retrovision - Puzzle",
-      "04. Syn Cole - Feel Good",
-      "06. Tobu - Roots",
-    ]);
+    let song1 = {
+      name: "Savage",
+      path: "02. Paul Flint - Savage",
+      artist: "Paul Flint",
+      cover: "https://i1.sndcdn.com/artworks-000178640584-kie7ij-t500x500.jpg",
+    };
+    let song2 = {
+      name: "Puzzle",
+      path: "03. Retrovision - Puzzle",
+      artist: "Retrovision",
+      cover: "https://i1.sndcdn.com/artworks-000196908840-gcl3jn-t500x500.jpg",
+    };
+    let song3 = {
+      name: "Feel Good",
+      path: "04. Syn Cole - Feel Good",
+      artist: "Syn Cole",
+      cover: "https://i1.sndcdn.com/artworks-000149107009-m881ek-t500x500.jpg",
+    };
+    let song4 = {
+      name: "Roots",
+      path: "06. Tobu - Roots",
+      artist: "Tobu",
+      cover:
+        "https://lastfm.freetls.fastly.net/i/u/300x300/d55932d44b33e431e68a3c0c4daceb98.png",
+    };
+    this.createPlaylist("All Songs", [song1, song2, song3, song4]);
     this.createPlaylist("Playlist-2", ["song1", "song2"]);
     this.createPlaylist("Playlist-3", ["song1", "song2"]);
-    this.createPlaylist("Playlist-4", ["song1", "song2"]);
-    this.createPlaylist("Playlist-5", ["song1", "song2"]);
-    this.createPlaylist("Playlist-6", ["song1", "song2"]);
-    this.createPlaylist("Playlist-6", ["song1", "song2"]);
   },
 };
 </script>
