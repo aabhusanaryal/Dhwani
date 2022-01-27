@@ -66,7 +66,11 @@
           />
         </div>
         <div class="timestamp">
-          {{ secondsToMinutes(queue[nowPlaying].duration - currentTime) }}
+          {{
+            nowPlaying
+              ? secondsToMinutes(nowPlaying.duration - currentTime)
+              : ""
+          }}
         </div>
       </div>
     </div>
@@ -74,14 +78,14 @@
 </template>
 
 <script>
+import DLL from "../DLL.js";
 export default {
   name: "Player",
   props: ["playlists"],
   data() {
     return {
-      queue: [],
-      nowPlaying: 0,
-      nowPlayingAduio: null,
+      queue: new DLL(),
+      nowPlaying: null,
       paused: true,
       seekSliderPosition: 0, // between 0 to 100
       currentTime: 0, // audio duration in seconds
@@ -94,41 +98,39 @@ export default {
     playpause() {
       // Playing if paused
       if (this.paused) {
-        this.nowPlayingAudio = this.queue[this.nowPlaying];
-        this.nowPlayingAudio.volume = this.volume / 100;
-        this.nowPlayingAudio.play();
+        this.nowPlaying = this.queue.head();
+        this.nowPlaying.volume = this.volume / 100;
+        this.nowPlaying.play();
         this.paused = false;
       }
       // Pausing if playing
       else {
-        this.nowPlayingAudio.pause();
+        this.nowPlaying.pause();
         this.paused = true;
       }
     },
     playNext() {
-      if (!this.paused) this.nowPlayingAudio.pause();
-      this.nowPlaying++;
-      this.nowPlayingAudio = this.queue[this.nowPlaying];
-      this.nowPlayingAudio.currentTime = 0;
-      this.nowPlayingAudio.volume = this.volume / 100;
-      this.nowPlayingAudio.play();
+      if (!this.paused) this.nowPlaying.pause();
+      this.nowPlaying = this.queue.next();
+      this.nowPlaying.currentTime = 0;
+      this.nowPlaying.volume = this.volume / 100;
+      this.nowPlaying.play();
       this.paused = false;
     },
     playPrevious() {
-      if (!this.paused) this.nowPlayingAudio.pause();
-      this.nowPlaying--;
-      this.nowPlayingAudio = this.queue[this.nowPlaying];
-      this.nowPlayingAudio.currentTime = 0;
-      this.nowPlayingAudio.volume = this.volume / 100;
-      this.nowPlayingAudio.play();
+      if (!this.paused) this.nowPlaying.pause();
+      this.nowPlaying = this.queue.previous();
+      this.nowPlaying.currentTime = 0;
+      this.nowPlaying.volume = this.volume / 100;
+      this.nowPlaying.play();
       this.paused = false;
     },
     seekTrack() {
       this.currentTime = Math.floor(
-        (this.nowPlayingAudio.duration * this.seekSliderPosition) /
+        (this.nowPlaying.duration * this.seekSliderPosition) /
           this.seekBarMaxRange
       );
-      this.nowPlayingAudio.currentTime = this.currentTime;
+      this.nowPlaying.currentTime = this.currentTime;
       console.log(this.currentTime);
     },
     secondsToMinutes(seconds) {
@@ -145,26 +147,33 @@ export default {
       });
       return `${minutes}:${seconds}`;
     },
+    queuePlaylist(playlist) {
+      // Creating an array of Audio objects containing the songs
+      let arr = [];
+      playlist.songs.forEach((song) => {
+        let audio = new Audio(require(`@/assets/songs/${song}.mp3`));
+        arr.push(audio);
+      });
+      this.queue.addArray(arr);
+    },
   },
   created() {
     // WEIRD CIRCULAR BUG
     setInterval(() => {
       if (!this.paused) {
         this.seekSliderPosition =
-          (this.nowPlayingAudio.currentTime / this.nowPlayingAudio.duration) *
+          (this.nowPlaying.currentTime / this.nowPlaying.duration) *
           this.seekBarMaxRange;
-        this.currentTime = this.nowPlayingAudio.currentTime;
-        if (this.nowPlayingAudio.ended) {
+        this.currentTime = this.nowPlaying.currentTime;
+        if (this.nowPlaying.ended) {
           // i.e after one song finishes playing, play next song
           this.playNext();
         }
       }
     }, 250);
     // Creating audio instance of all songs
-    this.playlists[0].songs.forEach((song) => {
-      let audio = new Audio(require(`@/assets/songs/${song}.mp3`));
-      this.queue.push(audio);
-    });
+    // console.log(this.playlists[0].songs);
+    this.queuePlaylist(this.playlists[0]);
   },
   computed: {
     playpauseicon() {
@@ -172,7 +181,7 @@ export default {
     },
     currentComputedTime() {
       try {
-        return this.nowPlayingAudio.currentTime;
+        return this.nowPlaying.currentTime;
       } catch {
         return 0;
       }
@@ -180,7 +189,7 @@ export default {
   },
   watch: {
     volume: function () {
-      this.nowPlayingAudio.volume = this.volume / 100;
+      this.nowPlaying.volume = this.volume / 100;
     },
   },
 };
@@ -299,6 +308,7 @@ img {
   cursor: pointer;
 }
 img:hover {
+  /* FIXME - Fine tune the color */
   filter: invert(47%) sepia(1%) saturate(1663%) hue-rotate(20deg)
     brightness(91%) contrast(94%);
 }
