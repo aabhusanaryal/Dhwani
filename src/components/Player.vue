@@ -221,7 +221,6 @@ export default {
 
       // VSeek with Ctrl + LEFT/RIGHT start
       if (e.ctrlKey && e.code == "ArrowRight") {
-        console.log("this ran");
         this.seekSliderPosition += 30;
         this.seekTrack();
       }
