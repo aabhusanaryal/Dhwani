@@ -116,11 +116,7 @@ export default {
       currentTime: 0, // audio duration in seconds
       seekBarMaxRange: 1000, // higher the better
       volume: 5,
-      metadata: {
-        name: "",
-        artist: "",
-        cover: "",
-      },
+      metadata: {},
     };
   },
 
@@ -134,6 +130,9 @@ export default {
       this.nowPlaying.currentTime = 0;
       this.nowPlaying.volume = this.volume / 100;
       this.nowPlaying.play();
+      // Loading the next song while the current song plays
+      let newPath = this.queue.returnNext().path;
+      require(`@/assets/songs/${newPath}.mp3`);
     },
     playpause() {
       // This function pauses and plays this.nowPlaying
