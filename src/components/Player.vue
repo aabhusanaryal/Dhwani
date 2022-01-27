@@ -130,9 +130,6 @@ export default {
       this.nowPlaying.currentTime = 0;
       this.nowPlaying.volume = this.volume / 100;
       this.nowPlaying.play();
-      // Loading the next song while the current song plays
-      let newPath = this.queue.returnNext().path;
-      require(`@/assets/songs/${newPath}.mp3`);
     },
     playpause() {
       // This function pauses and plays this.nowPlaying
@@ -227,6 +224,13 @@ export default {
         this.seekSliderPosition -= 30;
         this.seekTrack();
       }
+
+      // Preloading content
+      document.onload = async () => {
+        this.queue.getArray().forEach((songObj) => {
+          new Audio(require(`@/assets/songs/${songObj.path}.mp3`));
+        });
+      };
     });
   },
   computed: {
