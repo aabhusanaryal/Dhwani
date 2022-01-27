@@ -32,6 +32,8 @@ export default {
     this.createPlaylist("Playlist-1", [
       "02. Paul Flint - Savage",
       "03. Retrovision - Puzzle",
+      "04. Syn Cole - Feel Good",
+      "06. Tobu - Roots",
     ]);
     this.createPlaylist("Playlist-2", ["song1", "song2"]);
     this.createPlaylist("Playlist-3", ["song1", "song2"]);
