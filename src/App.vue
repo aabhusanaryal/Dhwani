@@ -40,6 +40,7 @@ export default {
     this.createPlaylist("Playlist-4", ["song1", "song2"]);
     this.createPlaylist("Playlist-5", ["song1", "song2"]);
     this.createPlaylist("Playlist-6", ["song1", "song2"]);
+    this.createPlaylist("Playlist-6", ["song1", "song2"]);
   },
 };
 </script>

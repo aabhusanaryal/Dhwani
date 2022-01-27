@@ -57,6 +57,7 @@ export default {
   min-width: var(--left-sidebar-width);
   min-height: 100vh;
   background: white;
+  z-index: 100;
   /* text-align: center; */
 }
 .playlists-wrapper {
