@@ -1,13 +1,17 @@
 <template>
   <div class="center-container">Hello this is home. lorem1000</div>
+  <div class="playlist-container"> 
+    <PlaylistView />
+  </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import PlaylistView from "@/components/PlaylistView.vue";
 
 export default {
   name: "Home",
-  components: {},
+  components: {PlaylistView},
 };
 </script>
 

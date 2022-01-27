@@ -14,7 +14,7 @@ import RightSidebar from "@/components/RightSidebar.vue";
 import Player from "@/components/Player.vue";
 
 export default {
-  components: { LeftSidebar, RightSidebar, Player },
+  components: { LeftSidebar, RightSidebar, Player},
   data() {
     return {
       playlists: [],
