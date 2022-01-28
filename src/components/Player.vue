@@ -130,11 +130,6 @@ export default {
       this.nowPlaying.currentTime = 0;
       this.nowPlaying.volume = this.volume / 100;
     },
-    play(songObj) {
-      // This function plays any song, and sets it as this.nowPlaying
-      this.loadSong(songObj);
-      this.nowPlaying.play();
-    },
     playpause() {
       // This function pauses and plays this.nowPlaying
       // Playing if paused
@@ -165,6 +160,15 @@ export default {
 
       this.nowPlaying.currentTime = this.currentTime;
       // console.log(this.currentTime);
+    },
+    playPlaylist(playlistName) {
+      let playlist = this.playlists.filter(
+        (playlist) => playlist.name == playlistName
+      )[0];
+      this.queue.clear();
+      this.queuePlaylist(playlist);
+      this.loadSong(this.queue.head());
+      this.playpause();
     },
     secondsToMinutes(seconds) {
       let minutes;
