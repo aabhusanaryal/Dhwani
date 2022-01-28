@@ -165,6 +165,7 @@ export default {
       let playlist = this.playlists.filter(
         (playlist) => playlist.name == playlistName
       )[0];
+      this.nowPlaying.pause();
       this.queue.clear();
       this.queuePlaylist(playlist);
       this.loadSong(this.queue.head());
