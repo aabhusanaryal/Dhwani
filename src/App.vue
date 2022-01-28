@@ -1,11 +1,11 @@
 <template>
   <div class="container-flex">
     <LeftSidebar :playlists="playlists" />
-    <router-view />
-    <RightSidebar :genre="genre" />
+    <router-view :playlists="playlists" @addPlaylist="createPlaylist" />
+    <RightSidebar :genre="genre" v-if="!createMode" />
   </div>
   <!-- Only rendering the player if there's any song in it -->
-  <Player :playlists="playlists" v-if="playlists[0]" />
+  <Player :playlists="playlists" v-if="playlists[0] && !createMode" />
 </template>
 
 <script>
@@ -19,6 +19,7 @@ export default {
     return {
       playlists: [],
       genre: ["Chill", "LoFi", "EDM", "Romance", "Country", "Pop"],
+      createMode: false
     };
   },
   methods: {
@@ -58,6 +59,14 @@ export default {
     this.createPlaylist("Playlist-2", ["song1", "song2"]);
     this.createPlaylist("Playlist-3", ["song1", "song2"]);
   },
+  watch:{
+    $route(to){
+      if(to.path==="/create")
+        this.createMode=true
+      else  
+        this.createMode=false
+    }
+  }
 };
 </script>
 
