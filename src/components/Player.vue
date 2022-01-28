@@ -116,23 +116,23 @@ export default {
       currentTime: 0, // audio duration in seconds
       seekBarMaxRange: 1000, // higher the better
       volume: 5,
-      metadata: {
-        name: "",
-        artist: "",
-        cover: "",
-      },
+      metadata: {},
+      audioArr: [],
     };
   },
 
   methods: {
-    play(songObj) {
-      // This function plays any song, and sets it as this.nowPlaying
+    loadSong(songObj) {
       this.metadata = songObj;
       this.nowPlaying = new Audio(
         require(`@/assets/songs/${songObj.path}.mp3`)
       );
       this.nowPlaying.currentTime = 0;
       this.nowPlaying.volume = this.volume / 100;
+    },
+    play(songObj) {
+      // This function plays any song, and sets it as this.nowPlaying
+      this.loadSong(songObj);
       this.nowPlaying.play();
     },
     playpause() {
@@ -159,10 +159,10 @@ export default {
       this.paused = false;
     },
     seekTrack() {
-      this.currentTime = Math.floor(
+      this.currentTime =
         (this.nowPlaying.duration * this.seekSliderPosition) /
-          this.seekBarMaxRange
-      );
+        this.seekBarMaxRange;
+
       this.nowPlaying.currentTime = this.currentTime;
       // console.log(this.currentTime);
     },
@@ -187,9 +187,6 @@ export default {
     },
   },
   created() {
-    document.addEventListener("keydown", (e) => {
-      if (e.code == "Space") this.playpause();
-    });
     setInterval(() => {
       if (!this.paused) {
         this.seekSliderPosition =
@@ -205,7 +202,42 @@ export default {
     // Creating audio instance of all songs
     // console.log(this.playlists[0].songs);
     this.queuePlaylist(this.playlists[0]);
-    this.play(this.queue.head());
+    this.loadSong(this.queue.head());
+    // FIXME: remove pause
+
+    // Keyboard Shortcuts
+
+    document.addEventListener("keydown", (e) => {
+      // Play pause with spacebar start
+      if (e.code == "Space") this.playpause();
+      // Play pause with spacebar end
+
+      // Volume up and down with Ctrl + UP / DOWN start
+      if (e.ctrlKey && e.code == "ArrowUp")
+        this.volume < 90 ? (this.volume += 10) : (this.volume = 100);
+      if (e.ctrlKey && e.code == "ArrowDown")
+        this.volume > 10 ? (this.volume -= 10) : (this.volume = 0);
+      // Volume up and down with Ctrl + UP / DOWN end
+
+      // VSeek with Ctrl + LEFT/RIGHT start
+      if (e.ctrlKey && e.code == "ArrowRight") {
+        this.seekSliderPosition += 30;
+        this.seekTrack();
+      }
+      if (e.ctrlKey && e.code == "ArrowLeft") {
+        this.seekSliderPosition -= 30;
+        this.seekTrack();
+      }
+
+      // Preloading content
+      document.onload = async () => {
+        this.queue.getArray().forEach((songObj) => {
+          this.audioArr.push(
+            new Audio(require(`@/assets/songs/${songObj.path}.mp3`))
+          );
+        });
+      };
+    });
   },
   computed: {
     playpauseicon() {
