@@ -122,14 +122,17 @@ export default {
   },
 
   methods: {
-    play(songObj) {
-      // This function plays any song, and sets it as this.nowPlaying
+    loadSong(songObj) {
       this.metadata = songObj;
       this.nowPlaying = new Audio(
         require(`@/assets/songs/${songObj.path}.mp3`)
       );
       this.nowPlaying.currentTime = 0;
       this.nowPlaying.volume = this.volume / 100;
+    },
+    play(songObj) {
+      // This function plays any song, and sets it as this.nowPlaying
+      this.loadSong(songObj);
       this.nowPlaying.play();
     },
     playpause() {
@@ -199,7 +202,7 @@ export default {
     // Creating audio instance of all songs
     // console.log(this.playlists[0].songs);
     this.queuePlaylist(this.playlists[0]);
-    this.play(this.queue.head());
+    this.loadSong(this.queue.head());
     // FIXME: remove pause
 
     // Keyboard Shortcuts
