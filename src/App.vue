@@ -1,11 +1,11 @@
 <template>
   <div class="container-flex">
     <LeftSidebar :playlists="playlists" />
-    <router-view :playlists="playlists" @addPlaylist="createPlaylist" />
-    <RightSidebar :genre="genre" v-if="!createMode" />
+    <router-view :playlists="playlists" @playPlaylist="playPlaylist" @addPlaylist="createPlaylist" />
+    <RightSidebar :genre="genre" />
   </div>
   <!-- Only rendering the player if there's any song in it -->
-  <Player :playlists="playlists" v-if="playlists[0] && !createMode" />
+  <Player :playlists="playlists" v-if="playlists[0] && !createMode" ref="playerComponent" />
 </template>
 
 <script>
@@ -26,6 +26,9 @@ export default {
     createPlaylist(name, songs) {
       let playlist = { name, songs };
       this.playlists.push(playlist);
+    },
+    playPlaylist(playlistName) {
+      this.$refs.playerComponent.playPlaylist(playlistName);
     },
   },
   mounted() {
