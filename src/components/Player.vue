@@ -145,13 +145,18 @@ export default {
     },
     playNext() {
       if (!this.paused) this.nowPlaying.pause();
-      this.play(this.queue.next());
-      this.paused = false;
+      this.paused = true;
+      this.loadSong(this.queue.next());
+      this.playpause();
+      // this.paused = false;
     },
     playPrevious() {
       if (!this.paused) this.nowPlaying.pause();
-      this.play(this.queue.previous());
-      this.paused = false;
+      this.paused = true;
+      this.loadSong(this.queue.previous());
+      this.playpause();
+
+      // this.paused = false;
     },
     seekTrack() {
       this.currentTime =
@@ -259,6 +264,9 @@ export default {
   watch: {
     volume: function () {
       this.nowPlaying.volume = this.volume / 100;
+    },
+    seekSliderPosition: function (prev, next) {
+      if (isNaN(prev) || isNaN(next)) this.seekSliderPosition = 0;
     },
   },
 };
