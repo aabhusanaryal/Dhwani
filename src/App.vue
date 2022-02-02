@@ -9,11 +9,7 @@
     <RightSidebar :genres="genres" />
   </div>
   <!-- Only rendering the player if there's any song in it -->
-  <Player
-    :playlists="playlists"
-    v-if="playlists[0] && !createMode"
-    ref="playerComponent"
-  />
+  <Player :playlists="playlists" v-if="playlists[0]" ref="playerComponent" />
 </template>
 
 <script>
@@ -124,7 +120,7 @@ export default {
 
 /* Setting variables */
 :root {
-  --left-sidebar-width: 300px;
+  --left-sidebar-width: 350px;
   --cyan: #35e6da;
   --blue: #0496ff;
   --primary-gradient: linear-gradient(

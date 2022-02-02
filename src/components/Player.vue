@@ -16,16 +16,16 @@
       <div class="top-bar grid">
         <!-- Left contains favourite, add to playlist -->
         <div class="left flex">
+          <div><img src="../assets/icons/heart.svg" class="icon" /></div>
           <div><img src="../assets/icons/heart.svg" /></div>
-          <div><img src="../assets/icons/playlist_add.svg" /></div>
+          <div><img src="../assets/icons/playlist_add.svg" class="icon" /></div>
         </div>
         <!-- Center contains music controls -->
         <div class="center flex">
-          <div><img src="../assets/icons/loop.svg" /></div>
-
+          <div><img src="../assets/icons/loop.svg" class="icon" /></div>
           <div>
             <img
-              class="medium-icon"
+              class="medium-icon icon"
               id="previous"
               @click="playPrevious"
               src="../assets/icons/previous.svg"
@@ -33,7 +33,7 @@
           </div>
           <div>
             <img
-              class="large-icon"
+              class="large-icon icon"
               id="play"
               @click="this.paused ? this.play() : this.pause()"
               :src="require(`../assets/icons/${playpauseicon}.svg`)"
@@ -41,14 +41,14 @@
           </div>
           <div>
             <img
-              class="medium-icon"
+              class="medium-icon icon"
               id="next"
               @click="playNext"
               src="../assets/icons/next.svg"
             />
           </div>
 
-          <div><img src="../assets/icons/shuffle.svg" /></div>
+          <div><img src="../assets/icons/shuffle.svg" class="icon" /></div>
         </div>
         <!-- Right contains volume controls -->
         <div class="right flex">
@@ -56,6 +56,7 @@
             <img
               src="../assets/icons/volume_low.svg"
               @click="volume > 10 ? (volume -= 10) : (volume = 0)"
+              class="icon"
             />
           </div>
           <div class="volume-bar-div">
@@ -70,6 +71,7 @@
             <img
               src="../assets/icons/volume_high.svg"
               @click="volume < 90 ? (volume += 10) : (volume = 100)"
+              class="icon"
             />
           </div>
         </div>
@@ -400,6 +402,11 @@ export default {
 .slider::-moz-range-progress {
   background-color: #43e5f7;
 }
+.icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
 .medium-icon {
   width: 25px;
   height: 25px;
@@ -408,12 +415,8 @@ export default {
   width: 50px;
   height: 50px;
 }
-img {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}
-img:hover {
+
+.icon:hover {
   /* FIXME - Fine tune the color */
   filter: invert(47%) sepia(1%) saturate(1663%) hue-rotate(20deg)
     brightness(91%) contrast(94%);
