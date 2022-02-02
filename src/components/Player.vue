@@ -1,4 +1,15 @@
 <template>
+  <div class="song-info-container">
+    <div class="song-info-wrapper">
+      <div class="cover-art-container">
+        <img :src="metadata.cover" alt="" class="cover-art" />
+        <div id="song-info">
+          <div id="song-name">{{ metadata.name }}</div>
+          <div id="artist-name">{{ metadata.artist }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="player-container flex">
     <div class="player-wrapper flex flex-column">
       <!-- Top bar containes favourites..., music controls and volume controls -->
@@ -51,7 +62,12 @@
         </div>
         <!-- Right contains volume controls -->
         <div class="right flex">
-          <div><img src="../assets/icons/volume_low.svg" /></div>
+          <div>
+            <img
+              src="../assets/icons/volume_low.svg"
+              @click="volume > 10 ? (volume -= 10) : (volume = 0)"
+            />
+          </div>
           <div class="volume-bar-div">
             <input
               type="range"
@@ -60,7 +76,12 @@
               v-model="volume"
             />
           </div>
-          <div><img src="../assets/icons/volume_high.svg" /></div>
+          <div>
+            <img
+              src="../assets/icons/volume_high.svg"
+              @click="volume < 90 ? (volume += 10) : (volume = 100)"
+            />
+          </div>
         </div>
       </div>
       <!-- Bottom bar contains audio timestamp and seek controls -->
@@ -81,9 +102,9 @@
         </div>
         <div class="timestamp">
           {{
-            nowPlaying
+            nowPlaying.duration
               ? secondsToMinutes(nowPlaying.duration - currentTime)
-              : ""
+              : "00:00"
           }}
         </div>
       </div>
@@ -105,15 +126,24 @@ export default {
       currentTime: 0, // audio duration in seconds
       seekBarMaxRange: 1000, // higher the better
       volume: 5,
+      metadata: {},
+      audioArr: [],
     };
   },
 
   methods: {
+    loadSong(songObj) {
+      this.metadata = songObj;
+      this.nowPlaying = new Audio(
+        require(`@/assets/songs/${songObj.path}.mp3`)
+      );
+      this.nowPlaying.currentTime = 0;
+      this.nowPlaying.volume = this.volume / 100;
+    },
     playpause() {
+      // This function pauses and plays this.nowPlaying
       // Playing if paused
       if (this.paused) {
-        this.nowPlaying = this.queue.head();
-        this.nowPlaying.volume = this.volume / 100;
         this.nowPlaying.play();
         this.paused = false;
       }
@@ -125,27 +155,36 @@ export default {
     },
     playNext() {
       if (!this.paused) this.nowPlaying.pause();
-      this.nowPlaying = this.queue.next();
-      this.nowPlaying.currentTime = 0;
-      this.nowPlaying.volume = this.volume / 100;
-      this.nowPlaying.play();
-      this.paused = false;
+      this.paused = true;
+      this.loadSong(this.queue.next());
+      this.playpause();
+      // this.paused = false;
     },
     playPrevious() {
       if (!this.paused) this.nowPlaying.pause();
-      this.nowPlaying = this.queue.previous();
-      this.nowPlaying.currentTime = 0;
-      this.nowPlaying.volume = this.volume / 100;
-      this.nowPlaying.play();
-      this.paused = false;
+      this.paused = true;
+      this.loadSong(this.queue.previous());
+      this.playpause();
+
+      // this.paused = false;
     },
     seekTrack() {
-      this.currentTime = Math.floor(
+      this.currentTime =
         (this.nowPlaying.duration * this.seekSliderPosition) /
-          this.seekBarMaxRange
-      );
+        this.seekBarMaxRange;
+
       this.nowPlaying.currentTime = this.currentTime;
       // console.log(this.currentTime);
+    },
+    playPlaylist(playlistName) {
+      let playlist = this.playlists.filter(
+        (playlist) => playlist.name == playlistName
+      )[0];
+      this.nowPlaying.pause();
+      this.queue.clear();
+      this.queuePlaylist(playlist);
+      this.loadSong(this.queue.head());
+      this.playpause();
     },
     secondsToMinutes(seconds) {
       let minutes;
@@ -163,16 +202,11 @@ export default {
     },
     queuePlaylist(playlist) {
       // Creating an array of Audio objects containing the songs
-      let arr = [];
-      playlist.songs.forEach((song) => {
-        let audio = new Audio(require(`@/assets/songs/${song}.mp3`));
-        arr.push(audio);
-      });
+      let arr = playlist.songs;
       this.queue.addArray(arr);
     },
   },
   created() {
-    // WEIRD CIRCULAR BUG
     setInterval(() => {
       if (!this.paused) {
         this.seekSliderPosition =
@@ -188,6 +222,42 @@ export default {
     // Creating audio instance of all songs
     // console.log(this.playlists[0].songs);
     this.queuePlaylist(this.playlists[0]);
+    this.loadSong(this.queue.head());
+    // FIXME: remove pause
+
+    // Keyboard Shortcuts
+
+    document.addEventListener("keydown", (e) => {
+      // Play pause with spacebar start
+      if (e.code == "Space") this.playpause();
+      // Play pause with spacebar end
+
+      // Volume up and down with Ctrl + UP / DOWN start
+      if (e.ctrlKey && e.code == "ArrowUp")
+        this.volume < 90 ? (this.volume += 10) : (this.volume = 100);
+      if (e.ctrlKey && e.code == "ArrowDown")
+        this.volume > 10 ? (this.volume -= 10) : (this.volume = 0);
+      // Volume up and down with Ctrl + UP / DOWN end
+
+      // VSeek with Ctrl + LEFT/RIGHT start
+      if (e.ctrlKey && e.code == "ArrowRight") {
+        this.seekSliderPosition += 30;
+        this.seekTrack();
+      }
+      if (e.ctrlKey && e.code == "ArrowLeft") {
+        this.seekSliderPosition -= 30;
+        this.seekTrack();
+      }
+
+      // Preloading content
+      document.onload = async () => {
+        this.queue.getArray().forEach((songObj) => {
+          this.audioArr.push(
+            new Audio(require(`@/assets/songs/${songObj.path}.mp3`))
+          );
+        });
+      };
+    });
   },
   computed: {
     playpauseicon() {
@@ -204,6 +274,9 @@ export default {
   watch: {
     volume: function () {
       this.nowPlaying.volume = this.volume / 100;
+    },
+    seekSliderPosition: function (prev, next) {
+      if (isNaN(prev) || isNaN(next)) this.seekSliderPosition = 0;
     },
   },
 };
@@ -334,6 +407,43 @@ img:hover {
 }
 #next {
   margin-right: 20px;
+}
+
+/* Song info card */
+.song-info-container {
+  width: var(--left-sidebar-width);
+  height: calc(var(--left-sidebar-width) + 40px);
+  position: fixed;
+  bottom: 10px;
+  right: 0px;
+  padding: 20px;
+}
+.song-info-wrapper {
+  margin-left: 10%;
+  margin-top: 10%;
+  background: white;
+  border-radius: 8%;
+  width: 90%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+}
+
+.cover-art-container {
+  padding-top: 25px;
+  /* text-align: center; */
+}
+.cover-art {
+  width: calc(var(--left-sidebar-width) - 85px);
+  height: calc(var(--left-sidebar-width) - 85px);
+  border-radius: 8%;
+}
+
+#song-info {
+  padding-left: 5px;
+}
+#song-name {
+  font-size: 24px;
 }
 
 /* For medium sized devices: */

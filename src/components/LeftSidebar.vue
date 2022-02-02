@@ -11,6 +11,18 @@
     <div class="playlists-wrapper">
       <!-- Playlist Link Card Start -->
       <!-- We're rendering router-link as adiv rather than an anchor -->
+      <router-link :to="`/create`" custom v-slot="{ navigate }">
+        <div
+          :class="$route.path === `/create` ? 'active-card' : ''"
+          class="playlist-card link"
+          @click="navigate"
+          @keypress.enter="navigate"
+          role="link"
+          tabindex="0"
+        >
+          <span class="text"> Create Playlist </span>
+        </div>
+      </router-link>
       <router-link
         :to="`/playlist/${playlist.name}`"
         custom

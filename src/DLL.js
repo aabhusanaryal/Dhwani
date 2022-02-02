@@ -116,6 +116,12 @@ export default class DLL {
     arr.push(obj);
     return arr;
   }
+  returnNext() {
+    return this.start.next.data;
+  }
+  returnPrevious() {
+    return this.start.previous.data;
+  }
   next() {
     this.start = this.start.next;
     return this.start.data;
