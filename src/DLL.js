@@ -138,7 +138,24 @@ export default class DLL {
     return this.start.data;
   }
   clear() {
+    this.totalNo-=this.getArray().length
     this.start = null;
+  }
+  shuffle(){
+    let arr=this.getArray();
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      if(j==0)
+        continue;
+      const temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+    }
+    this.clear();
+    for(let i=0;i<arr.length;i++){
+      arr[i]=arr[i].data;
+    }
+    this.addArray(arr);
   }
 }
 

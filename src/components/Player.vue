@@ -57,7 +57,7 @@
             />
           </div>
 
-          <div><img src="../assets/icons/shuffle.svg" class="icon" /></div>
+          <div @click="shuffle"><img src="../assets/icons/shuffle.svg" class="icon" /></div>
         </div>
         <!-- Right contains volume controls -->
         <div class="right flex">
@@ -162,6 +162,9 @@ export default {
   // Polar opposite of playNext()
 
   methods: {
+    shuffle(){
+      this.queue.shuffle();
+    },
     loadSong(songObj) {
       // Creates an Audio object for the current song if it already doesn't have one
       // and sets it as the nowPlaing song
