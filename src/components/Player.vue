@@ -120,12 +120,39 @@ export default {
     };
   },
 
+  // How does a song play? The complete workflow.
+
+  // When the app is first loaded, a playlist containing all songs is created in App.vue, which is then
+  // passed to Player.vue, as a prop. This songs of this playlist is then added to the queue (a DLL).
+  // Then, the first song of the queue is loaded using the loadSong method. This initial queueing and
+  // loading happens takes place in the mounted hook. The user may then play the song.
+
+  // To play a song, it must first be loaded using the loadSong method and then can be played using the
+  // play method.
+
+  // loadSong(songObj)
+  // To play a song, we must create an Audio object. This is done by the loadSong method. It takes in
+  // songObj as a parameter, and finds the song in @assets/songs/ and creates an Audio object. This
+  // Audio object is then stored as songObj.audio and also as this.nowPlaying. To avoid multiple songs
+  // being played simultaneously, we first pause the nowPlaying song while loading a new song.
+
+  // play()
+  // This method doesn't take in any argument. It simply calls the play() method of the nowPlaying.audio and
+  // also sets this.paused = false
+
+  // pause()
+  // Polar opposite of play()
+
+  // playNext()
+  // Moves the head of the queue to the next song, and plays the song
+
+  // playPrevious()
+  // Polar opposite of playNext()
+
   methods: {
     loadSong(songObj) {
       // Creates an Audio object for the current song if it already doesn't have one
       // and sets it as the nowPlaing song
-      // PS: Loading a song always pauses the currently playing song. This is to avoid
-      // playing multiple songs in the background
       this.pause();
       if (songObj.audio == null) {
         songObj.audio = new Audio(
