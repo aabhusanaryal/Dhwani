@@ -5,7 +5,7 @@
     <RightSidebar :genre="genre" />
   </div>
   <!-- Only rendering the player if there's any song in it -->
-  <Player :playlists="playlists" v-if="playlists[0] && !createMode" ref="playerComponent" />
+  <Player :playlists="playlists" v-if="playlists[0]" ref="playerComponent" />
 </template>
 
 <script>

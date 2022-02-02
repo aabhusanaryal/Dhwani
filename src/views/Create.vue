@@ -1,26 +1,30 @@
 <template>
-    <form>
+    <form @submit.prevent=addPlaylist>
         <input type="text" 
         placeholder="Enter Playlist Name" 
         v-model="playlistName" 
         class="name-input" 
         required>
+        <button class="add" type="submit">+</button>
         <table>
-            <tr>
-                <th>>S.N.</th>
-                <th>>Name</th>
-                <th>>Artist</th>
-            </tr>
-            <tr v-for="(song, index) in playlists[0].songs" :key="index">
-                <td>{{index+1}}</td>
-                <td>{{song.name}}</td>
-                <td>{{song.artist}}</td>
-                <td>
-                    <input type="checkbox" :value=song v-model="addedSongs">
-                </td>
-            </tr>
+            <thead>
+                <tr>
+                    <th class="SN TH">#</th>
+                    <th class="TH">Name</th>
+                    <th class="TH">Artist</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(song, index) in playlists[0].songs" :key="index">
+                    <td class="SN">{{index+1}}</td>
+                    <td>{{song.name}}</td>
+                    <td>{{song.artist}}</td>
+                    <td class="checkbox-wrapper">
+                        <input type="checkbox" :value=song v-model="addedSongs" name="songCheckbox">
+                    </td>
+                </tr>
+            </tbody>
         </table>
-        <button class="add" @click="addPlaylist">Done</button>
     </form>
 </template>
 
@@ -46,16 +50,90 @@ export default {
 
 <style scoped>
 
+form{
+    margin:10px auto;
+}
+table{
+font-family: "Roboto", sans-serif;
+color:#4C4E52;
+display:block;   
+border-collapse: separate;
+border-spacing: 0 20px;   
+}
+tbody{
+ display:block;
+ overflow-y:scroll; 
+ max-height:600px;  
+}  
+td,th{
+    width: 200px;
+    text-align: left;
+}
+.SN{
+    width:100px;
+}
 th{
-    height: 20px;
+    color:#6F7378;
+    font-weight: lighter;
 }
-button.add{
+.add{
+    color:white;
     height:fit-content;
+    font-family: "Roboto", sans-serif;
+    font-size: 25px;
+    width: 50px;
+    /* background: var(--active-gradient); */
+    background-image: var(--merged-gradient);
+    background-size: 200%;
+    background-position: left;
+    border: none;
+    margin: 10px 25px;
+    border-radius: 30px;
+    height: 50px;
+    transition: 0.5s;
 }
-/* td{
-    height: 20px;
-} */
+.add:hover{
+    background-position: right;
+    cursor: pointer;
+    
+}
 .name-input{
+    font-family: Roboto;
+    font-style: normal;
+    background-color:rgb(244, 245, 254);
+    color:#4C4E52; ;
+    /* border:none; */
     height: fit-content;
+    font-size: 40px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom-width:5px ;
+    border-image:linear-gradient(
+    93.64deg,
+    #35e6da 0.98%,
+    rgba(5, 145, 245, 0.42),
+    #35e6da 0.98%,
+    rgba(16, 55, 245, 0.5) 119.65%
+  ) 100;
+  border-image-width:0 0 3px 0 ;
+}
+input:focus-visible{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-image:linear-gradient(
+    93.64deg,
+    #35e6da 0.98%,
+    rgba(5, 145, 245, 0.42),
+    #35e6da 0.98%,
+    rgba(16, 55, 245, 0.5) 119.65%
+  ) 100;
+    border-image-width:0 0 4px 0 ;
+    transition: 0.05s;
+    outline: none;
+}
+input::placeholder{
+    color:rgba(178,180,189,255);
 }
 </style>
