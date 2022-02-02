@@ -9,7 +9,12 @@
     <RightSidebar :genres="genres" />
   </div>
   <!-- Only rendering the player if there's any song in it -->
-  <Player :playlists="playlists" v-if="playlists[0]" ref="playerComponent" />
+  <Player
+    :playlists="playlists"
+    v-if="playlists[0]"
+    ref="playerComponent"
+    @updateFavourites="updateFavourites"
+  />
 </template>
 
 <script>
@@ -36,6 +41,7 @@ export default {
   // artist: Name of artist/ band
   // cover: CDN link to the cover artwork
   // genres: an array of genres the song belongs to
+  // isFav: is the song added to the Favourites playlist?
 
   // To play a song, we first instantiate an Audio() object as:
   // audio = new Audio(require(`@assets/songs/${song.name}.mp3`))
@@ -53,6 +59,18 @@ export default {
       // This method in-turn calls the playPlaylist method of Player.vue
       this.$refs.playerComponent.playPlaylist(playlistName);
     },
+    updateFavourites(song) {
+      if (song.isFav) {
+        // Removing the song from array
+        this.playlists[1].songs = this.playlists[1].songs.filter(
+          (s) => s != song
+        );
+        song.isFav = false;
+      } else {
+        this.playlists[1].songs.push(song);
+        song.isFav = true;
+      }
+    },
   },
 
   mounted() {
@@ -65,6 +83,7 @@ export default {
       cover: "https://i1.sndcdn.com/artworks-000178640584-kie7ij-t500x500.jpg",
       genres: ["Chill", "LoFi"],
       audio: null,
+      isFav: null,
     };
     let song2 = {
       name: "Puzzle",
@@ -73,6 +92,7 @@ export default {
       cover: "https://i1.sndcdn.com/artworks-000196908840-gcl3jn-t500x500.jpg",
       genres: ["EDM"],
       audio: null,
+      isFav: null,
     };
     let song3 = {
       name: "Feel Good",
@@ -81,6 +101,7 @@ export default {
       cover: "https://i1.sndcdn.com/artworks-000149107009-m881ek-t500x500.jpg",
       genres: ["Pop"],
       audio: null,
+      isFav: null,
     };
     let song4 = {
       name: "Roots",
@@ -90,8 +111,10 @@ export default {
         "https://lastfm.freetls.fastly.net/i/u/300x300/d55932d44b33e431e68a3c0c4daceb98.png",
       genres: ["OP", "Hello"],
       audio: null,
+      isFav: null,
     };
     this.createPlaylist("All Songs", [song1, song2, song3, song4]);
+    this.createPlaylist("Favourites", []);
     this.createPlaylist("Playlist-2", [song3, song2]);
     this.createPlaylist("Playlist-3", [song4]);
 

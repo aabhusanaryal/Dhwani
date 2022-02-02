@@ -16,8 +16,17 @@
       <div class="top-bar grid">
         <!-- Left contains favourite, add to playlist -->
         <div class="left flex">
-          <div><img src="../assets/icons/heart.svg" class="icon" /></div>
-          <div><img src="../assets/icons/heart.svg" /></div>
+          <div>
+            <img
+              :src="
+                require(nowPlaying.isFav
+                  ? '../assets/icons/heart_fill.svg'
+                  : '../assets/icons/heart.svg')
+              "
+              class="icon"
+              @click="updateFavourites"
+            />
+          </div>
           <div><img src="../assets/icons/playlist_add.svg" class="icon" /></div>
         </div>
         <!-- Center contains music controls -->
@@ -109,6 +118,7 @@ import DLL from "../DLL.js";
 export default {
   name: "Player",
   props: ["playlists"],
+  emits: ["updateFavourites"],
   data() {
     return {
       queue: new DLL(), // Holds a DLL containing currently playing songs
@@ -214,7 +224,9 @@ export default {
       let arr = playlist.songs;
       this.queue.addArray(arr);
     },
-
+    updateFavourites() {
+      this.$emit("updateFavourites", this.nowPlaying);
+    },
     // Methods not realted to the functionality of the player are below this line
     secondsToMinutes(seconds) {
       // Takes in seconds as parameter and returns a string of the format "mm:ss"
