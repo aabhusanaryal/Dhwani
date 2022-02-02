@@ -117,12 +117,14 @@ export default class DLL {
     return arr;
   }
   returnNext() {
+    // only returns what's next
     return this.start.next.data;
   }
   returnPrevious() {
     return this.start.previous.data;
   }
   next() {
+    // returns returns what's next and sets that as the new head
     this.start = this.start.next;
     return this.start.data;
   }
@@ -137,3 +139,8 @@ export default class DLL {
     this.start = null;
   }
 }
+
+// Make array of next song dekhi last song samma
+// Clear DLL
+// sort that array
+// this.addArray([array])
