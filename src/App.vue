@@ -68,6 +68,7 @@ export default {
       artist: "Paul Flint",
       cover: "https://i1.sndcdn.com/artworks-000178640584-kie7ij-t500x500.jpg",
       genres: ["Chill", "LoFi"],
+      audio: null,
     };
     let song2 = {
       name: "Puzzle",
@@ -75,6 +76,7 @@ export default {
       artist: "Retrovision",
       cover: "https://i1.sndcdn.com/artworks-000196908840-gcl3jn-t500x500.jpg",
       genres: ["EDM"],
+      audio: null,
     };
     let song3 = {
       name: "Feel Good",
@@ -82,6 +84,7 @@ export default {
       artist: "Syn Cole",
       cover: "https://i1.sndcdn.com/artworks-000149107009-m881ek-t500x500.jpg",
       genres: ["Pop"],
+      audio: null,
     };
     let song4 = {
       name: "Roots",
@@ -90,6 +93,7 @@ export default {
       cover:
         "https://lastfm.freetls.fastly.net/i/u/300x300/d55932d44b33e431e68a3c0c4daceb98.png",
       genres: ["OP", "Hello"],
+      audio: null,
     };
     this.createPlaylist("All Songs", [song1, song2, song3, song4]);
     this.createPlaylist("Playlist-2", [song3, song2]);
@@ -120,7 +124,7 @@ export default {
 
 /* Setting variables */
 :root {
-  --left-sidebar-width: 350px;
+  --left-sidebar-width: 300px;
   --cyan: #35e6da;
   --blue: #0496ff;
   --primary-gradient: linear-gradient(

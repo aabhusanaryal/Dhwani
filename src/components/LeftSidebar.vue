@@ -67,6 +67,7 @@ export default {
 }
 .left-sidebar {
   min-width: var(--left-sidebar-width);
+  width: 18%;
   min-height: 100vh;
   background: white;
   z-index: 100;
