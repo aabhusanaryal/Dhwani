@@ -125,11 +125,13 @@ export default class DLL {
   }
   next() {
     // returns returns what's next and sets that as the new head
-    this.start = this.start.next;
+    if(this.start.next!=null)
+      this.start = this.start.next;
     return this.start.data;
   }
   previous() {
-    this.start = this.start.prev;
+    if(this.start.prev!=null)
+      this.start = this.start.prev;
     return this.start.data;
   }
   head() {
