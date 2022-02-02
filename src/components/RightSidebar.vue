@@ -3,8 +3,8 @@
     <div class="sidebar-wrapper">
       <h1>Genre</h1>
       <div class="chips-container">
-        <div class="chips" v-for="(mood, index) in genre" :key="index">
-          {{ mood }}
+        <div class="chips" v-for="(genre, index) in genres" :key="index">
+          {{ genre }}
         </div>
       </div>
     </div>
@@ -14,7 +14,7 @@
 <script>
 export default {
   name: "RightSidebar",
-  props: ["genre"],
+  props: ["genres"],
 };
 </script>
 
