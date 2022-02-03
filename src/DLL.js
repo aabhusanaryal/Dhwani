@@ -13,6 +13,7 @@ export default class DLL {
     this.end = this.start;
     this.dataNo = 0;
     this.totalNo = 0;
+    this.looped=true;
   }
   insertBeg(data) {
     ++this.totalNo;
@@ -101,6 +102,14 @@ export default class DLL {
     let arr = [];
     let ptr = this.start;
     if (ptr == null) return arr;
+    if(ptr.next==null){
+      obj={
+        id:ptr.id,
+        data:ptr.data
+      };
+      arr.push(obj);
+      return arr;
+    }
     while (ptr.next != this.start) {
       obj = {
         id: ptr.id,
@@ -157,6 +166,24 @@ export default class DLL {
     }
     this.addArray(arr);
   }
+  loop(){
+    if(!this.looped){
+      if(this.start.next!=null){
+        this.end.next=this.start;
+        this.start.prev=this.end;
+      }
+      this.looped=true;
+    }
+  }
+  unloop(){
+    if(this.looped){
+      if(this.start.next!=null){
+        this.end.next=null;
+        this.start.prev=null;         
+    }
+    this.looped=false;
+  }
+}
 }
 
 // Make array of next song dekhi last song samma

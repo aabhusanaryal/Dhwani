@@ -31,7 +31,8 @@
         </div>
         <!-- Center contains music controls -->
         <div class="center flex">
-          <div><img src="../assets/icons/loop.svg" class="icon" /></div>
+          <div @click="loop"><img src="../assets/icons/loop.svg" class="icon" /></div>
+          <div @click="unloop"><img src="../assets/icons/loop.svg" class="icon" /></div>
           <div>
             <img
               class="medium-icon icon"
@@ -164,6 +165,12 @@ export default {
   methods: {
     shuffle(){
       this.queue.shuffle();
+    },
+    loop(){
+      this.queue.loop();
+    },
+    unloop(){
+      this.queue.unloop();
     },
     loadSong(songObj) {
       // Creates an Audio object for the current song if it already doesn't have one
