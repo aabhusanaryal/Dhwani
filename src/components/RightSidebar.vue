@@ -20,8 +20,7 @@ export default {
 
 <style>
 .right-sidebar {
-  min-width: var(--left-sidebar-width);
-  max-width: var(--left-sidebar-width);
+  width: 100%;
   min-height: 100vh;
   max-height: 100vh;
   /* text-align: center; */

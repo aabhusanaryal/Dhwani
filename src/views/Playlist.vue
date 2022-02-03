@@ -47,7 +47,7 @@ export default {
 .playlist-container {
  position: absolute;
  left: 20%;
- top: 40%;
+ top: 30%;
  width: 60rem;
  height: 25rem;
  outline: 1px solid red;

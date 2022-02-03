@@ -1,13 +1,26 @@
 <template>
-  <div class="container-flex">
+<div class="maincontainer">
+  <div class="leftcontainer">
     <LeftSidebar :playlists="playlists" />
+  </div>
+
+  <div class="rightcontainer">
+    <RightSidebar :genres="genres" />
+  </div>
+
+  <div class="centercontainer">
     <router-view
       :playlists="playlists"
       @playPlaylist="playPlaylist"
       @addPlaylist="createPlaylist"
     />
-    <RightSidebar :genres="genres" />
   </div>
+
+  <div class="topcontainer">
+
+  </div>
+
+  <div class="bottomcontainer">
   <!-- Only rendering the player if there's any song in it -->
   <Player
     :playlists="playlists"
@@ -15,6 +28,8 @@
     ref="playerComponent"
     @updateFavourites="updateFavourites"
   />
+  </div>
+</div>
 </template>
 
 <script>
@@ -202,17 +217,36 @@ html {
   -moz-osx-font-smoothing: grayscale;
   background: #f4f5fe;
 }
-.container-flex {
-  display: flex;
-  flex-direction: row;
+
+.maincontainer{
+  display:grid;
+  grid-template-rows: 0.5fr 2fr 0.8fr;
+  grid-template-columns: 20% 60% 20%;
+  grid-template-areas: 
+    "leftcontainer topcontainer rightcontainer"
+    "leftcontainer centercontainer rightcontainer"
+    "leftcontainer bottomcontainer rightcontainer";
 }
+
+.leftcontainer{
+  grid-area: leftcontainer;
+}
+.rightcontainer{
+  grid-area: rightcontainer;
+}
+.topcontainer{
+  grid-area: topcontainer;
+}
+.centercontainer{
+  grid-area: centercontainer;
+}
+.bottomcontainer{
+  grid-area: bottomcontainer;
+  display: flex;
+  justify-content: center;
+}
+
 .link {
   cursor: pointer;
-}
-.right-sidebar {
-  margin-left: auto; /* Sticks it to the right side */
-}
-.center-container {
-  min-width: 40%;
 }
 </style>
