@@ -125,35 +125,32 @@ export default class DLL {
   }
   next() {
     // returns returns what's next and sets that as the new head
-    if(this.start.next!=null)
-      this.start = this.start.next;
+    if (this.start.next != null) this.start = this.start.next;
     return this.start.data;
   }
   previous() {
-    if(this.start.prev!=null)
-      this.start = this.start.prev;
+    if (this.start.prev != null) this.start = this.start.prev;
     return this.start.data;
   }
   head() {
     return this.start.data;
   }
   clear() {
-    this.totalNo-=this.getArray().length
+    this.totalNo -= this.getArray().length;
     this.start = null;
   }
-  shuffle(){
-    let arr=this.getArray();
+  shuffle() {
+    let arr = this.getArray();
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      if(j==0)
-        continue;
+      if (j == 0) continue;
       const temp = arr[i];
       arr[i] = arr[j];
       arr[j] = temp;
     }
     this.clear();
-    for(let i=0;i<arr.length;i++){
-      arr[i]=arr[i].data;
+    for (let i = 0; i < arr.length; i++) {
+      arr[i] = arr[i].data;
     }
     this.addArray(arr);
   }
