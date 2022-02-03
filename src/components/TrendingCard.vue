@@ -7,7 +7,7 @@
         :style="`background: linear-gradient(
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.5)
-    ), url(${song.cover})`"
+    ), url(${song.cover});`"
       >
         <div class="content-wrapper">
           <h2 id="artist">{{ song ? song.artist : "" }}</h2>
@@ -40,7 +40,11 @@ export default {
   padding: 2.7rem;
 }
 .trending-card-wrapper {
-  background-size: 50px;
+  /* The following two properties can be used to make image full size */
+  background-size: 60% !important;
+  background-position-y: center !important;
+  background-position-x: center !important;
+  /* background-repeat: no-repeat !important; */
   height: 16rem;
   border-radius: 1.5rem;
   color: white;

@@ -227,7 +227,9 @@ export default {
     },
     // This method is called from App.vue
     playSong(song) {
-      this.loadSong(song);
+      this.queue.clear();
+      this.queue.addArray([song]);
+      this.loadSong(this.queue.head());
       this.play();
     },
     queuePlaylist(playlist) {
