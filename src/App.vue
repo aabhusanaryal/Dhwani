@@ -4,7 +4,9 @@
     <router-view
       :playlists="playlists"
       @playPlaylist="playPlaylist"
+      @playSong="playSong"
       @addPlaylist="createPlaylist"
+      v-if="playlists[0]"
     />
     <RightSidebar :genres="genres" />
   </div>
@@ -58,6 +60,9 @@ export default {
     playPlaylist(playlistName) {
       // This method in-turn calls the playPlaylist method of Player.vue
       this.$refs.playerComponent.playPlaylist(playlistName);
+    },
+    playSong(songName) {
+      this.$refs.playerComponent.playSong(songName);
     },
     updateFavourites(song) {
       if (song.isFav) {
@@ -146,6 +151,8 @@ export default {
   --left-sidebar-width: 350px;
   --cyan: #35e6da;
   --blue: #0496ff;
+  --grey: rgb(105, 105, 105);
+  --light-grey: rgb(209, 207, 207);
   --primary-gradient: linear-gradient(
     93.64deg,
     #35e6da 0.98%,

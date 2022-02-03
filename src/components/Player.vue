@@ -58,7 +58,9 @@
             />
           </div>
 
-          <div @click="shuffle"><img src="../assets/icons/shuffle.svg" class="icon" /></div>
+          <div @click="shuffle">
+            <img src="../assets/icons/shuffle.svg" class="icon" />
+          </div>
         </div>
         <!-- Right contains volume controls -->
         <div class="right flex">
@@ -163,7 +165,7 @@ export default {
   // Polar opposite of playNext()
 
   methods: {
-    shuffle(){
+    shuffle() {
       this.queue.shuffle();
     },
     loop(){
@@ -214,6 +216,7 @@ export default {
         this.seekBarMaxRange;
       this.nowPlaying.audio.currentTime = this.currentTime;
     },
+    // This method is called from App.vue
     playPlaylist(playlistName) {
       // This takes in the name of playlist as argument, finds that playlist in the playlists array
       // and starts playing it
@@ -226,6 +229,13 @@ export default {
       this.queue.clear();
       this.queuePlaylist(playlist);
       // Loading the first song of the new queue and playing it
+      this.loadSong(this.queue.head());
+      this.play();
+    },
+    // This method is called from App.vue
+    playSong(song) {
+      this.queue.clear();
+      this.queue.addArray([song]);
       this.loadSong(this.queue.head());
       this.play();
     },
