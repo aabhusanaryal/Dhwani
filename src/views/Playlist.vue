@@ -1,12 +1,18 @@
 <template>
   <div class="center-container">
     <button class="play" @click="play">Play</button>
-    <li v-for="(song, index) in songs" :key="index">{{ song.name }}</li>
+  </div>
+
+  <div class= "playlist-container">
+    <PlaylistView :songlist = "songs">
+    </PlaylistView>
   </div>
 </template>
 
 <script>
+import PlaylistView from '../components/PlaylistView.vue';
 export default {
+  components: {PlaylistView},
   name: "Playlist",
   props: ["playlists"],
   data() {
@@ -36,5 +42,14 @@ export default {
   overflow-y: scroll;
   overflow-x: hidden;
   max-height: 100vh;
+}
+
+.playlist-container {
+ position: absolute;
+ left: 20%;
+ top: 40%;
+ width: 60rem;
+ height: 25rem;
+ outline: 1px solid red;
 }
 </style>

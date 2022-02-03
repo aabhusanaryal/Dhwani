@@ -1,0 +1,53 @@
+<template>
+  <div class="list-container">
+      <h1 class="playlist-title">Playlist Title</h1>
+      <table>
+          <thead>
+              <tr>
+                  <th>Title</th>
+                  <th>Artist</th>
+              </tr>
+          </thead>
+          <tbody>
+    
+              <tr v-for="(song, index) in songlist" :key="index">
+                  <td>{{ song.name }}</td>
+                  <td>{{ song.artist }}</td> 
+              </tr>
+            </tbody>
+      </table>
+  </div>
+</template>
+
+<script>
+export default {
+    props :['songlist']
+}
+</script>
+
+<style scoped>
+
+.list-container{
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+table > tbody> tr{
+    background: white;
+    width: 100%;
+    height: 7.2rem;
+    outline: 1px solid blue;
+    text-align: center;
+}
+table{
+    width: 100%;
+}
+
+table > thead > tr{
+    width: 100%;
+    height: 2rem;
+    outline: 1px solid blue;
+}
+
+</style>
