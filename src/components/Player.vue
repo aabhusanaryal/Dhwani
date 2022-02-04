@@ -35,7 +35,8 @@
             <img
               src="../assets/icons/loop.svg"
               class="icon"
-              :class="isLooping ? 'green-icon' : ''"
+              :class="looping ? 'green-icon' : ''"
+              @click="toggleLoop"
             />
           </div>
           <div>
@@ -173,6 +174,12 @@ export default {
     shuffle() {
       this.queue.shuffle();
     },
+    loop() {
+      this.queue.loop();
+    },
+    unloop() {
+      this.queue.unloop();
+    },
     loadSong(songObj) {
       // Creates an Audio object for the current song if it already doesn't have one
       // and sets it as the nowPlaing song
@@ -245,6 +252,10 @@ export default {
     },
     updateFavourites() {
       this.$emit("updateFavourites", this.nowPlaying);
+    },
+    toggleLoop() {
+      if (this.looping) this.queue.unloop();
+      else this.queue.loop();
     },
     // Methods not realted to the functionality of the player are below this line
     secondsToMinutes(seconds) {
@@ -320,8 +331,8 @@ export default {
         return 0;
       }
     },
-    isLooping() {
-      return this.queue.isLooping;
+    looping() {
+      return this.queue.looping;
     },
   },
   watch: {
@@ -450,13 +461,17 @@ export default {
   height: 50px;
 }
 .green-icon {
-  filter: invert(47%) sepia(1%) saturate(1663%) hue-rotate(70deg)
-    brightness(91%) contrast(94%);
+  filter: invert(50%) sepia(61%) saturate(1861%) hue-rotate(82deg)
+    brightness(120%) contrast(121%);
 }
 .icon:hover {
   /* FIXME - Fine tune the color */
   filter: invert(47%) sepia(1%) saturate(1663%) hue-rotate(20deg)
     brightness(91%) contrast(94%);
+}
+.green-icon:hover {
+  filter: invert(94%) sepia(85%) saturate(5818%) hue-rotate(100deg)
+    brightness(104%) contrast(102%);
 }
 #previous {
   margin-left: 20px;
