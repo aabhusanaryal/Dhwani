@@ -124,14 +124,7 @@ th {
   border-right: none;
   border-left: none;
   border-bottom-width: 5px;
-  border-image: linear-gradient(
-      93.64deg,
-      #35e6da 0.98%,
-      rgba(5, 145, 245, 0.42),
-      #35e6da 0.98%,
-      rgba(16, 55, 245, 0.5) 119.65%
-    )
-    100;
+  border-image: var(--primary-gradient) 100;
   border-image-width: 0 0 3px 0;
 }
 input:focus-visible {

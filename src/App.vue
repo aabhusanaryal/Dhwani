@@ -79,6 +79,9 @@ export default {
   },
 
   mounted() {
+    setTimeout(() => {
+      console.log(document.querySelectorAll("input[type='text']"));
+    }, 1000);
     // Creating fake playlists
     // FIXME: Add proper genre to songs
     let song1 = {
