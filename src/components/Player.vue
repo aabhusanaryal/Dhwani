@@ -295,25 +295,33 @@ export default {
 
     // Keyboard Shortcuts
     document.addEventListener("keydown", (e) => {
-      // Play pause with spacebar start
-      if (e.code == "Space") this.paused ? this.play() : this.pause();
-      // Play pause with spacebar end
+      if (
+        !(
+          document.activeElement.tagName == "INPUT" &&
+          document.activeElement.type == "text"
+        )
+      ) {
+        // Only executing the kb shortcuts if no text field is focused
+        // Play pause with spacebar start
+        if (e.code == "Space") this.paused ? this.play() : this.pause();
+        // Play pause with spacebar end
 
-      // Volume up and down with Ctrl + UP / DOWN start
-      if (e.ctrlKey && e.code == "ArrowUp")
-        this.volume < 90 ? (this.volume += 10) : (this.volume = 100);
-      if (e.ctrlKey && e.code == "ArrowDown")
-        this.volume > 10 ? (this.volume -= 10) : (this.volume = 0);
-      // Volume up and down with Ctrl + UP / DOWN end
+        // Volume up and down with Ctrl + UP / DOWN start
+        if (e.ctrlKey && e.code == "ArrowUp")
+          this.volume < 90 ? (this.volume += 10) : (this.volume = 100);
+        if (e.ctrlKey && e.code == "ArrowDown")
+          this.volume > 10 ? (this.volume -= 10) : (this.volume = 0);
+        // Volume up and down with Ctrl + UP / DOWN end
 
-      // VSeek with Ctrl + LEFT/RIGHT start
-      if (e.ctrlKey && e.code == "ArrowRight") {
-        this.seekSliderPosition += 30;
-        this.seekTrack();
-      }
-      if (e.ctrlKey && e.code == "ArrowLeft") {
-        this.seekSliderPosition -= 30;
-        this.seekTrack();
+        // VSeek with Ctrl + LEFT/RIGHT start
+        if (e.ctrlKey && e.code == "ArrowRight") {
+          this.seekSliderPosition += 30;
+          this.seekTrack();
+        }
+        if (e.ctrlKey && e.code == "ArrowLeft") {
+          this.seekSliderPosition -= 30;
+          this.seekTrack();
+        }
       }
     });
   },
