@@ -111,7 +111,7 @@
           />
         </div>
         <div class="timestamp">
-          {{
+          -{{
             nowPlaying.audio.duration
               ? secondsToMinutes(nowPlaying.audio.duration - currentTime)
               : "00:00"
