@@ -112,8 +112,8 @@
         </div>
         <div class="timestamp">
           {{
-            nowPlaying.duration
-              ? secondsToMinutes(nowPlaying.duration - currentTime)
+            nowPlaying.audio.duration
+              ? secondsToMinutes(nowPlaying.audio.duration - currentTime)
               : "00:00"
           }}
         </div>
@@ -483,6 +483,9 @@ export default {
 }
 #previous {
   margin-left: 20px;
+}
+.timestamp {
+  padding: 0 10px;
 }
 #next {
   margin-right: 20px;
