@@ -31,7 +31,13 @@
         </div>
         <!-- Center contains music controls -->
         <div class="center flex">
-          <div><img src="../assets/icons/loop.svg" class="icon" /></div>
+          <div>
+            <img
+              src="../assets/icons/loop.svg"
+              class="icon"
+              :class="isLooping ? 'green-icon' : ''"
+            />
+          </div>
           <div>
             <img
               class="medium-icon icon"
@@ -314,6 +320,9 @@ export default {
         return 0;
       }
     },
+    isLooping() {
+      return this.queue.isLooping;
+    },
   },
   watch: {
     volume: function () {
@@ -440,7 +449,10 @@ export default {
   width: 50px;
   height: 50px;
 }
-
+.green-icon {
+  filter: invert(47%) sepia(1%) saturate(1663%) hue-rotate(70deg)
+    brightness(91%) contrast(94%);
+}
 .icon:hover {
   /* FIXME - Fine tune the color */
   filter: invert(47%) sepia(1%) saturate(1663%) hue-rotate(20deg)
