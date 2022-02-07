@@ -32,16 +32,13 @@ when the template is changed, the only contaners shown in the grid areas become 
 \          7        \
 --------------------
 The area is changed using mediaquery -->
-
   <div class="maincontainer">
     <div class="leftcontainer">
       <LeftSidebar :playlists="playlists" />
     </div>
-
     <div class="rightcontainer">
       <RightSidebar :genres="genres" />
     </div>
-
     <div class="centercontainer">
       <router-view
         :playlists="playlists"
@@ -51,41 +48,18 @@ The area is changed using mediaquery -->
         v-if="playlists[0]"
       />
     </div>
-
     <div class="topcontainer">
       <!-- search bar -->
       search
     </div>
-
-    <div class="maincontainer">
-      <div class="leftcontainer">
-        <LeftSidebar :playlists="playlists" />
-      </div>
-      <div class="rightcontainer">
-        <RightSidebar :genres="genres" />
-      </div>
-      <div class="centercontainer">
-        <router-view
-          :playlists="playlists"
-          @playPlaylist="playPlaylist"
-          @playSong="playSong"
-          @addPlaylist="createPlaylist"
-          v-if="playlists[0]"
-        />
-      </div>
-      <div class="topcontainer">
-        <!-- search bar -->
-        search
-      </div>
-      <div class="bottomcontainer">
-        <!-- Only rendering the player if there's any song in it -->
-        <Player
-          :playlists="playlists"
-          v-if="playlists[0]"
-          ref="playerComponent"
-          @updateFavourites="updateFavourites"
-        />
-      </div>
+    <div class="bottomcontainer">
+      <!-- Only rendering the player if there's any song in it -->
+      <Player
+        :playlists="playlists"
+        v-if="playlists[0]"
+        ref="playerComponent"
+        @updateFavourites="updateFavourites"
+      />
     </div>
   </div>
 </template>
