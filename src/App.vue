@@ -250,6 +250,7 @@ html {
 
 @media screen and (max-width: 768px){
   .maincontainer{
+    /* aabhusan is tori */
     grid-template-areas: 
     " topcontainer"
     "centercontainer"
