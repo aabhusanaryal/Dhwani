@@ -13,8 +13,7 @@ export default class DLL {
     this.end = this.start;
     this.dataNo = 0;
     this.totalNo = 0;
-    this.looping = true;
-    this.head1 = null;
+    this.looped = true;
   }
   insertBeg(data) {
     ++this.totalNo;
@@ -30,7 +29,6 @@ export default class DLL {
       this.end.next = this.start;
       this.start.prev = this.end;
     }
-    this.head1 = this.start;
   }
   insertEnd(data) {
     ++this.totalNo;
@@ -50,7 +48,6 @@ export default class DLL {
     input.prev = ptr;
     this.start.prev = input;
     this.end = input;
-    this.head1 = this.start;
   }
   //insert after a specific id
   insertAfter(id, data) {
@@ -72,7 +69,6 @@ export default class DLL {
     temp.prev = ptr;
     ptr.next = temp;
     temp.id = ++this.dataNo;
-    this.head1 = this.start;
   }
   //can add an array of songs to the linked list, where array contains an array of audios
   addArray(array) {
@@ -104,7 +100,7 @@ export default class DLL {
   getArray() {
     let obj = {};
     let arr = [];
-    let ptr = this.head1;
+    let ptr = this.start;
     if (ptr == null) return arr;
     if (ptr.next == null) {
       obj = {
@@ -129,17 +125,24 @@ export default class DLL {
     arr.push(obj);
     return arr;
   }
+  returnNext() {
+    // only returns what's next
+    return this.start.next.data;
+  }
+  returnPrevious() {
+    return this.start.previous.data;
+  }
   next() {
-    // returns what's next and sets that as the new head
-    if (this.head1.next != null) this.head1 = this.head1.next;
-    return this.head1.data;
+    // returns returns what's next and sets that as the new head
+    if (this.start.next != null) this.start = this.start.next;
+    return this.start.data;
   }
   previous() {
-    if (this.head1.prev != null) this.head1 = this.head1.prev;
-    return this.head1.data;
+    if (this.start.prev != null) this.start = this.start.prev;
+    return this.start.data;
   }
   head() {
-    return this.head1.data;
+    return this.start.data;
   }
   clear() {
     this.totalNo -= this.getArray().length;
@@ -161,21 +164,21 @@ export default class DLL {
     this.addArray(arr);
   }
   loop() {
-    if (!this.looping) {
+    if (!this.looped) {
       if (this.start.next != null) {
         this.end.next = this.start;
         this.start.prev = this.end;
       }
-      this.looping = true;
+      this.looped = true;
     }
   }
   unloop() {
-    if (this.looping) {
+    if (this.looped) {
       if (this.start.next != null) {
         this.end.next = null;
         this.start.prev = null;
       }
-      this.looping = false;
+      this.looped = false;
     }
   }
 }
