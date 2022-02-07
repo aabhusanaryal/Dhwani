@@ -111,9 +111,9 @@
           />
         </div>
         <div class="timestamp">
-          {{
-            nowPlaying.duration
-              ? secondsToMinutes(nowPlaying.duration - currentTime)
+          -{{
+            nowPlaying.audio.duration
+              ? secondsToMinutes(nowPlaying.audio.duration - currentTime)
               : "00:00"
           }}
         </div>
@@ -292,6 +292,7 @@ export default {
     // When the app is first load, populating queue with all songs
     this.queuePlaylist(this.playlists[0]);
     this.loadSong(this.queue.head());
+    this.unloop(); // Setting the default behavior to unloop
 
     // Keyboard Shortcuts
     document.addEventListener("keydown", (e) => {
@@ -483,6 +484,9 @@ export default {
 }
 #previous {
   margin-left: 20px;
+}
+.timestamp {
+  padding: 0 10px;
 }
 #next {
   margin-right: 20px;
