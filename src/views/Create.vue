@@ -33,7 +33,7 @@
                         name="songCheckbox"
                         :id="index"
                         />
-                        <label :for="index">A</label>
+                        <label :for="index"></label>
                     </td>
                 </tr>
             </tbody>
