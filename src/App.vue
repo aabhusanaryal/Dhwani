@@ -18,6 +18,7 @@
 
   <div class="topcontainer">
     <!-- search bar -->
+    search
   </div>
 
   <div class="bottomcontainer">
@@ -251,12 +252,12 @@ html {
 @media screen and (max-width: 768px){
   .maincontainer{
     /* aabhusan is tori */
+    grid-template-columns: 100% !important;
+    grid-template-rows: 10% 65% 25% !important;
     grid-template-areas: 
     " topcontainer"
     "centercontainer"
-    "bottomcontainer";
-    grid-template-columns: 1fr;
-    grid-template-rows: 10% 65% 25%;
+    "bottomcontainer" !important;
 }
 }
 
