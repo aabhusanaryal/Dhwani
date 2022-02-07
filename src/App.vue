@@ -17,7 +17,7 @@
   </div>
 
   <div class="topcontainer">
-
+    <!-- search bar -->
   </div>
 
   <div class="bottomcontainer">
@@ -230,6 +230,7 @@ html {
 
 .leftcontainer{
   grid-area: leftcontainer;
+  height: 100vh;
 }
 .rightcontainer{
   grid-area: rightcontainer;
@@ -239,11 +240,23 @@ html {
 }
 .centercontainer{
   grid-area: centercontainer;
+  outline: 2px solid brown;
 }
 .bottomcontainer{
   grid-area: bottomcontainer;
   display: flex;
   justify-content: center;
+}
+
+@media screen and (max-width: 768px){
+  .maincontainer{
+    grid-template-areas: 
+    " topcontainer"
+    "centercontainer"
+    "bottomcontainer";
+    grid-template-columns: 1fr;
+    grid-template-rows: 10% 65% 25%;
+}
 }
 
 .link {

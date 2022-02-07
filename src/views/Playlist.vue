@@ -1,7 +1,7 @@
 <template>
-  <div class="center-container">
+  <!-- <div class="center-container">
     <button class="play" @click="play">Play</button>
-  </div>
+  </div> -->
 
   <div class= "playlist-container">
     <PlaylistView :songlist = "songs">
@@ -37,18 +37,17 @@ export default {
 </script>
 
 <style scoped>
-.center-container {
+/* .center-container {
   font-size: 25px;
   overflow-y: scroll;
   overflow-x: hidden;
   max-height: 100vh;
-}
+  width: 100%
+} */
 
 .playlist-container {
- position: absolute;
- left: 20%;
- top: 30%;
- width: 60rem;
+  
+ width: 100%;
  height: 25rem;
  outline: 1px solid red;
 }

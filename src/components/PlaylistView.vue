@@ -1,7 +1,8 @@
 <template>
   <div class="list-container">
+      <div class="trending-card"></div>
       <h1 class="playlist-title">Playlist Title</h1>
-      <table>
+      <table class="playlist-table">
           <thead>
               <tr>
                   <th>Title</th>
@@ -28,9 +29,17 @@ export default {
 <style scoped>
 
 .list-container{
+    display:flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     overflow-y: scroll;
+}
+
+.trending-card{
+    width: 40px;
+    height: 2 rem;
+    background-color: violet;
 }
 
 table > tbody> tr{
