@@ -31,7 +31,9 @@
                         :value="song"
                         v-model="addedSongs"
                         name="songCheckbox"
+                        :id="index"
                         />
+                        <label :for="index">A</label>
                     </td>
                 </tr>
             </tbody>
@@ -157,5 +159,17 @@ th {
 }
 .checkbox-wrapper{
     width:50px;
+}
+label{
+    position: relative;
+}
+label::before{
+    content:"";
+    background: url("/@/src/assets/tick.svg");
+    background-position: center;
+    background-size:contain ;
+    width: 30px;
+    height: 30px;
+    position: absolute;
 }
 </style>
