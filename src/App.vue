@@ -1,4 +1,42 @@
 <template>
+<!-- How the grid works:
++----------------------------------------------+
+|    1   |             2             |    3    |
+|________|___________________________|_________|
+|        |                           |         |
+|        |                           |         |
+|    4   |             5             |    6    |
+|        |                           |         |
+|________|___________________________|_________|
+|    7   |             8             |    9    | 
+|________|___________________________|_________| 
+
+The whole page is contained in the container "maincontainer",
+The grid is made in the maincontainer and the different components are contained in it.
+The areas 1-9 are the areas of the grid made from rows and cols.
+The areas are assigned different components,
+1,4,7 is for left sidebar, contained by "leftcontainer"
+2 is for the searchbar, contained by "topcontainer"
+5 is for the router-view, contained by "centercontainer"
+8 is for the player, contained by "bottomcontainer"
+3,6,9 is for the right sidebar, contained by "rightcontainer"  
+when the template is changed, the only contaners shown in the grid areas become 1, 4 and 7 as:
+--------------------
+\        1          \
+\___________________\
+\                   \
+\                   \
+\         4         \
+\                   \
+\                   \
+\___________________
+\          7        \
+--------------------
+The area is changed using mediaquery
+-->
+
+
+
 <div class="maincontainer">
   <div class="leftcontainer">
     <LeftSidebar :playlists="playlists" />
@@ -231,6 +269,8 @@ html {
 
 .maincontainer{
   display:grid;
+  height: 100vh;
+  width: 100vw;
   grid-template-rows: 0.5fr 2fr 0.8fr;
   grid-template-columns: 20% 60% 20%;
   grid-template-areas: 
