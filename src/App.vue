@@ -1,45 +1,74 @@
 <template>
-<div class="maincontainer">
-  <div class="leftcontainer">
-    <LeftSidebar :playlists="playlists" />
-  </div>
+  <!-- How the grid works:
++----------------------------------------------+
+|    1   |             2             |    3    |
+|________|___________________________|_________|
+|        |                           |         |
+|        |                           |         |
+|    4   |             5             |    6    |
+|        |                           |         |
+|________|___________________________|_________|
+|    7   |             8             |    9    | 
+|________|___________________________|_________| 
+The whole page is contained in the container "maincontainer",
+The grid is made in the maincontainer and the different components are contained in it.
+The areas 1-9 are the areas of the grid made from rows and cols.
+The areas are assigned different components,
+1,4,7 is for left sidebar, contained by "leftcontainer"
+2 is for the searchbar, contained by "topcontainer"
+5 is for the router-view, contained by "centercontainer"
+8 is for the player, contained by "bottomcontainer"
+3,6,9 is for the right sidebar, contained by "rightcontainer"  
+when the template is changed, the only contaners shown in the grid areas become 1, 4 and 7 as:
+--------------------
+\        1          \
+\___________________\
+\                   \
+\                   \
+\         4         \
+\                   \
+\                   \
+\___________________
+\          7        \
+--------------------
+The area is changed using mediaquery
+-->
 
-  <div class="rightcontainer">
-    <RightSidebar :genres="genres" />
+  <div class="maincontainer">
+    <div class="leftcontainer">
+      <LeftSidebar :playlists="playlists" />
+    </div>
+    <div class="rightcontainer">
+      <RightSidebar :genres="genres" />
+    </div>
+    <div class="centercontainer">
+      <router-view
+        :playlists="playlists"
+        @playPlaylist="playPlaylist"
+        @playSong="playSong"
+        @addPlaylist="createPlaylist"
+        v-if="playlists[0]"
+      />
+    </div>
+    <div class="topcontainer">
+      <!-- search bar -->
+      search
+    </div>
+    <div class="bottomcontainer">
+      <!-- Only rendering the player if there's any song in it -->
+      <Player
+        :playlists="playlists"
+        v-if="playlists[0]"
+        ref="playerComponent"
+        @updateFavourites="updateFavourites"
+      />
+    </div>
   </div>
-
-  <div class="centercontainer">
-    <router-view
-      :playlists="playlists"
-      @playPlaylist="playPlaylist"
-      @playSong="playSong"
-      @addPlaylist="createPlaylist"
-      v-if="playlists[0]"
-    />
-  </div>
-
-  <div class="topcontainer">
-    <!-- search bar -->
-    search
-  </div>
-
-  <div class="bottomcontainer">
-  <!-- Only rendering the player if there's any song in it -->
-  <Player
-    :playlists="playlists"
-    v-if="playlists[0]"
-    ref="playerComponent"
-    @updateFavourites="updateFavourites"
-  />
-  </div>
-</div>
 </template>
-
 <script>
 import LeftSidebar from "@/components/LeftSidebar.vue";
 import RightSidebar from "@/components/RightSidebar.vue";
 import Player from "@/components/Player.vue";
-
 export default {
   components: { LeftSidebar, RightSidebar, Player },
   data() {
@@ -52,7 +81,6 @@ export default {
   // The playlists array contain playlists object. The playlist object has two properties:
   // name and songs. The name property holds the name/ title of the playlist, while the
   // songs property holds an array of song objects.
-
   // The song object has the following properties:
   // name: name of the song
   // path: filename of the song. The song MUST be stored in @assets/songs/<filename>.mp3
@@ -60,11 +88,9 @@ export default {
   // cover: CDN link to the cover artwork
   // genres: an array of genres the song belongs to
   // isFav: is the song added to the Favourites playlist?
-
   // To play a song, we first instantiate an Audio() object as:
   // audio = new Audio(require(`@assets/songs/${song.name}.mp3`))
   // Then, we can play the audio by calling the .play() method on the Audio object.
-
   // PS: The first element of the playlists[] array is the playlist called "All Songs"
   methods: {
     createPlaylist(name, songs) {
@@ -93,7 +119,6 @@ export default {
       }
     },
   },
-
   mounted() {
     setTimeout(() => {
       console.log(document.querySelectorAll("input[type='text']"));
@@ -141,7 +166,6 @@ export default {
     this.createPlaylist("Favourites", []);
     this.createPlaylist("Playlist-2", [song3, song2]);
     this.createPlaylist("Playlist-3", [song4]);
-
     // Populating this.genres
     let allSongs = this.playlists[0].songs;
     allSongs.forEach((song) => {
@@ -160,11 +184,9 @@ export default {
   },
 };
 </script>
-
 <style>
 /* Importing fonts */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
-
 /* Setting variables */
 :root {
   --left-sidebar-width: 350px;
@@ -195,7 +217,6 @@ export default {
     #004b81 119.65%
   );
 }
-
 /* Removing margin and padding from all elements */
 * {
   margin: 0;
@@ -204,7 +225,6 @@ export default {
 html {
   overflow: hidden; /* Removing scrollbar from the main html element */
 }
-
 /* Making the scrollbar look pretty (like myself - Aabhusan) */
 ::-webkit-scrollbar {
   width: 20px;
@@ -221,56 +241,53 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #d4d4da;
 }
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #f4f5fe;
 }
-
-.maincontainer{
-  display:grid;
+.maincontainer {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
   grid-template-rows: 0.5fr 2fr 0.8fr;
   grid-template-columns: 20% 60% 20%;
-  grid-template-areas: 
+  grid-template-areas:
     "leftcontainer topcontainer rightcontainer"
     "leftcontainer centercontainer rightcontainer"
     "leftcontainer bottomcontainer rightcontainer";
 }
-
-.leftcontainer{
+.leftcontainer {
   grid-area: leftcontainer;
   height: 100vh;
 }
-.rightcontainer{
+.rightcontainer {
   grid-area: rightcontainer;
 }
-.topcontainer{
+.topcontainer {
   grid-area: topcontainer;
 }
-.centercontainer{
+.centercontainer {
   grid-area: centercontainer;
   outline: 2px solid brown;
 }
-.bottomcontainer{
+.bottomcontainer {
   grid-area: bottomcontainer;
   display: flex;
   justify-content: center;
 }
-
-@media screen and (max-width: 768px){
-  .maincontainer{
+@media screen and (max-width: 768px) {
+  .maincontainer {
     /* aabhusan is tori */
     grid-template-columns: 100% !important;
     grid-template-rows: 10% 65% 25% !important;
-    grid-template-areas: 
-    " topcontainer"
-    "centercontainer"
-    "bottomcontainer" !important;
+    grid-template-areas:
+      " topcontainer"
+      "centercontainer"
+      "bottomcontainer" !important;
+  }
 }
-}
-
 .link {
   cursor: pointer;
 }
