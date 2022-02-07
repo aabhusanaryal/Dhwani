@@ -31,7 +31,14 @@
         </div>
         <!-- Center contains music controls -->
         <div class="center flex">
-          <div><img src="../assets/icons/loop.svg" class="icon" /></div>
+          <div>
+            <img
+              src="../assets/icons/loop.svg"
+              class="icon"
+              :class="looping ? 'green-icon' : ''"
+              @click="toggleLoop"
+            />
+          </div>
           <div>
             <img
               class="medium-icon icon"
@@ -57,7 +64,9 @@
             />
           </div>
 
-          <div @click="shuffle"><img src="../assets/icons/shuffle.svg" class="icon" /></div>
+          <div @click="shuffle">
+            <img src="../assets/icons/shuffle.svg" class="icon" />
+          </div>
         </div>
         <!-- Right contains volume controls -->
         <div class="right flex">
@@ -102,9 +111,9 @@
           />
         </div>
         <div class="timestamp">
-          {{
-            nowPlaying.duration
-              ? secondsToMinutes(nowPlaying.duration - currentTime)
+          -{{
+            nowPlaying.audio.duration
+              ? secondsToMinutes(nowPlaying.audio.duration - currentTime)
               : "00:00"
           }}
         </div>
@@ -162,8 +171,14 @@ export default {
   // Polar opposite of playNext()
 
   methods: {
-    shuffle(){
+    shuffle() {
       this.queue.shuffle();
+    },
+    loop() {
+      this.queue.loop();
+    },
+    unloop() {
+      this.queue.unloop();
     },
     loadSong(songObj) {
       // Creates an Audio object for the current song if it already doesn't have one
@@ -207,6 +222,7 @@ export default {
         this.seekBarMaxRange;
       this.nowPlaying.audio.currentTime = this.currentTime;
     },
+    // This method is called from App.vue
     playPlaylist(playlistName) {
       // This takes in the name of playlist as argument, finds that playlist in the playlists array
       // and starts playing it
@@ -222,6 +238,13 @@ export default {
       this.loadSong(this.queue.head());
       this.play();
     },
+    // This method is called from App.vue
+    playSong(song) {
+      this.queue.clear();
+      this.queue.addArray([song]);
+      this.loadSong(this.queue.head());
+      this.play();
+    },
     queuePlaylist(playlist) {
       // Takes a playlist object and queues the songs of that playlist to the current queue
       let arr = playlist.songs;
@@ -229,6 +252,10 @@ export default {
     },
     updateFavourites() {
       this.$emit("updateFavourites", this.nowPlaying);
+    },
+    toggleLoop() {
+      if (this.looping) this.queue.unloop();
+      else this.queue.loop();
     },
     // Methods not realted to the functionality of the player are below this line
     secondsToMinutes(seconds) {
@@ -265,28 +292,37 @@ export default {
     // When the app is first load, populating queue with all songs
     this.queuePlaylist(this.playlists[0]);
     this.loadSong(this.queue.head());
+    this.unloop(); // Setting the default behavior to unloop
 
     // Keyboard Shortcuts
     document.addEventListener("keydown", (e) => {
-      // Play pause with spacebar start
-      if (e.code == "Space") this.paused ? this.play() : this.pause();
-      // Play pause with spacebar end
+      if (
+        !(
+          document.activeElement.tagName == "INPUT" &&
+          document.activeElement.type == "text"
+        )
+      ) {
+        // Only executing the kb shortcuts if no text field is focused
+        // Play pause with spacebar start
+        if (e.code == "Space") this.paused ? this.play() : this.pause();
+        // Play pause with spacebar end
 
-      // Volume up and down with Ctrl + UP / DOWN start
-      if (e.ctrlKey && e.code == "ArrowUp")
-        this.volume < 90 ? (this.volume += 10) : (this.volume = 100);
-      if (e.ctrlKey && e.code == "ArrowDown")
-        this.volume > 10 ? (this.volume -= 10) : (this.volume = 0);
-      // Volume up and down with Ctrl + UP / DOWN end
+        // Volume up and down with Ctrl + UP / DOWN start
+        if (e.ctrlKey && e.code == "ArrowUp")
+          this.volume < 90 ? (this.volume += 10) : (this.volume = 100);
+        if (e.ctrlKey && e.code == "ArrowDown")
+          this.volume > 10 ? (this.volume -= 10) : (this.volume = 0);
+        // Volume up and down with Ctrl + UP / DOWN end
 
-      // VSeek with Ctrl + LEFT/RIGHT start
-      if (e.ctrlKey && e.code == "ArrowRight") {
-        this.seekSliderPosition += 30;
-        this.seekTrack();
-      }
-      if (e.ctrlKey && e.code == "ArrowLeft") {
-        this.seekSliderPosition -= 30;
-        this.seekTrack();
+        // VSeek with Ctrl + LEFT/RIGHT start
+        if (e.ctrlKey && e.code == "ArrowRight") {
+          this.seekSliderPosition += 30;
+          this.seekTrack();
+        }
+        if (e.ctrlKey && e.code == "ArrowLeft") {
+          this.seekSliderPosition -= 30;
+          this.seekTrack();
+        }
       }
     });
   },
@@ -303,6 +339,9 @@ export default {
       } catch {
         return 0;
       }
+    },
+    looping() {
+      return this.queue.looping;
     },
   },
   watch: {
@@ -430,14 +469,24 @@ export default {
   width: 50px;
   height: 50px;
 }
-
+.green-icon {
+  filter: invert(50%) sepia(61%) saturate(1861%) hue-rotate(82deg)
+    brightness(120%) contrast(121%);
+}
 .icon:hover {
   /* FIXME - Fine tune the color */
   filter: invert(47%) sepia(1%) saturate(1663%) hue-rotate(20deg)
     brightness(91%) contrast(94%);
 }
+.green-icon:hover {
+  filter: invert(94%) sepia(85%) saturate(5818%) hue-rotate(100deg)
+    brightness(104%) contrast(102%);
+}
 #previous {
   margin-left: 20px;
+}
+.timestamp {
+  padding: 0 10px;
 }
 #next {
   margin-right: 20px;

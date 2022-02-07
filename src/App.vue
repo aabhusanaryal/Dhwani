@@ -12,7 +12,9 @@
     <router-view
       :playlists="playlists"
       @playPlaylist="playPlaylist"
+      @playSong="playSong"
       @addPlaylist="createPlaylist"
+      v-if="playlists[0]"
     />
   </div>
 
@@ -75,6 +77,9 @@ export default {
       // This method in-turn calls the playPlaylist method of Player.vue
       this.$refs.playerComponent.playPlaylist(playlistName);
     },
+    playSong(songName) {
+      this.$refs.playerComponent.playSong(songName);
+    },
     updateFavourites(song) {
       if (song.isFav) {
         // Removing the song from array
@@ -90,6 +95,9 @@ export default {
   },
 
   mounted() {
+    setTimeout(() => {
+      console.log(document.querySelectorAll("input[type='text']"));
+    }, 1000);
     // Creating fake playlists
     // FIXME: Add proper genre to songs
     let song1 = {
@@ -162,6 +170,8 @@ export default {
   --left-sidebar-width: 350px;
   --cyan: #35e6da;
   --blue: #0496ff;
+  --grey: rgb(105, 105, 105);
+  --light-grey: rgb(209, 207, 207);
   --primary-gradient: linear-gradient(
     93.64deg,
     #35e6da 0.98%,
