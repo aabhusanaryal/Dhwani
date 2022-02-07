@@ -3,7 +3,13 @@
     <div class="sidebar-wrapper">
       <h1>Genre</h1>
       <div class="chips-container">
-        <div class="chips" v-for="(genre, index) in genres" :key="index">
+        <div
+          class="chips"
+          :class="filter.includes(genre) ? 'active-chips' : ''"
+          v-for="(genre, index) in genres"
+          :key="index"
+          @click="filterGenre(genre)"
+        >
           {{ genre }}
         </div>
       </div>
@@ -15,6 +21,22 @@
 export default {
   name: "RightSidebar",
   props: ["genres"],
+  data() {
+    return {
+      filter: [],
+    };
+  },
+  methods: {
+    filterGenre(genre) {
+      // Toggling the filter on/ off
+      if (this.filter.includes(genre)) {
+        // If the filter already exists, removing the filter
+        this.filter = this.filter.filter((el) => el != genre); // This line removes genre from this.filter
+      } else this.filter.push(genre); // If the filter doesn't already exist in this.filter, appending it
+      // Updating the query params in URL
+      this.$router.push({ query: { genre: this.filter } });
+    },
+  },
 };
 </script>
 
@@ -48,6 +70,9 @@ export default {
 }
 .chips:hover {
   background: rgb(241, 240, 240);
+}
+.active-chips {
+  background: rgb(158, 158, 158) !important;
 }
 .sidebar-wrapper {
   margin: 30px 25px;
