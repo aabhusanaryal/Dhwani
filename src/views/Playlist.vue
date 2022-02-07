@@ -1,7 +1,7 @@
 <template>
-  <!-- <div class="center-container">
+  <div class="center-container">
     <button class="play" @click="play">Play</button>
-  </div> -->
+  </div>
 
   <div class= "playlist-container">
     <PlaylistView :songlist = "songs">
