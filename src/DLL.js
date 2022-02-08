@@ -13,7 +13,8 @@ export default class DLL {
     this.end = this.start;
     this.dataNo = 0;
     this.totalNo = 0;
-    this.looped = true;
+    this.looping = false;
+    this.head1 = null;
   }
   insertBeg(data) {
     ++this.totalNo;
@@ -29,6 +30,9 @@ export default class DLL {
       this.end.next = this.start;
       this.start.prev = this.end;
     }
+    this.head1 = this.start;
+    if(!this.looping)
+      this.unloop();
   }
   insertEnd(data) {
     ++this.totalNo;
@@ -38,6 +42,9 @@ export default class DLL {
     if (ptr == null) {
       this.start = input;
       this.end = this.start;
+      this.head1=this.start;
+      if(!this.looping)
+        this.unloop();
       return;
     }
     while (ptr != this.end) {
@@ -48,27 +55,9 @@ export default class DLL {
     input.prev = ptr;
     this.start.prev = input;
     this.end = input;
-  }
-  //insert after a specific id
-  insertAfter(id, data) {
-    ++this.totalNo;
-    let ptr = this.start;
-    let temp = new NODE(data);
-    while (ptr.id != id) {
-      if (ptr.next == this.start) {
-        console.log("Data not found");
-        return;
-      } else ptr = ptr.next;
-    }
-    if (ptr.next == this.start || ptr.next == null) {
-      --this.totalNo;
-      this.insertEnd(data);
-      return;
-    } else ptr.next.prev = temp;
-    temp.next = ptr.next;
-    temp.prev = ptr;
-    ptr.next = temp;
-    temp.id = ++this.dataNo;
+    this.head1 = this.start;
+    if(!this.looping)
+      this.unloop();
   }
   //can add an array of songs to the linked list, where array contains an array of audios
   addArray(array) {
@@ -76,41 +65,13 @@ export default class DLL {
       this.insertEnd(array[i]);
     }
   }
-  deleteId(id) {
-    --this.totalNo;
-    let ptr = this.start;
-    while (ptr.id != id) {
-      ptr = ptr.next;
-    }
-    if (ptr.next == null || ptr.next == ptr) {
-      this.start = null;
-      this.end = null;
-      return;
-    }
-    ptr.prev.next = ptr.next;
-    ptr.next.prev = ptr.prev;
-    if (ptr == this.start) {
-      this.start = ptr.next;
-    } else if (ptr == this.end) {
-      this.end = ptr.prev;
-    }
-    ptr = null;
-  }
   //returns all the items of the linked list as an array of objects. {id:...,data:...}
   getArray() {
     let obj = {};
     let arr = [];
-    let ptr = this.start;
+    let ptr = this.head1;
     if (ptr == null) return arr;
-    if (ptr.next == null) {
-      obj = {
-        id: ptr.id,
-        data: ptr.data,
-      };
-      arr.push(obj);
-      return arr;
-    }
-    while (ptr.next != this.start) {
+    while (ptr.next != this.start && ptr.next != null) {
       obj = {
         id: ptr.id,
         data: ptr.data,
@@ -125,28 +86,22 @@ export default class DLL {
     arr.push(obj);
     return arr;
   }
-  returnNext() {
-    // only returns what's next
-    return this.start.next.data;
-  }
-  returnPrevious() {
-    return this.start.previous.data;
-  }
   next() {
-    // returns returns what's next and sets that as the new head
-    if (this.start.next != null) this.start = this.start.next;
-    return this.start.data;
+    // returns what's next and sets that as the new head
+    if (this.head1.next != null) this.head1 = this.head1.next;
+    return this.head1.data;
   }
   previous() {
-    if (this.start.prev != null) this.start = this.start.prev;
-    return this.start.data;
+    if (this.head1.prev != null) this.head1 = this.head1.prev;
+    return this.head1.data;
   }
   head() {
-    return this.start.data;
+    return this.head1.data;
   }
   clear() {
     this.totalNo -= this.getArray().length;
     this.start = null;
+    this.head1=null;
   }
   shuffle() {
     let arr = this.getArray();
@@ -164,22 +119,18 @@ export default class DLL {
     this.addArray(arr);
   }
   loop() {
-    if (!this.looped) {
-      if (this.start.next != null) {
-        this.end.next = this.start;
-        this.start.prev = this.end;
-      }
-      this.looped = true;
+    if (this.start.next != null) {
+      this.end.next = this.start;
+      this.start.prev = this.end;
     }
+    this.looping = true;
   }
   unloop() {
-    if (this.looped) {
-      if (this.start.next != null) {
-        this.end.next = null;
-        this.start.prev = null;
-      }
-      this.looped = false;
+    if (this.start.next != null) {
+      this.end.next = null;
+      this.start.prev = null;
     }
+    this.looping = false;
   }
 }
 
@@ -187,3 +138,46 @@ export default class DLL {
 // Clear DLL
 // sort that array
 // this.addArray([array])
+
+// deleteId(id) {
+//   --this.totalNo;
+//   let ptr = this.start;
+//   while (ptr.id != id) {
+//     ptr = ptr.next;
+//   }
+//   if (ptr.next == null || ptr.next == ptr) {
+//     this.start = null;
+//     this.end = null;
+//     return;
+//   }
+//   ptr.prev.next = ptr.next;
+//   ptr.next.prev = ptr.prev;
+//   if (ptr == this.start) {
+//     this.start = ptr.next;
+//   } else if (ptr == this.end) {
+//     this.end = ptr.prev;
+//   }
+//   ptr = null;
+// }
+//insert after a specific id
+// insertAfter(id, data) {
+//   ++this.totalNo;
+//   let ptr = this.start;
+//   let temp = new NODE(data);
+//   while (ptr.id != id) {
+//     if (ptr.next == this.start) {
+//       console.log("Data not found");
+//       return;
+//     } else ptr = ptr.next;
+//   }
+//   if (ptr.next == this.start || ptr.next == null) {
+//     --this.totalNo;
+//     this.insertEnd(data);
+//     return;
+//   } else ptr.next.prev = temp;
+//   temp.next = ptr.next;
+//   temp.prev = ptr;
+//   ptr.next = temp;
+//   temp.id = ++this.dataNo;
+//   this.head1 = this.start;
+// }
