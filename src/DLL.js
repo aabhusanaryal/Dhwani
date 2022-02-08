@@ -104,6 +104,7 @@ export default class DLL {
     this.totalNo -= this.getArray().length;
     this.start = null;
     this.head1=null;
+    this.shuffling=false;
   }
   shuffle() {
     let arr = this.getArray();
