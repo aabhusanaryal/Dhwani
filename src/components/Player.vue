@@ -64,7 +64,7 @@
             />
           </div>
 
-          <div @click="shuffle">
+          <div @click="toggleShuffle">
             <img src="../assets/icons/shuffle.svg" class="icon" />
           </div>
         </div>
@@ -258,6 +258,10 @@ export default {
       if (this.looping) this.queue.unloop();
       else this.queue.loop();
     },
+    toggleShuffle() {
+      if (this.shuffling) this.queue.unshuffle();
+      else this.queue.shuffle();
+    },
     // Methods not realted to the functionality of the player are below this line
     secondsToMinutes(seconds) {
       // Takes in seconds as parameter and returns a string of the format "mm:ss"
@@ -344,6 +348,9 @@ export default {
     looping() {
       return this.queue.looping;
     },
+    shuffling(){
+      return this.queue.shuffling;
+    }
   },
   watch: {
     volume: function () {

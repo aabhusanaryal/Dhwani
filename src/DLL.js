@@ -14,7 +14,9 @@ export default class DLL {
     this.dataNo = 0;
     this.totalNo = 0;
     this.looping = false;
+    this.shuffling = false;
     this.head1 = null;
+    this.initialArr=[];
   }
   insertBeg(data) {
     ++this.totalNo;
@@ -105,6 +107,10 @@ export default class DLL {
   }
   shuffle() {
     let arr = this.getArray();
+    let arr2 = [...this.getArray()];
+    if(this.shuffling==false){
+      this.initialArr=[...arr2];
+    }
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       if (j == 0) continue;
@@ -117,6 +123,15 @@ export default class DLL {
       arr[i] = arr[i].data;
     }
     this.addArray(arr);
+    this.shuffling=true;
+  }
+  unshuffle(){
+    this.clear();
+    for(let i=0;i<this.initialArr.length;i++){
+      this.initialArr[i]=this.initialArr[i].data;
+    }
+    this.addArray(this.initialArr);
+    this.shuffling=false;
   }
   loop() {
     if (this.start.next != null) {
