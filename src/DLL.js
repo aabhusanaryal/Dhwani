@@ -71,7 +71,7 @@ export default class DLL {
   getArray() {
     let obj = {};
     let arr = [];
-    let ptr = this.start;
+    let ptr = this.head1;
     if (ptr == null) return arr;
     while (ptr.next != this.start && ptr.next != null) {
       obj = {
@@ -88,24 +88,17 @@ export default class DLL {
     arr.push(obj);
     return arr;
   }
-  returnNext() {
-    // only returns what's next
-    return this.start.next.data;
-  }
-  returnPrevious() {
-    return this.start.previous.data;
-  }
   next() {
-    // returns returns what's next and sets that as the new head
-    if (this.start.next != null) this.start = this.start.next;
-    return this.start.data;
+    // returns what's next and sets that as the new head
+    if (this.head1.next != null) this.head1 = this.head1.next;
+    return this.head1.data;
   }
   previous() {
-    if (this.start.prev != null) this.start = this.start.prev;
-    return this.start.data;
+    if (this.head1.prev != null) this.head1 = this.head1.prev;
+    return this.head1.data;
   }
   head() {
-    return this.start.data;
+    return this.head1.data;
   }
   clear() {
     this.totalNo -= this.getArray().length;
