@@ -70,9 +70,13 @@ export default {
 
 <style scoped>
 form {
-    margin: 10px auto;
-    font-size:23px ;
-    font-family: "Roboto", sans-serif;
+  width: fit-content;
+  margin: 0 auto;
+  font-size:23px ;
+  font-family: "Roboto", sans-serif;
+}
+.main-wrapper{
+  padding-left:50px ;
 }
 .name-input {
   font-family: Roboto;
@@ -89,20 +93,13 @@ form {
   border-image: var(--primary-gradient) 100;
   border-image-width: 0 0 3px 0;
 }
-input:focus-visible {
+.name-input:focus-visible {
     border-top: none;
     border-right: none;
     border-left: none;
-    border-image: linear-gradient(
-        93.64deg,
-        #35e6da 0.98%,
-        rgba(5, 145, 245, 0.42),
-        #35e6da 0.98%,
-        rgba(16, 55, 245, 0.5) 119.65%
-    )
-    100;
-    border-image-width: 0 0 4px 0;
-    transition: 0.05s;
+    border-image: var(--active-gradient) 100;
+    border-image-width: 0 0 3px 0;
+    transition: 0.5s;
     outline: none;
 }
 input::placeholder {
@@ -139,15 +136,14 @@ table {
 tbody {
   display: block;
   overflow-y: scroll;
-  max-height: 600px;
-  /* width: fit-content */
+  max-height: 550px;
 }
 thead{
     display: block;
     height: 50px;
 }
 td,th {
-  width: 250px;
+  width: 300px;
   text-align: left;
 }
 th {
@@ -171,5 +167,64 @@ label::before{
     width: 30px;
     height: 30px;
     position: absolute;
+}
+
+@media screen and (max-width: 1445px){
+  /* form {
+    font-size:18px ;
+  } */
+  .main-wrapper{
+    padding-left:30px ;
+  }
+  .name-input {
+    font-size: 35px;
+    border-bottom-width: 4px;
+  }
+  .add {
+      font-size: 25px;
+      width: 45px;
+      height: 45px;
+      margin: 8px 20px;
+      border-radius: 30px;
+      transition: 0.5s;
+  }
+  table {
+    border-spacing: 0 20px;
+  }
+  thead{
+      height: 45px;
+  }
+  td,th {
+    width: 250px;
+  }
+}
+@media screen and (max-width: 1175px){
+  form {
+    font-size:18px ;
+  }
+  .main-wrapper{
+    padding-left:20px ;
+  }
+  table {
+    border-spacing: 0 27px;
+  }
+  td,th {
+    width: 200px;
+  }
+}
+@media screen and (max-width: 1025px){
+  .main-wrapper{
+    padding-left:10px ;
+  }
+  td,th {
+    width: 130px;
+  }
+  .name-input{
+    font-size: 30px;
+  }
+  .add{
+    width:40px;
+    height: 40px;
+  }
 }
 </style>
