@@ -276,6 +276,7 @@ html {
   grid-area: bottomcontainer;
   display: flex;
   justify-content: center;
+  outline: 2px solid blue;
 }
 @media screen and (max-width: 768px) {
   .maincontainer {
