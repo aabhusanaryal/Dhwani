@@ -250,7 +250,7 @@ html {
   display: grid;
   height: 100vh;
   width: 100vw;
-  grid-template-rows: 0.5fr 2fr 0.8fr;
+  grid-template-rows: 0.25fr 2fr 0.8fr;
   grid-template-columns: 20% 60% 20%;
   grid-template-areas:
     "leftcontainer topcontainer rightcontainer"
