@@ -27,7 +27,6 @@
               @click="updateFavourites"
             />
           </div>
-          <div><img src="../assets/icons/playlist_add.svg" class="icon" /></div>
         </div>
         <!-- Center contains music controls -->
         <div class="center flex">
@@ -65,7 +64,11 @@
           </div>
 
           <div @click="toggleShuffle">
-            <img src="../assets/icons/shuffle.svg" class="icon" />
+            <img
+              src="../assets/icons/shuffle.svg"
+              class="icon"
+              :class="shuffling ? 'green-icon' : ''"
+            />
           </div>
         </div>
         <!-- Right contains volume controls -->
@@ -348,9 +351,9 @@ export default {
     looping() {
       return this.queue.looping;
     },
-    shuffling(){
+    shuffling() {
       return this.queue.shuffling;
-    }
+    },
   },
   watch: {
     volume: function () {
@@ -477,18 +480,18 @@ export default {
   width: 50px;
   height: 50px;
 }
-.green-icon {
-  filter: invert(50%) sepia(61%) saturate(1861%) hue-rotate(82deg)
-    brightness(120%) contrast(121%);
-}
 .icon:hover {
   /* FIXME - Fine tune the color */
-  filter: invert(47%) sepia(1%) saturate(1663%) hue-rotate(20deg)
-    brightness(91%) contrast(94%);
+  filter: invert(21%) sepia(19%) saturate(944%) hue-rotate(168deg)
+    brightness(93%) contrast(89%);
+}
+.green-icon {
+  filter: invert(39%) sepia(89%) saturate(1900%) hue-rotate(184deg)
+    brightness(101%) contrast(100%);
 }
 .green-icon:hover {
-  filter: invert(94%) sepia(85%) saturate(5818%) hue-rotate(100deg)
-    brightness(104%) contrast(102%);
+  filter: invert(62%) sepia(65%) saturate(3746%) hue-rotate(183deg)
+    brightness(105%) contrast(101%);
 }
 #previous {
   margin-left: 20px;

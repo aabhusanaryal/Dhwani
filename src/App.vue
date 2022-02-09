@@ -154,7 +154,7 @@ export default {
   --left-sidebar-width: 350px;
   --cyan: #35e6da;
   --blue: #0496ff;
-  --grey: rgb(105, 105, 105);
+  --grey: #2d3f50;
   --light-grey: rgb(209, 207, 207);
   --primary-gradient: linear-gradient(
     93.64deg,
