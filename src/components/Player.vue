@@ -1,10 +1,14 @@
 <template>
+  <!-- Song info on big screen -->
+  <!-- Song info on smaller screen is inside player-container -->
   <div class="song-info-container">
     <div class="song-info-wrapper">
       <div class="cover-art-container">
         <img :src="nowPlaying.cover" alt="" class="cover-art" />
         <div id="song-info">
-          <div id="song-name">{{ nowPlaying.name }}</div>
+          <div id="song-name">
+            {{ nowPlaying.name }}
+          </div>
           <div id="artist-name">{{ nowPlaying.artist }}</div>
         </div>
       </div>
@@ -12,6 +16,20 @@
   </div>
   <div class="player-container flex">
     <div class="player-wrapper flex flex-column">
+      <!-- Song info on small screen -->
+      <div class="song-info-container-mobile">
+        <div class="song-info-wrapper-mobile flex">
+          <div class="cover-art-container-mobile">
+            <img :src="nowPlaying.cover" alt="" class="cover-art-mobile" />
+          </div>
+          <div id="song-info-mobile">
+            <div id="song-name-mobile">
+              {{ nowPlaying.name }}
+            </div>
+            <div id="artist-name-mobile">{{ nowPlaying.artist }}</div>
+          </div>
+        </div>
+      </div>
       <!-- Top bar containes favourites..., music controls and volume controls -->
       <div class="top-bar grid">
         <!-- Left contains favourite, add to playlist -->
@@ -29,48 +47,52 @@
           </div>
         </div>
         <!-- Center contains music controls -->
-        <div class="center flex">
-          <div>
-            <img
-              src="../assets/icons/loop.svg"
-              class="icon"
-              :class="looping ? 'green-icon' : ''"
-              @click="toggleLoop"
-            />
-          </div>
-          <div>
-            <img
-              class="medium-icon icon"
-              id="previous"
-              @click="playPrevious"
-              src="../assets/icons/previous.svg"
-            />
-          </div>
-          <div>
-            <img
-              class="large-icon icon"
-              id="play"
-              @click="this.paused ? this.play() : this.pause()"
-              :src="require(`../assets/icons/${playpauseicon}.svg`)"
-            />
-          </div>
-          <div>
-            <img
-              class="medium-icon icon"
-              id="next"
-              @click="playNext"
-              src="../assets/icons/next.svg"
-            />
-          </div>
+        <div class="player-wrapper-mobile">
+          <!-- This div is used to center music controls on the remaining space in mobile -->
+          <div class="center flex">
+            <div>
+              <img
+                src="../assets/icons/loop.svg"
+                class="icon"
+                :class="looping ? 'green-icon' : ''"
+                @click="toggleLoop"
+              />
+            </div>
+            <div>
+              <img
+                class="medium-icon icon"
+                id="previous"
+                @click="playPrevious"
+                src="../assets/icons/previous.svg"
+              />
+            </div>
+            <div>
+              <img
+                class="large-icon icon"
+                id="play"
+                @click="this.paused ? this.play() : this.pause()"
+                :src="require(`../assets/icons/${playpauseicon}.svg`)"
+              />
+            </div>
+            <div>
+              <img
+                class="medium-icon icon"
+                id="next"
+                @click="playNext"
+                src="../assets/icons/next.svg"
+              />
+            </div>
 
-          <div @click="toggleShuffle">
-            <img
-              src="../assets/icons/shuffle.svg"
-              class="icon"
-              :class="shuffling ? 'green-icon' : ''"
-            />
+            <div @click="toggleShuffle">
+              <img
+                src="../assets/icons/shuffle.svg"
+                class="icon"
+                :class="shuffling ? 'green-icon' : ''"
+              />
+            </div>
           </div>
         </div>
+
         <!-- Right contains volume controls -->
         <div class="right flex">
           <div>
@@ -99,7 +121,9 @@
       </div>
       <!-- Bottom bar contains audio timestamp and seek controls -->
       <div class="bottom-bar flex">
-        <div class="timestamp">{{ secondsToMinutes(currentTime) }}</div>
+        <div class="timestamp timestamp-left">
+          {{ secondsToMinutes(currentTime) }}
+        </div>
         <div class="seek-bar-div">
           <input
             type="range"
@@ -113,7 +137,7 @@
             @input="seekTrack"
           />
         </div>
-        <div class="timestamp">
+        <div class="timestamp timestamp-right">
           -{{
             nowPlaying.audio.duration
               ? secondsToMinutes(nowPlaying.audio.duration - currentTime)
@@ -507,6 +531,7 @@ export default {
 .song-info-container {
   width: var(--left-sidebar-width);
   height: calc(var(--left-sidebar-width) + 40px);
+
   position: fixed;
   bottom: 10px;
   right: 0px;
@@ -540,16 +565,88 @@ export default {
   font-size: 24px;
 }
 
+.song-info-container-mobile {
+  display: none;
+}
 /* For medium sized devices: */
 @media (max-width: 1350px) {
-  .player-wrapper {
-    width: 80%;
+  .song-info-container {
+    display: none;
+  }
+  .song-info-container-mobile {
+    width: 95%;
+    align-self: center;
+    margin-top: 15px;
+    display: block;
+    /* padding-left: 80px; */
+    /* margin-bottom: 15px; */
+  }
+  #song-info-mobile {
+    padding-left: 10px;
+  }
+  #song-name-mobile {
+    font-size: 22px;
+  }
+  #artist-name-mobile {
+    font-size: 14px;
+  }
+  .top-bar {
+    margin-top: 12px;
+  }
+  .cover-art-container-mobile {
+    display: inline;
+  }
+  .cover-art-mobile {
+    display: inline;
+    width: 50px;
   }
 }
 /* For small sized devices: */
-@media (max-width: 980px) {
+@media (max-width: 768px) {
+  .player-container {
+    bottom: 0;
+  }
   .player-wrapper {
-    width: 90%;
+    border-radius: 0;
+    width: 100%;
+    flex-direction: row;
+    padding-left: 25px;
+    gap: 25px;
+  }
+  .song-info-container-mobile {
+    width: auto;
+  }
+  .center {
+    width: auto !important;
+  }
+  .player-wrapper-mobile {
+    display: flex;
+    justify-content: center;
+    width: calc(100vw - 300px);
+  }
+
+  .bottom-bar {
+    position: absolute;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    left: 0;
+    margin-left: 50%;
+    transform: translate(-50%, -40%);
+  }
+  .seek-bar-input {
+    height: 5px;
+  }
+  .timestamp {
+    position: absolute;
+    top: 20px;
+  }
+  .timestamp-left {
+    left: 10px;
+  }
+  .timestamp-right {
+    right: 10px;
   }
   .large-icon {
     width: 40px;
@@ -561,8 +658,14 @@ export default {
   #next {
     margin-right: 5px;
   }
-  .right {
-    display: none; /* Hiding volume controls in mobile devices */
+
+  .center {
+    width: 100vw;
+    justify-content: center;
+  }
+  .right,
+  .left {
+    display: none; /* Hiding volume controls and heart button in mobile devices */
   }
 }
 </style>

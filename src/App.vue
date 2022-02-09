@@ -19,7 +19,7 @@ The areas are assigned different components,
 5 is for the router-view, contained by "centercontainer"
 8 is for the player, contained by "bottomcontainer"
 3,6,9 is for the right sidebar, contained by "rightcontainer"  
-when the template is changed, the only contaners shown in the grid areas become 1, 4 and 7 as:
+when the template is changed, the only contaniers shown in the grid areas become 1, 4 and 7 as:
 --------------------
 \        1          \
 \___________________\
@@ -31,6 +31,7 @@ when the template is changed, the only contaners shown in the grid areas become 
 \___________________
 \          7        \
 --------------------
+BREAKPOINT AT 768PX
 The area is changed using mediaquery -->
   <div class="maincontainer">
     <div class="leftcontainer">
