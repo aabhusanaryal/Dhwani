@@ -34,21 +34,21 @@ export default {
     height: 100%;
     overflow-y: scroll;
 }
+
+table{
+    width: 100%;
+}
 table > tbody> tr{
     background: white;
     width: 100%;
     height: 7.2rem;
-    outline: 1px solid blue;
     text-align: center;
 }
-table{
-    width: 100%;
-}
+
 
 table > thead > tr{
     width: 100%;
     height: 2rem;
-    outline: 1px solid blue;
 }
 
 </style>

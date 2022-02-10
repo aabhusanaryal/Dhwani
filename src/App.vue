@@ -252,7 +252,7 @@ html {
   height: 100vh;
   width: 100vw;
   grid-template-rows: 10% 70% 20%;
-  grid-template-columns: 20% 60% 20%;
+  grid-template-columns: 350px 1fr 350px;
   grid-template-areas:
     "leftcontainer topcontainer rightcontainer"
     "leftcontainer centercontainer rightcontainer"
@@ -279,6 +279,19 @@ html {
   justify-content: center;
   outline: 2px solid blue;
 }
+
+@media screen and (max-width: 1350px) {
+    .maincontainer {
+      /* aabhusan is tori */
+      grid-template-columns: 350px 1fr !important;
+      grid-template-rows: 10% 70% 20%  !important;
+      grid-template-areas:
+        "leftcontainer topcontainer"
+        "leftcontainer centercontainer"
+        "leftcontainer bottomcontainer" !important;
+    }
+  }
+
 @media screen and (max-width: 768px) {
   .maincontainer {
     /* aabhusan is tori */
@@ -290,6 +303,8 @@ html {
       "bottomcontainer" !important;
   }
 }
+
+
 .link {
   cursor: pointer;
 }
