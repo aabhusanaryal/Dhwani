@@ -260,8 +260,8 @@ html {
 }
 .leftcontainer {
   grid-area: leftcontainer;
-  height: 100vh;
-}
+  height:100vh;
+} 
 .rightcontainer {
   grid-area: rightcontainer;
 }
@@ -282,19 +282,17 @@ html {
 
 @media screen and (max-width: 1350px) {
     .maincontainer {
-      /* aabhusan is tori */
-      grid-template-columns: 350px 1fr !important;
-      grid-template-rows: 10% 70% 20%  !important;
+      grid-template-columns: 350px 1fr;
+      grid-template-rows: 10% 70% 20% ;
       grid-template-areas:
         "leftcontainer topcontainer"
         "leftcontainer centercontainer"
-        "leftcontainer bottomcontainer" !important;
+        "leftcontainer bottomcontainer";
     }
   }
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   .maincontainer {
-    /* aabhusan is tori */
     grid-template-columns: 100% !important;
     grid-template-rows: 10% 65% 25% !important;
     grid-template-areas:
@@ -302,7 +300,7 @@ html {
       "centercontainer"
       "bottomcontainer" !important;
   }
-}
+} */
 
 
 .link {
