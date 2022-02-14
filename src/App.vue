@@ -301,6 +301,12 @@ html {
       "centercontainer"
       "bottomcontainer";
   }
+  .rightcontainer{
+    display: none;
+  }
+  .leftcontainer{
+    display: none;
+  }
 }
 
 
