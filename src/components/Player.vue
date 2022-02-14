@@ -611,20 +611,15 @@ export default {
     width: 100%;
     flex-direction: row;
     padding-left: 25px;
-    gap: 25px;
+    gap: 20px;
   }
   .song-info-container-mobile {
     width: auto;
   }
-  .center {
-    width: auto !important;
-  }
   .player-wrapper-mobile {
     display: flex;
-    justify-content: center;
     width: calc(100vw - 300px);
   }
-
   .bottom-bar {
     position: absolute;
     top: 0;
@@ -666,6 +661,28 @@ export default {
   .right,
   .left {
     display: none; /* Hiding volume controls and heart button in mobile devices */
+  }
+  .icon {
+    width: 17px;
+    height: 17px;
+  }
+  .medium-icon {
+    width: 22px;
+    height: 22px;
+  }
+  .large-icon {
+    width: 38px;
+    height: 38px;
+  }
+}
+/* Hidding the loop and shuffle buttons in very small screens */
+@media (max-width: 400px) {
+  .icon {
+    display: none;
+  }
+  .medium-icon,
+  .large-icon {
+    display: block;
   }
 }
 </style>
