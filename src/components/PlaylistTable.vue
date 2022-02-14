@@ -5,12 +5,14 @@
               <tr>
                   <th>Title</th>
                   <th>Artist</th>
+                  <th>Release Date</th>
               </tr>
           </thead>
           <tbody>
               <tr v-for="(song, index) in genresongs" :key="index">
                   <td>{{ song.name }}</td>
                   <td>{{ song.artist }}</td> 
+                  <td>{{song.releaseyear}}</td>
               </tr>
             </tbody>
       </table>
@@ -73,6 +75,7 @@ table {
     margin-right: auto;
     text-align: center;
     font-size:2rem;
+    table-layout: fixed;
 }
 
 th>tr{

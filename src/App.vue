@@ -18,7 +18,20 @@ The areas are assigned different components,
 2 is for the searchbar, contained by "topcontainer"
 5 is for the router-view, contained by "centercontainer"
 8 is for the player, contained by "bottomcontainer"
-3,6,9 is for the right sidebar, contained by "rightcontainer"  
+3,6,9 is for the right sidebar, contained by "rightcontainer"
+
+@ 1350 width the template changes as:
++----------------------------------------------+
+|    1   |             2                       |
+|        |_____________________________________|
+|        |                                     |
+|    4   |             5                       |
+|        |                                     |
+|        |                                     |
+|    7   |_____________________________________|
+|        |              8                      |
+|________|_____________________________________|
+
 when the template is changed, the only contaniers shown in the grid areas become 1, 4 and 7 as:
 --------------------
 \        1          \
@@ -86,6 +99,7 @@ export default {
   // artist: Name of artist/ band
   // cover: CDN link to the cover artwork
   // genres: an array of genres the song belongs to
+  // releaseyear: year of release of the song, int value
   // isFav: is the song added to the Favourites playlist?
   // To play a song, we first instantiate an Audio() object as:
   // audio = new Audio(require(`@assets/songs/${song.name}.mp3`))
@@ -132,6 +146,7 @@ export default {
       genres: ["Chill", "LoFi"],
       audio: null,
       isFav: null,
+      releaseyear: 2017,
     };
     let song2 = {
       name: "Puzzle",
@@ -141,6 +156,7 @@ export default {
       genres: ["EDM"],
       audio: null,
       isFav: null,
+      releaseyear: 2019,
     };
     let song3 = {
       name: "Feel Good",
@@ -150,6 +166,7 @@ export default {
       genres: ["Pop"],
       audio: null,
       isFav: null,
+      releaseyear: 2018,
     };
     let song4 = {
       name: "Roots",
@@ -160,6 +177,7 @@ export default {
       genres: ["OP", "Hello"],
       audio: null,
       isFav: null,
+      releaseyear: 2016,
     };
     this.createPlaylist("All Songs", [song1, song2, song3, song4]);
     this.createPlaylist("Favourites", []);
