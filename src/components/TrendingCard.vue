@@ -32,13 +32,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .trending-container {
   width: 100%;
 }
 .trending-wrapper {
   padding: 2.7rem;
 }
+
 .trending-card-wrapper {
   /* The following two properties can be used to make image full size */
   background-size: 60% !important;
