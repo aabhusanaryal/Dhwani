@@ -49,6 +49,5 @@ export default {
   
  width: 100%;
  height: 25rem;
- outline: 1px solid red;
 }
 </style>
