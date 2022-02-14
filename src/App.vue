@@ -309,7 +309,6 @@ html {
   }
 }
 
-
 .link {
   cursor: pointer;
 }

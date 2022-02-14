@@ -1,15 +1,18 @@
 <template>
   <TrendingCard v-if="randomSong" :song="randomSong" />
+  <PlaylistTable :playlist = "playlists[0]">
+  </PlaylistTable>
 </template>
 
 <script>
 // @ is an alias to /src
 
 import TrendingCard from "@/components/TrendingCard.vue";
+import PlaylistTable from "@/components/PlaylistTable.vue";
 
 export default {
   name: "Home",
-  components: { TrendingCard },
+  components: { TrendingCard, PlaylistTable },
   props: ["playlists"],
   data() {
     return {

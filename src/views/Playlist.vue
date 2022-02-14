@@ -4,15 +4,15 @@
   </div>
 
   <div class= "playlist-container">
-    <PlaylistView :songlist = "songs">
-    </PlaylistView>
+    <PlaylistTable :playlist = "currentPlaylist">
+    </PlaylistTable>
   </div>
 </template>
 
 <script>
-import PlaylistView from '../components/PlaylistView.vue';
+import PlaylistTable from '../components/PlaylistTable.vue';
 export default {
-  components: {PlaylistView},
+  components: {PlaylistTable},
   name: "Playlist",
   props: ["playlists"],
   data() {
@@ -28,9 +28,8 @@ export default {
     name() {
       return this.$route.params.playlist;
     },
-    songs() {
-      return this.playlists.filter((playlist) => playlist.name == this.name)[0]
-        .songs;
+    currentPlaylist() {
+      return this.playlists.filter((playlist) => playlist.name == this.name)[0];
     },
   },
 };

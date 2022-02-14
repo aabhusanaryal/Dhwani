@@ -1,6 +1,5 @@
 <template>
   <div class="list-container">
-      <h1 class="playlist-title">{{$route.params.playlist}}</h1>
       <table class="playlist-table">
           <thead>
               <tr>
@@ -9,7 +8,6 @@
               </tr>
           </thead>
           <tbody>
-    
               <tr v-for="(song, index) in genresongs" :key="index">
                   <td>{{ song.name }}</td>
                   <td>{{ song.artist }}</td> 
@@ -21,21 +19,21 @@
 
 <script>
 export default {
-    props :['songlist'], 
+    props :['playlist'], 
     computed: {
         genresongs: function(){
             if(!this.$route.query.genre) {
-                return this.songlist;
+                return this.playlist.songs;
             }
             else if(this.$route.query.genre.length == 0){
-                return this.songlist;
+                return this.playlist.songs;
             }
             else if(this.$route.query.genre.length != 0){
                 const arr = [];
-                for(let i =0; i<this.songlist.length; i++){
+                for(let i =0; i<this.playlist.songs.length; i++){
                     for(let j=0; j<this.$route.query.genre.length; j++){
-                        if(this.songlist[i].genres.includes(this.$route.query.genre[j]) && !arr.includes(this.songlist[i])){
-                            arr.push(this.songlist[i]);
+                        if(this.playlist.songs[i].genres.includes(this.$route.query.genre[j]) && !arr.includes(this.playlist.songs[i])){
+                            arr.push(this.playlist.songs[i]);
                         }
                     }
                 }
