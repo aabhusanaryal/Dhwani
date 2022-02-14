@@ -1,7 +1,6 @@
 <template>
-  <TrendingCard v-if="randomSong" :song="randomSong" />
-  <PlaylistTable :playlist = "playlists[0]">
-  </PlaylistTable>
+  <TrendingCard v-if="randomSong" :song="randomSong" @playSong="playSong" />
+  <PlaylistTable :playlist="playlists[0]"> </PlaylistTable>
 </template>
 
 <script>
@@ -18,6 +17,11 @@ export default {
     return {
       randomSong: null,
     };
+  },
+  methods: {
+    playSong(song) {
+      this.$emit("playSong", song);
+    },
   },
   mounted() {
     // Setting randomSong

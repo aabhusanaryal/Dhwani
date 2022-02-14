@@ -26,6 +26,7 @@ export default {
   emits: ["playSong"],
   methods: {
     playSong() {
+      console.log("Emitted playSong");
       this.$emit("playSong", this.song);
     },
   },

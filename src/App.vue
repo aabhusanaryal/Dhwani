@@ -103,6 +103,8 @@ export default {
       this.$refs.playerComponent.playPlaylist(playlistName);
     },
     playSong(songName) {
+      console.log(111);
+      console.log(songName);
       this.$refs.playerComponent.playSong(songName);
     },
     updateFavourites(song) {
