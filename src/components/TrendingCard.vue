@@ -38,6 +38,7 @@ export default {
 }
 .trending-wrapper {
   padding: 2.7rem;
+  padding-top: 0rem;
 }
 
 .trending-card-wrapper {
