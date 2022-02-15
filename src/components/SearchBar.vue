@@ -7,6 +7,8 @@
       placeholder="Search"
       v-model="searchQuery"
       @keypress="search"
+      @keydown.backspace="backspace"
+      autocomplete="off"
     />
   </div>
 </template>
@@ -18,18 +20,36 @@ export default {
     return {
       data: "hello this is search",
       searchQuery: "",
+      pastRoute: null,
     };
   },
   methods: {
     search() {
-      if (this.searchQuery != "") {
-        setTimeout(() => {
-          this.$router.replace({
-            name: "Search",
-            params: { searchQuery: this.searchQuery },
-          });
-        }, 100);
+      setTimeout(() => {
+        this.$router.replace({
+          name: "Search",
+          params: { searchQuery: this.searchQuery },
+        });
+      }, 0);
+    },
+    backspace() {
+      if (this.searchQuery && this.searchQuery.length != 1) {
+        this.search();
       }
+    },
+  },
+
+  watch: {
+    $route(to, from) {
+      // console.log(to.name, )
+      if (to.name != from.name) {
+        this.pastRoute = from;
+        console.log(this.pastRoute);
+      }
+      if (to.name != "Search") this.searchQuery = "";
+    },
+    searchQuery(query) {
+      if (!query) this.$router.push(this.pastRoute);
     },
   },
 };
