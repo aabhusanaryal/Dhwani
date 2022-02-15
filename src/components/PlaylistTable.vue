@@ -17,7 +17,6 @@
             </tbody>
       </table>
   </div>
-  <button @click="sortthelist" class="sort" >Sort</button>
 </template>
 
 <script>
@@ -25,61 +24,21 @@ export default {
     props :['playlist'],
     data:function() {
         return {
-            sortedlist : [],
+            sortedlist: [...this.playlist.songs],
             sorted: false,
         }
     },
     methods:{
         //function to merge the array
-        merge(arr, beg, mid, end){
-            let i=beg 
-            let j=mid+1
-            let k=0;
-            const temp = [];
-            while(i<=mid && j<=end){
-                if(arr[i].duration < arr[j].duration){
-                    temp[k++] = arr[i++];
-                }
-                else{
-                    temp[k++] = arr[j++];
-                }
-            }
-            while(i<=mid){
-                temp[k++] = arr[i++]
-            }
-            while(j<=end){
-                temp[k++] = arr[j++]
-            }
-            for(let i=beg; i<=end; i++){
-                arr[i] = temp[i-beg];
-            }
-        },
-
-        mergeSort(arr, beg, end){
-            if (beg<end){
-                //divide the array into singular elements
-                var mid = beg + Math.floor((end-beg)/2);
-                this.mergeSort(arr, beg, mid);
-                this.mergeSort(arr, mid+1, end);
-                //merge the elements elements are divided in to singular arrays with one elemets each
-                this.merge(arr, beg, mid, end);
-            }
-        },
 
         sortthelist(){
+            console.log(this.sortedlist);
             this.sorted= !this.sorted;
-            console.log("Sort = " + this.sorted);
-            console.log(this.playlist.songs)
-            if(!this.sorted){
-                 //deepcopy
-                this.sortedlist = [...this.playlist.songs];
-                console.log(this.playlist.songs);              
+            if(this.sorted){
+                this.mergeSort(this.playlist.songs, 0, this.playlist.songs.length-1);
+                this.sortedlist = this.playlist.songs;
             }
-            else{
-                this.sortedlist = [...this.genresongs];
-                this.mergeSort(this.sortedlist, 0, this.sortedlist.length-1);
-            }
-          
+            console.log(this.playlist)
         },
 
         secondsToMinutes(seconds) {
@@ -102,20 +61,17 @@ export default {
         genresongs: function(){
             //if genre is not loaded, show all songs of the playlist
             if(!this.$route.query.genre) {
-                if(this.sortedlist.length == 0){
-                    return this.playlist.songs;
-                }
-                return this.sortedlist;
+                return this.playlist.songs;
             }   
 
             //if genre
             else if (this.$route.query.genre.length != 0){
                 const arr = [];
-                for(let i =0; i<this.sortedlist.length; i++){
+                for(let i =0; i<this.playlist.songs.length; i++){
                     for(let j=0; j<this.$route.query.genre.length; j++){
                         //check genre of playlist.songs[i] with genre query's list
-                        if(this.sortedlist[i].genres.includes(this.$route.query.genre[j]) && !arr.includes(this.sortedlist[i])){
-                            arr.push(this.sortedlist[i]);
+                        if(this.playlist.songs[i].genres.includes(this.$route.query.genre[j]) && !arr.includes(this.playlist.songs[i])){
+                            arr.push(this.playlist.songs[i]);
                         }
                     }
                 }
@@ -123,7 +79,7 @@ export default {
             }
             else{
                 //when the genre list is empty
-                if(this.sorted){
+                if(!this.sorted){
                     //if we want to show sorted list, send sorted list as the list of songs
                     return this.sortedlist;
                 }
@@ -131,7 +87,14 @@ export default {
                 return this.playlist.songs;
             }
         }
-    }
+    },
+    watch: {
+    playlist() {
+        this.sortedlist = this.playlist.songs;
+        this.sorted = false;
+        console.log("Sorted is: "+this.sorted);
+    },
+  },
 }
 </script>
 
@@ -168,10 +131,11 @@ th>tr{
     background: var(--white);
 }
 
-tr:nth-child(even){
-    background: var(--blue);
+
+tbody>tr:nth-child(even){
+    background: linear-gradient(to right, #3ae0dd, rgb(236, 156, 236));
 }
 tbody>tr:nth-child(odd){
-    background: var(--light-grey)
+    background: linear-gradient(to right, rgb(236, 156, 236), #3ae0dd);
 }
 </style>
