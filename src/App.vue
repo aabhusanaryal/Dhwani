@@ -146,7 +146,7 @@ export default {
       genres: ["Chill", "LoFi"],
       audio: null,
       isFav: null,
-      releaseyear: 2017,
+      duration: 132,
     };
     let song2 = {
       name: "Puzzle",
@@ -156,7 +156,7 @@ export default {
       genres: ["EDM"],
       audio: null,
       isFav: null,
-      releaseyear: 2019,
+      duration: 245,
     };
     let song3 = {
       name: "Feel Good",
@@ -166,7 +166,7 @@ export default {
       genres: ["Pop"],
       audio: null,
       isFav: null,
-      releaseyear: 2018,
+      duration: 189,
     };
     let song4 = {
       name: "Roots",
@@ -177,7 +177,7 @@ export default {
       genres: ["OP", "Hello"],
       audio: null,
       isFav: null,
-      releaseyear: 2016,
+      duration: 200,
     };
     this.createPlaylist("All Songs", [song1, song2, song3, song4]);
     this.createPlaylist("Favourites", []);
