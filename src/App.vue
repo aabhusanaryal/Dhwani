@@ -64,7 +64,7 @@ The area is changed using mediaquery -->
     </div>
     <div class="topcontainer">
       <!-- search bar -->
-      search
+      <SearchBar />
     </div>
     <div class="bottomcontainer">
       <!-- Only rendering the player if there's any song in it -->
@@ -81,8 +81,9 @@ The area is changed using mediaquery -->
 import LeftSidebar from "@/components/LeftSidebar.vue";
 import RightSidebar from "@/components/RightSidebar.vue";
 import Player from "@/components/Player.vue";
+import SearchBar from "@/components/SearchBar.vue";
 export default {
-  components: { LeftSidebar, RightSidebar, Player },
+  components: { LeftSidebar, RightSidebar, Player, SearchBar },
   data() {
     return {
       playlists: [],
@@ -117,6 +118,8 @@ export default {
       this.$refs.playerComponent.playPlaylist(playlistName);
     },
     playSong(songName) {
+      console.log(111);
+      console.log(songName);
       this.$refs.playerComponent.playSong(songName);
     },
     updateFavourites(song) {
@@ -329,7 +332,6 @@ html {
     display: none;
   }
 }
-
 .link {
   cursor: pointer;
 }
