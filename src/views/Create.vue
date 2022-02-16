@@ -145,7 +145,7 @@ thead {
 }
 td,
 th {
-  text-align: center !important;
+  text-align: left !important;
   width: 400px;
   text-align: left;
 }
@@ -159,17 +159,42 @@ th {
 .checkbox-wrapper {
   width: 50px;
 }
-label {
-  position: relative;
+input[type="checkbox"]{
+  display:none;
+}
+label{
+    position: relative;
 }
 label::before {
   content: "";
-  background: url("/@/src/assets/tick.svg");
+  background: url("../assets/tick.svg");
   background-position: center;
   background-size: contain;
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   position: absolute;
+  left:-30px;
+  top: -10px;
+  transform: scale(0) rotateZ(180deg);
+  transition: all 0.5s cubic-bezier(0.54,0.01,0,1.49);
+}
+
+input[type="checkbox"]:checked + label::before{
+  transform: scale(1) rotateZ(0);
+}
+input[type="checkbox"]:checked + label::after{
+  transform: scale(0) rotateZ(180deg);
+}
+
+label::after{
+  content: "";
+  border: 2px solid #35e6da;
+  width:20px;
+  height: 20px;
+  position: absolute;
+  left: -30px;
+  top: -10px;
+  border-radius: 100%;
 }
 
 /*MEDIA QUERIES*/
