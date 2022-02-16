@@ -32,7 +32,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .trending-container {
   width: 100%;
 }
@@ -59,7 +59,7 @@ export default {
   padding-top: 1rem;
 }
 h3 {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 h2 {
   font-size: 1.5rem;
