@@ -1,6 +1,14 @@
 <template>
-  Query: {{ query }}
-  <PlaylistTable :playlist='searchResults' />
+  <!-- <PlaylistTable :playlist='searchResults' /> -->
+  <h4 v-if="searchResults.songs.length==0 && searchResults.artists.length==0">Not found! Please enter another keyword!</h4>
+  <h3 v-if="searchResults.songs.length!=0">Songs</h3>
+  <ul v-for="(song, index) in searchResults.songs" :key="index">
+    <li @click="playSong">{{song.name}}</li>
+  </ul>
+  <h3 v-if="searchResults.artists.length!=0">Artists</h3>
+  <ul v-for="(song, index) in searchResults.artists" :key="index">
+    <li>{{song.artist}}</li>
+  </ul>
 </template>
 
 <script>
@@ -9,34 +17,9 @@ export default {
   components: {PlaylistTable},
   name: "Search",
   props:['playlists'],
-  // data(){
-  //   return{
-  //     sortedPlaylist:{
-  //       name:"Sorted All Songs",
-  //       songs:[]
-  //     },
-  //   }
-  // },
-  // methods:{
-  //   insertionSort(){
-  //     let n=this.playlists[0].songs.length //number of songs in "all songs"
-  //     let arr=[...this.playlists[0].songs] //songs array of "all songs" playlist
-  //     let temp
-  //     let j
-  //     for(let i=1;i<n;i++){
-  //       console.log(i)
-  //       temp=arr[i]
-  //       j=i-1
-  //       while(j>=0 && temp.name.localeCompare(arr[j].name)==-1){
-  //         console.log(i)
-  //         arr[j+1]=arr[j]
-  //         j=j-1
-  //       }
-  //       arr[j+1]=temp
-  //     }
-  //     this.sortedPlaylist.songs=[...arr]
-  //   }
-  // },
+  methods:{
+
+  },
   computed: {
     query() {
       return this.$route.params.searchQuery;
@@ -45,20 +28,20 @@ export default {
       //performing linear search in playlist 
       let result={
         name:"Search Results",
-        songs:[]
+        songs:[],
+        artists:[]
       }
       let n=this.playlists[0].songs.length //number of songs in "all songs"
       let arr=[...this.playlists[0].songs] //songs array of "all songs" playlist
       for(let i=0;i<n;i++){
         if(arr[i].name.toLowerCase().includes(this.query.toLowerCase()))
           result.songs.push(arr[i])
+        else if(arr[i].artist.toLowerCase().includes(this.query.toLowerCase()))
+          result.artists.push(arr[i])
       }
       return result
     }
   },
-  // mounted(){
-  //   this.insertionSort();
-  // }
 };
 </script>
 
