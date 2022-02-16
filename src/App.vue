@@ -245,6 +245,7 @@ export default {
 html {
   overflow: hidden; /* Removing scrollbar from the main html element */
 }
+
 /* Making the scrollbar look pretty (like myself - Aabhusan) */
 ::-webkit-scrollbar {
   width: 20px;
@@ -279,9 +280,10 @@ html {
     "leftcontainer centercontainer rightcontainer"
     "leftcontainer bottomcontainer rightcontainer";
 }
+
 .leftcontainer {
   grid-area: leftcontainer;
-  height: 100vh;
+  /* height: 100vh; */
 }
 .rightcontainer {
   grid-area: rightcontainer;
@@ -319,16 +321,14 @@ html {
   }
   .maincontainer {
     grid-template-columns: 100%;
-    grid-template-rows: 10% 65% 25%;
+    grid-template-rows: 80px 10% 65% 25%;
     grid-template-areas:
-      " topcontainer"
+      "leftcontainer"
+      "topcontainer"
       "centercontainer"
       "bottomcontainer";
   }
   .rightcontainer {
-    display: none;
-  }
-  .leftcontainer {
     display: none;
   }
 }

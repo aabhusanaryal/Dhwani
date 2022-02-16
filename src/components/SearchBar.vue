@@ -73,4 +73,9 @@ export default {
 #search-bar-input:focus {
   /* border: 1px solid red; */
 }
+@media (max-width: 786px) {
+  .search-bar-container {
+    padding-top: 20px;
+  }
+}
 </style>
