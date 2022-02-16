@@ -117,8 +117,8 @@ export default {
   font-size: 1.82rem;
   background: var(--white);
   width: 100%;
-  height: 100%;
-  overflow-y: scroll;
+  height: 300px;
+  overflow-y: hidden;
   overflow-x: hidden;
   display: flex;
   justify-content: center;
