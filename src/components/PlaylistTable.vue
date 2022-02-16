@@ -8,8 +8,8 @@
             <div @click="sortname" class="arrow"></div>
             <div @click="sortnamerev" class="downarrow"></div></th>
           <th>Artist 
-            <div class ="arrow"></div>
-            <div class="downarrow"></div></th>
+            <div @click="sortartist" class ="arrow"></div>
+            <div @click="sortartistrev" class="downarrow"></div></th>
           <th>Duration 
             <div @click="sortascending" class= "arrow"></div>
             <div @click="sortdescending" class = "downarrow"></div>
@@ -57,7 +57,13 @@ export default {
     },
     sortnamerev(){
       this.$emit("sortNameRev", this.name);
-    }
+    },
+    sortartist(){
+      this.$emit("sortArtist", this.name)
+    },
+    sortartistrev(){
+      this.$emit("sortArtistRev", this.name)
+    },
 },
     computed: {
         genresongs: function(){
@@ -94,18 +100,17 @@ export default {
 }
 
 .list-container {
-  font-size: 35px;
+  font-size: 1.82rem;
   background: var(--white);
   width: 99%;
   height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
   display: flex;
+  justify-content: center;
 }
 
 table {
-  margin: 0 auto;
-  width: fit-content;
   color: #646569;
   border-collapse: separate;
   border-spacing: 0 20px;
@@ -131,18 +136,18 @@ th {
   display: inline-block;
   height: 0;
   width: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom:10px solid #84898f;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom:8px solid #84898f;
   margin-bottom: 15px;
 }
 .downarrow{
   display: inline-block;
   height: 0;
   width: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top:10px solid #84898f;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top:8px solid #84898f;
   margin-bottom: 3px;
 }
 .arrow:hover{
