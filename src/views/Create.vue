@@ -33,7 +33,7 @@
                         name="songCheckbox"
                         :id="index"
                         />
-                        <label :for="index"></label>
+                        <label :for="index">A</label>
                     </td>
                 </tr>
             </tbody>
@@ -155,6 +155,9 @@ th {
 }
 .checkbox-wrapper{
     width:50px;
+}
+input[type="checkbox"]{
+  display:none;
 }
 label{
     position: relative;
