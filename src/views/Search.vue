@@ -14,13 +14,12 @@
         class="card"
         v-for="(song, index) in searchResults.songs"
         :key="index"
-        @click="playSong"
         :style="`background: linear-gradient(
       rgba(0, 0, 0, 0.4),
       rgba(0, 0, 0, 0.4)
     ), url(${song.cover}); background-repeat: no-repeat; background-size: 100%;`"
       >
-        <div class="info-wrapper">
+        <div @click="playSong(song)" class="info-wrapper">
           {{ song.name }}
         </div>
       </div>
@@ -49,7 +48,11 @@
 export default {
   name: "Search",
   props: ["playlists"],
-  methods: {},
+  methods: {
+    playSong(song) {
+      this.$emit("playSong", song);
+    },
+  },
   computed: {
     query() {
       return this.$route.params.searchQuery;
@@ -93,6 +96,7 @@ export default {
   position: relative;
   display: flex;
   justify-content: center;
+  cursor: pointer;
 }
 h3 {
   margin-bottom: 1rem;
