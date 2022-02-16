@@ -1,18 +1,28 @@
 <template>
   <div class="list-container">
-
     <table class="playlist-table">
       <thead>
         <tr>
-          <th>Title 
-            <div @click="sortname" class="arrow"></div>
-            <div @click="sortnamerev" class="downarrow"></div></th>
-          <th>Artist 
-            <div @click="sortartist" class ="arrow"></div>
-            <div @click="sortartistrev" class="downarrow"></div></th>
-          <th>Duration 
-            <div @click="sortascending" class= "arrow"></div>
-            <div @click="sortdescending" class = "downarrow"></div>
+          <th>
+            Title
+            <div class="sort-icon">
+              <div @click="sortname" class="arrow"></div>
+              <div @click="sortnamerev" class="downarrow"></div>
+            </div>
+          </th>
+          <th>
+            Artist
+            <div class="sort-icon">
+              <div @click="sortartist" class="arrow"></div>
+              <div @click="sortartistrev" class="downarrow"></div>
+            </div>
+          </th>
+          <th>
+            Duration
+            <div class="sort-icon">
+              <div @click="sortascending" class="arrow"></div>
+              <div @click="sortdescending" class="downarrow"></div>
+            </div>
           </th>
         </tr>
       </thead>
@@ -30,66 +40,70 @@
 <script>
 export default {
   props: ["playlist"],
-  methods:{
-        secondsToMinutes(seconds) {
-        // Takes in seconds as parameter and returns a string of the format "mm:ss"
-            let minutes;
-            minutes = Math.floor(seconds / 60);
-            seconds -= minutes * 60;
-            minutes = minutes.toLocaleString("en-US", {
-                minimumIntegerDigits: 2,
-                useGrouping: false,
-            });
-            seconds = Math.floor(seconds).toLocaleString("en-US", {
-                minimumIntegerDigits: 2,
-                useGrouping: false,
-            });
-            return `${minutes}:${seconds}`;
-        },
-    sortascending(){
-      this.$emit("sortAscending", this.name);  
+  methods: {
+    secondsToMinutes(seconds) {
+      // Takes in seconds as parameter and returns a string of the format "mm:ss"
+      let minutes;
+      minutes = Math.floor(seconds / 60);
+      seconds -= minutes * 60;
+      minutes = minutes.toLocaleString("en-US", {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      });
+      seconds = Math.floor(seconds).toLocaleString("en-US", {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      });
+      return `${minutes}:${seconds}`;
     },
-    sortdescending(){
+    sortascending() {
+      this.$emit("sortAscending", this.name);
+    },
+    sortdescending() {
       this.$emit("sortDescending", this.name);
     },
-    sortname(){
+    sortname() {
       this.$emit("sortName", this.name);
     },
-    sortnamerev(){
+    sortnamerev() {
       this.$emit("sortNameRev", this.name);
     },
-    sortartist(){
-      this.$emit("sortArtist", this.name)
+    sortartist() {
+      this.$emit("sortArtist", this.name);
     },
-    sortartistrev(){
-      this.$emit("sortArtistRev", this.name)
+    sortartistrev() {
+      this.$emit("sortArtistRev", this.name);
     },
-},
-    computed: {
-        genresongs: function(){
-            //if genre is not loaded, show all songs of the playlist
-            if(!this.$route.query.genre) {
-                return this.playlist.songs;
-            }   
-            //if genre
-            else if (this.$route.query.genre.length != 0){
-                const arr = [];
-                for(let i =0; i<this.playlist.songs.length; i++){
-                    for(let j=0; j<this.$route.query.genre.length; j++){
-                        //check genre of playlist.songs[i] with genre query's list
-                        if(this.playlist.songs[i].genres.includes(this.$route.query.genre[j]) && !arr.includes(this.playlist.songs[i])){
-                            arr.push(this.playlist.songs[i]);
-                        }
-                    }
-                }
-                return arr;
-            }
-            else{
-                return this.playlist.songs;
+  },
+  computed: {
+    genresongs: function () {
+      //if genre is not loaded, show all songs of the playlist
+      if (!this.$route.query.genre) {
+        return this.playlist.songs;
+      }
+      //if genre
+      else if (this.$route.query.genre.length != 0) {
+        const arr = [];
+        for (let i = 0; i < this.playlist.songs.length; i++) {
+          for (let j = 0; j < this.$route.query.genre.length; j++) {
+            //check genre of playlist.songs[i] with genre query's list
+            if (
+              this.playlist.songs[i].genres.includes(
+                this.$route.query.genre[j]
+              ) &&
+              !arr.includes(this.playlist.songs[i])
+            ) {
+              arr.push(this.playlist.songs[i]);
             }
           }
-    }
-}
+        }
+        return arr;
+      } else {
+        return this.playlist.songs;
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -102,7 +116,7 @@ export default {
 .list-container {
   font-size: 1.82rem;
   background: var(--white);
-  width: 99%;
+  width: 100%;
   height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -111,55 +125,67 @@ export default {
 }
 
 table {
+  text-align: center;
+  border: 1px solid red;
   color: #646569;
-  border-collapse: separate;
-  border-spacing: 0 20px;
+  /* border-collapse: separate; */
+  border-spacing: 1px 20px;
 }
 tbody {
   display: block;
   overflow-y: scroll;
-  max-height: 550px;
 }
-thead{
-    display: block;
-    height: 50px;
+thead {
+  display: block;
+  height: 50px;
 }
-td,th {
+td,
+th {
+  text-align: center !important;
+  vertical-align: middle;
   width: 300px;
   text-align: left;
 }
 th {
-    color: #84898f;
-    font-weight: lighter;
-}
-.arrow{
-  display: inline-block;
-  height: 0;
-  width: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom:8px solid #84898f;
-  margin-bottom: 15px;
-}
-.downarrow{
-  display: inline-block;
-  height: 0;
-  width: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top:8px solid #84898f;
-  margin-bottom: 3px;
-}
-.arrow:hover{
-  border-bottom-color:  #5b5e62;
-  transform: scale(1.25);
-  transition:ease-in-out;
+  color: #84898f;
+  font-weight: lighter;
 }
 
-.downarrow:hover{
-  border-top-color: #5b5e62;
+.sort-icon {
+  display: inline-block;
+  position: relative;
+}
+.arrow {
+  position: absolute;
+  left: 0;
+}
+.arrow {
+  display: inline-block;
+  height: 0;
+  width: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #84898f;
+  margin-bottom: 15px;
+}
+.downarrow {
+  display: inline-block;
+  height: 0;
+  width: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #84898f;
+  margin-bottom: 3px;
+}
+.arrow:hover {
+  border-bottom-color: #5b5e62;
   transform: scale(1.25);
   transition: ease-in-out;
 }
 
+.downarrow:hover {
+  border-top-color: #5b5e62;
+  transform: scale(1.25);
+  transition: ease-in-out;
+}
 </style>
