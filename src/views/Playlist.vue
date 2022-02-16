@@ -5,12 +5,12 @@
 
   <div class= "playlist-container">
     <PlaylistTable :playlist = "currentPlaylist" 
-      @sortAscending="sortascending" 
-      @sortDescending="sortdescending" 
-      @sortName ="sortname "
-      @sortNameRev="sortnamerev"
-      @sortArtist="sortartist"
-      @sortArtistRev="sortartistrev"
+      @sortDurationAsc="sortDurationAsc" 
+      @sortDurationDesc="sortDurationDesc" 
+      @sortTitleAsc ="sortTitleAsc"
+      @sortTitleDesc="sortTitleDesc"
+      @sortArtistAsc="sortArtistAsc"
+      @sortArtistDesc="sortArtistDesc"
     >
     </PlaylistTable>
   </div>
@@ -28,23 +28,23 @@ export default {
       console.log("Playing ", this.name);
       this.$emit("playPlaylist", this.name);
     },
-    sortascending(){
-      this.$emit("sortAscending", this.name);
+    sortDurationAsc(){
+      this.$emit("sortDurationAsc", this.name);
     },
-    sortdescending(){
-      this.$emit("sortDescending", this.name);
+    sortDurationDesc(){
+      this.$emit("sortDurationDesc", this.name);
     },
-    sortname(){
-      this.$emit("sortName", this.name);
+    sortTitleAsc(){
+      this.$emit("sortTitleAsc", this.name);
     },
-    sortnamerev(){
-      this.$emit("sortNameRev", this.name);
+    sortTitleDesc(){
+      this.$emit("sortTitleDesc", this.name);
     },
-    sortartist(){
-      this.$emit("sortArtist", this.name);
+    sortArtistAsc(){
+      this.$emit("sortArtistAsc", this.name);
     },
-    sortartistrev(){
-      this.$emit("sortArtistRev", this.name);
+    sortArtistDesc(){
+      this.$emit("sortArtistDesc", this.name);
     }
   },
 

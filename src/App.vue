@@ -59,12 +59,12 @@ The area is changed using mediaquery -->
         @playPlaylist="playPlaylist"
         @playSong="playSong"
         @addPlaylist="createPlaylist"
-        @sortAscending="sortAscending"
-        @sortDescending ="sortDescending"
-        @sortName ="sortName"
-        @sortNameRev="sortNameRev"
-        @sortArtist="sortArtist"
-        @sortArtistRev="sortArtistRev"
+        @sortDurationAsc="sortDurationAsc" 
+        @sortDurationDesc="sortDurationDesc" 
+        @sortTitleAsc ="sortTitleAsc"
+        @sortTitleDesc="sortTitleDesc"
+        @sortArtistAsc="sortArtistAsc"
+        @sortArtistDesc="sortArtistDesc"
         v-if="playlists[0]"
       />
     </div>
@@ -124,41 +124,38 @@ export default {
       this.$refs.playerComponent.playPlaylist(playlistName);
     },
 
-    sortDescending(playlistName){
+    sortDurationDesc(playlistName){
       let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
       this.bubbleSort(playlist.songs, playlist.songs.length);
-      console.log(playlist.songs);
     },
 
-    sortAscending(playlistName) {
+    sortDurationAsc(playlistName) {
       let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
       this.mergeSort(playlist.songs, 0, playlist.songs.length - 1);
     },
 
-    sortName(playlistName) {
+    sortTitleAsc(playlistName) {
       let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
       this.insertionSort(playlist.songs, playlist.songs.length);
     },
 
-    sortNameRev(playlistName){
+    sortTitleDesc(playlistName){
       let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
       this.insertionSortRev(playlist.songs, playlist.songs.length);
     },
     
-    sortArtist(playlistName){
+    sortArtistAsc(playlistName){
       let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
       this.selectionSort(playlist.songs, playlist.songs.length);
     },
     
-    sortArtistRev(playlistName){
+    sortArtistDesc(playlistName){
       let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
       this.selectionSortRev(playlist.songs, playlist.songs.length);
     },
 
     //performs shell sort on the array arr of the size n
     selectionSortRev(arr, n){
-      console.log("selectionnsortcalled")
-      console.log(arr);
       for(let k = 0; k<=n-1; k++){
         let pos = this.largest(arr, k, n-1 );
         this.swap(arr, k, pos);
@@ -168,10 +165,8 @@ export default {
     //returns the smallest value in the array from the given range (k, n)
     smallest(arr, k, n){
       let small = arr[k];
-      console.log(small.artist)
       let pos = k;
       for(let j = k+1; j<=n; j++){
-        console.log(arr[j].artist);
         if (small.artist.localeCompare(arr[j].artist)==1){
           small = arr[j];
           pos = j;
@@ -183,10 +178,8 @@ export default {
     //returns the largest value in the array from the given range (k, n)
     largest(arr, k, n){
       let small = arr[k];
-      console.log(small.artist)
       let pos = k;
       for(let j = k+1; j<=n; j++){
-        console.log(arr[j].artist);
         if (small.artist.localeCompare(arr[j].artist)==-1){
           small = arr[j];
           pos = j;
@@ -197,7 +190,6 @@ export default {
 
     //performs selection sort on the array arr of the size n
     selectionSort(arr, n){
-      console.log(arr);
       for(let k = 0; k<=n-1; k++){
         let pos = this.smallest(arr, k, n-1 );
         this.swap(arr, k, pos);
@@ -274,17 +266,12 @@ export default {
       let temp = arr[i1];
       arr[i1] = arr[i2];
       arr[i2] = temp;
-      console.log(i1+", "+i2);
-
     },
 
     //performs bubble sort on array of size n
     bubbleSort(arr, n){
-      console.log("hello")
       for(let i = 0; i<=n-1; i++){
-        console.log("i= "+i);
         for(let j = i+1; j<=n-1; j++){
-          console.log("j= "+j)
           if(arr[i].duration < arr[j].duration){            
             this.swap(arr, i, j);
           } 

@@ -6,22 +6,22 @@
           <th>
             Title
             <div class="sort-icon">
-              <div @click="sortname" class="arrow"></div>
-              <div @click="sortnamerev" class="downarrow"></div>
+              <div @click="sortTitleAsc" class="uparrow"></div>
+              <div @click="sortTitleDesc" class="downarrow"></div>
             </div>
           </th>
           <th>
             Artist
             <div class="sort-icon">
-              <div @click="sortartist" class="arrow"></div>
-              <div @click="sortartistrev" class="downarrow"></div>
+              <div @click="sortArtistAsc" class="uparrow"></div>
+              <div @click="sortArtistDesc" class="downarrow"></div>
             </div>
           </th>
           <th>
             Duration
             <div class="sort-icon">
-              <div @click="sortascending" class="arrow"></div>
-              <div @click="sortdescending" class="downarrow"></div>
+              <div @click="sortDurationAsc" class="uparrow"></div>
+              <div @click="sortDurationDesc" class="downarrow"></div>
             </div>
           </th>
         </tr>
@@ -56,23 +56,23 @@ export default {
       });
       return `${minutes}:${seconds}`;
     },
-    sortascending() {
-      this.$emit("sortAscending", this.name);
+    sortDurationAsc() {
+      this.$emit("sortDurationAsc", this.name);
     },
-    sortdescending() {
-      this.$emit("sortDescending", this.name);
+    sortDurationDesc() {
+      this.$emit("sortDurationDesc", this.name);
     },
-    sortname() {
-      this.$emit("sortName", this.name);
+    sortTitleAsc() {
+      this.$emit("sortTitleAsc", this.name);
     },
-    sortnamerev() {
-      this.$emit("sortNameRev", this.name);
+    sortTitleDesc() {
+      this.$emit("sortTitleDesc", this.name);
     },
-    sortartist() {
-      this.$emit("sortArtist", this.name);
+    sortArtistAsc() {
+      this.$emit("sortArtistAsc", this.name);
     },
-    sortartistrev() {
-      this.$emit("sortArtistRev", this.name);
+    sortArtistDesc() {
+      this.$emit("sortArtistDesc", this.name);
     },
   },
   computed: {
@@ -126,9 +126,7 @@ export default {
 
 table {
   text-align: center;
-  border: 1px solid red;
   color: #646569;
-  /* border-collapse: separate; */
   border-spacing: 1px 20px;
 }
 tbody {
@@ -155,11 +153,11 @@ th {
   display: inline-block;
   position: relative;
 }
-.arrow {
+.uparrow {
   position: absolute;
   left: 0;
 }
-.arrow {
+.uparrow {
   display: inline-block;
   height: 0;
   width: 0;
@@ -177,7 +175,7 @@ th {
   border-top: 7px solid #84898f;
   margin-bottom: 3px;
 }
-.arrow:hover {
+.uparrow:hover {
   border-bottom-color: #5b5e62;
   transform: scale(1.25);
   transition: ease-in-out;
