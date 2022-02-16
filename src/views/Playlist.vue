@@ -1,11 +1,17 @@
 <template>
   <div class="center-container">
     <button class="play" @click="play">Play</button>
-    <button @click="sortthelist" class="sort" >Sort</button>
   </div>
 
   <div class= "playlist-container">
-    <PlaylistTable :playlist = "currentPlaylist">
+    <PlaylistTable :playlist = "currentPlaylist" 
+      @sortAscending="sortascending" 
+      @sortDescending="sortdescending" 
+      @sortName ="sortname "
+      @sortNameRev="sortnamerev"
+      @sortArtist="sortartist"
+      @sortArtistRev="sortartistrev"
+    >
     </PlaylistTable>
   </div>
 </template>
@@ -16,18 +22,32 @@ export default {
   components: {PlaylistTable},
   name: "Playlist",
   props: ["playlists"],
-  data() {
-    return {};
-  },
+
   methods: {
     play() {
       console.log("Playing ", this.name);
       this.$emit("playPlaylist", this.name);
     },
-    sortthelist(){
-      this.$emit("sortPlaylist", this.name);
+    sortascending(){
+      this.$emit("sortAscending", this.name);
+    },
+    sortdescending(){
+      this.$emit("sortDescending", this.name);
+    },
+    sortname(){
+      this.$emit("sortName", this.name);
+    },
+    sortnamerev(){
+      this.$emit("sortNameRev", this.name);
+    },
+    sortartist(){
+      this.$emit("sortArtist", this.name);
+    },
+    sortartistrev(){
+      this.$emit("sortArtistRev", this.name);
     }
   },
+
   computed: {
     name() {
       return this.$route.params.playlist;
@@ -40,14 +60,6 @@ export default {
 </script>
 
 <style scoped>
-/* .center-container {
-  font-size: 25px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  max-height: 100vh;
-  width: 100%
-} */
-
 .playlist-container {
   
  width: 100%;

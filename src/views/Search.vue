@@ -14,6 +14,7 @@
         class="card"
         v-for="(song, index) in searchResults.songs"
         :key="index"
+        @click="playSong(song)"
         :style="`background: linear-gradient(
       rgba(0, 0, 0, 0.4),
       rgba(0, 0, 0, 0.4)
@@ -67,10 +68,18 @@ export default {
       let n = this.playlists[0].songs.length; //number of songs in "all songs"
       let arr = [...this.playlists[0].songs]; //songs array of "all songs" playlist
       for (let i = 0; i < n; i++) {
-        if (arr[i].name.toLowerCase().includes(this.query.toLowerCase()))
+        if (arr[i]?.name.toLowerCase().includes(this.query?.toLowerCase()))
           result.songs.push(arr[i]);
-        else if (arr[i].artist.toLowerCase().includes(this.query.toLowerCase()))
-          result.artists.push(arr[i]);
+        if (arr[i]?.artist.toLowerCase().includes(this.query?.toLowerCase())) {
+          let flag = 1;
+          for (let j = 0; j < result.artists.length; j++) {
+            if (result.artists[j].artist === arr[i].artist) {
+              flag = 0;
+              break;
+            }
+          }
+          if (flag) result.artists.push(arr[i]);
+        }
       }
       return result;
     },

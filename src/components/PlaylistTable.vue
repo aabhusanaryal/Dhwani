@@ -1,11 +1,19 @@
 <template>
   <div class="list-container">
+
     <table class="playlist-table">
       <thead>
         <tr>
-          <th>Title</th>
-          <th>Artist</th>
-          <th>Duration</th>
+          <th>Title 
+            <div @click="sortname" class="arrow"></div>
+            <div @click="sortnamerev" class="downarrow"></div></th>
+          <th>Artist 
+            <div @click="sortartist" class ="arrow"></div>
+            <div @click="sortartistrev" class="downarrow"></div></th>
+          <th>Duration 
+            <div @click="sortascending" class= "arrow"></div>
+            <div @click="sortdescending" class = "downarrow"></div>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -38,6 +46,24 @@ export default {
             });
             return `${minutes}:${seconds}`;
         },
+    sortascending(){
+      this.$emit("sortAscending", this.name);  
+    },
+    sortdescending(){
+      this.$emit("sortDescending", this.name);
+    },
+    sortname(){
+      this.$emit("sortName", this.name);
+    },
+    sortnamerev(){
+      this.$emit("sortNameRev", this.name);
+    },
+    sortartist(){
+      this.$emit("sortArtist", this.name)
+    },
+    sortartistrev(){
+      this.$emit("sortArtistRev", this.name)
+    },
 },
     computed: {
         genresongs: function(){
@@ -74,35 +100,66 @@ export default {
 }
 
 .list-container {
-  display: flex;
+  font-size: 1.82rem;
   background: var(--white);
-  flex-direction: column;
-  width: 100%;
+  width: 99%;
   height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 table {
-  width: 100%;
-  padding: 10px;
-  border-collapse: collapse;
-  margin-left: 10px;
-  margin-right: auto;
-  text-align: center;
-  font-size: 2rem;
-  table-layout: fixed;
+  color: #646569;
+  border-collapse: separate;
+  border-spacing: 0 20px;
+}
+tbody {
+  display: block;
+  overflow-y: scroll;
+  max-height: 550px;
+}
+thead{
+    display: block;
+    height: 50px;
+}
+td,th {
+  width: 300px;
+  text-align: left;
+}
+th {
+    color: #84898f;
+    font-weight: lighter;
+}
+.arrow{
+  display: inline-block;
+  height: 0;
+  width: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom:8px solid #84898f;
+  margin-bottom: 15px;
+}
+.downarrow{
+  display: inline-block;
+  height: 0;
+  width: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top:8px solid #84898f;
+  margin-bottom: 3px;
+}
+.arrow:hover{
+  border-bottom-color:  #5b5e62;
+  transform: scale(1.25);
+  transition:ease-in-out;
 }
 
-th > tr {
-  background: var(--white);
+.downarrow:hover{
+  border-top-color: #5b5e62;
+  transform: scale(1.25);
+  transition: ease-in-out;
 }
 
-
-tbody>tr:nth-child(even){
-    background: linear-gradient(to right, #3ae0dd, rgb(236, 156, 236));
-}
-tbody>tr:nth-child(odd){
-    background: linear-gradient(to right, rgb(236, 156, 236), #3ae0dd);
-}
 </style>

@@ -59,7 +59,12 @@ The area is changed using mediaquery -->
         @playPlaylist="playPlaylist"
         @playSong="playSong"
         @addPlaylist="createPlaylist"
-        @sortPlaylist="sortPlaylist"
+        @sortAscending="sortAscending"
+        @sortDescending ="sortDescending"
+        @sortName ="sortName"
+        @sortNameRev="sortNameRev"
+        @sortArtist="sortArtist"
+        @sortArtistRev="sortArtistRev"
         v-if="playlists[0]"
       />
     </div>
@@ -119,17 +124,121 @@ export default {
       this.$refs.playerComponent.playPlaylist(playlistName);
     },
 
-    sortPlaylist(playlistName) {
-      let playlist = this.playlists.filter(
-        (playlist) => playlist.name == playlistName
-      )[0];
+    sortDescending(playlistName){
+      let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
+      this.bubbleSort(playlist.songs, playlist.songs.length);
+      console.log(playlist.songs);
+    },
+
+    sortAscending(playlistName) {
+      let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
       this.mergeSort(playlist.songs, 0, playlist.songs.length - 1);
     },
 
-    merge(arr, beg, mid, end) {
-      let i = beg;
-      let j = mid + 1;
-      let k = 0;
+    sortName(playlistName) {
+      let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
+      this.insertionSort(playlist.songs, playlist.songs.length);
+    },
+
+    sortNameRev(playlistName){
+      let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
+      this.insertionSortRev(playlist.songs, playlist.songs.length);
+    },
+    
+    sortArtist(playlistName){
+      let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
+      this.selectionSort(playlist.songs, playlist.songs.length);
+    },
+    
+    sortArtistRev(playlistName){
+      let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
+      this.selectionSortRev(playlist.songs, playlist.songs.length);
+    },
+
+    //performs shell sort on the array arr of the size n
+    selectionSortRev(arr, n){
+      console.log("selectionnsortcalled")
+      console.log(arr);
+      for(let k = 0; k<=n-1; k++){
+        let pos = this.largest(arr, k, n-1 );
+        this.swap(arr, k, pos);
+      }
+    },
+
+    //returns the smallest value in the array from the given range (k, n)
+    smallest(arr, k, n){
+      let small = arr[k];
+      console.log(small.artist)
+      let pos = k;
+      for(let j = k+1; j<=n; j++){
+        console.log(arr[j].artist);
+        if (small.artist.localeCompare(arr[j].artist)==1){
+          small = arr[j];
+          pos = j;
+        } 
+      }
+      return pos
+    },
+
+    //returns the largest value in the array from the given range (k, n)
+    largest(arr, k, n){
+      let small = arr[k];
+      console.log(small.artist)
+      let pos = k;
+      for(let j = k+1; j<=n; j++){
+        console.log(arr[j].artist);
+        if (small.artist.localeCompare(arr[j].artist)==-1){
+          small = arr[j];
+          pos = j;
+        } 
+      }
+      return pos
+    },
+
+    //performs selection sort on the array arr of the size n
+    selectionSort(arr, n){
+      console.log(arr);
+      for(let k = 0; k<=n-1; k++){
+        let pos = this.smallest(arr, k, n-1 );
+        this.swap(arr, k, pos);
+      }
+    },
+
+    //performs insertion sort on the array of size n
+    insertionSort(arr, n){
+      let temp
+      let j
+      for(let i=1;i<n;i++){
+        temp=arr[i]
+        j=i-1
+        while(j>=0 && temp.name.localeCompare(arr[j].name)==-1){
+          arr[j+1]=arr[j]
+          j=j-1
+        }
+        arr[j+1]=temp
+      }
+    },
+
+    //performs insertion sort in the reverse order on the array of size n
+    insertionSortRev(arr, n){
+      let temp
+      let j
+      for(let i=1;i<n;i++){
+        temp=arr[i]
+        j=i-1
+        while(j>=0 && temp.name.localeCompare(arr[j].name)==1){
+          arr[j+1]=arr[j]
+          j=j-1
+        }
+        arr[j+1]=temp
+      }
+    },
+    
+    //function to merge the partitioned arrays
+    merge(arr, beg, mid, end){
+      let i=beg 
+      let j=mid+1
+      let k=0;
       const temp = [];
       while (i <= mid && j <= end) {
         if (arr[i].duration < arr[j].duration) {
@@ -147,15 +256,39 @@ export default {
       for (let i = beg; i <= end; i++) {
         arr[i] = temp[i - beg];
       }
-    },
-    mergeSort(arr, beg, end) {
-      if (beg < end) {
-        //divide the array into singular elements
-        var mid = beg + Math.floor((end - beg) / 2);
+    },        
+
+    //function to perform merge sort
+    mergeSort(arr, beg, end){
+      if (beg<end){                //divide the array into singular elements
+        var mid = beg + Math.floor((end-beg)/2);
         this.mergeSort(arr, beg, mid);
         this.mergeSort(arr, mid + 1, end);
         //merge the elements elements are divided in to singular arrays with one elemets each
         this.merge(arr, beg, mid, end);
+      }
+    },
+
+    //function to swap arr elements of the positions i1 and i2
+    swap(arr, i1, i2){
+      let temp = arr[i1];
+      arr[i1] = arr[i2];
+      arr[i2] = temp;
+      console.log(i1+", "+i2);
+
+    },
+
+    //performs bubble sort on array of size n
+    bubbleSort(arr, n){
+      console.log("hello")
+      for(let i = 0; i<=n-1; i++){
+        console.log("i= "+i);
+        for(let j = i+1; j<=n-1; j++){
+          console.log("j= "+j)
+          if(arr[i].duration < arr[j].duration){            
+            this.swap(arr, i, j);
+          } 
+        }
       }
     },
 
@@ -177,6 +310,7 @@ export default {
       }
     },
   },
+
   mounted() {
     setTimeout(() => {
       console.log(document.querySelectorAll("input[type='text']"));
@@ -335,7 +469,7 @@ h3 {
   display: grid;
   height: 100vh;
   width: 100vw;
-  grid-template-rows: 10% 70% 20%;
+  grid-template-rows: 10% 65% 25%;
   grid-template-columns: var(--left-sidebar-width) 1fr 350px;
   grid-template-areas:
     "leftcontainer topcontainer rightcontainer"
