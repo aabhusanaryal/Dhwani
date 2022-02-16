@@ -1,5 +1,9 @@
 <template>
   <div class="list-container">
+    <button @click="sortascending" class="sort" >Ascending</button>
+    <button @click="sortdescending" class="sort">Desending</button>
+    <button @click="sortname" class="sort">Name</button>
+    <button @click="sortnamerev" class = "sort">Rev</button>
     <table class="playlist-table">
       <thead>
         <tr>
@@ -38,6 +42,18 @@ export default {
             });
             return `${minutes}:${seconds}`;
         },
+    sortascending(){
+      this.$emit("sortAscending", this.name);  
+    },
+    sortdescending(){
+      this.$emit("sortDescending", this.name);
+    },
+    sortname(){
+      this.$emit("sortName", this.name);
+    },
+    sortnamerev(){
+      this.$emit("sortNameRev", this.name);
+    }
 },
     computed: {
         genresongs: function(){
