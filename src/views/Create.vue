@@ -145,7 +145,7 @@ thead {
 }
 td,
 th {
-  text-align: center !important;
+  text-align: left !important;
   width: 400px;
   text-align: left;
 }
@@ -188,7 +188,7 @@ input[type="checkbox"]:checked + label::after{
 
 label::after{
   content: "";
-  border: 2px solid black;
+  border: 2px solid #35e6da;
   width:20px;
   height: 20px;
   position: absolute;
