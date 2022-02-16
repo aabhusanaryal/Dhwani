@@ -120,38 +120,40 @@ export default {
     },
 
     sortPlaylist(playlistName) {
-        let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
-        this.mergeSort(playlist.songs, 0, playlist.songs.length - 1);
+      let playlist = this.playlists.filter(
+        (playlist) => playlist.name == playlistName
+      )[0];
+      this.mergeSort(playlist.songs, 0, playlist.songs.length - 1);
     },
 
-    merge(arr, beg, mid, end){
-      let i=beg 
-      let j=mid+1
-      let k=0;
+    merge(arr, beg, mid, end) {
+      let i = beg;
+      let j = mid + 1;
+      let k = 0;
       const temp = [];
-      while(i<=mid && j<=end){
-          if(arr[i].duration < arr[j].duration){
-              temp[k++] = arr[i++];
-          }
-          else{
-              temp[k++] = arr[j++];
-          }
+      while (i <= mid && j <= end) {
+        if (arr[i].duration < arr[j].duration) {
+          temp[k++] = arr[i++];
+        } else {
+          temp[k++] = arr[j++];
+        }
       }
-      while(i<=mid){
-          temp[k++] = arr[i++]
+      while (i <= mid) {
+        temp[k++] = arr[i++];
       }
-      while(j<=end){
-          temp[k++] = arr[j++]
+      while (j <= end) {
+        temp[k++] = arr[j++];
       }
-      for(let i=beg; i<=end; i++){
-          arr[i] = temp[i-beg];
+      for (let i = beg; i <= end; i++) {
+        arr[i] = temp[i - beg];
       }
-    },        
-    mergeSort(arr, beg, end){
-      if (beg<end){                //divide the array into singular elements
-        var mid = beg + Math.floor((end-beg)/2);
+    },
+    mergeSort(arr, beg, end) {
+      if (beg < end) {
+        //divide the array into singular elements
+        var mid = beg + Math.floor((end - beg) / 2);
         this.mergeSort(arr, beg, mid);
-        this.mergeSort(arr, mid+1, end);
+        this.mergeSort(arr, mid + 1, end);
         //merge the elements elements are divided in to singular arrays with one elemets each
         this.merge(arr, beg, mid, end);
       }
@@ -340,7 +342,6 @@ html {
   display: flex;
   justify-content: center;
 }
-
 @media screen and (max-width: 1350px) {
   .maincontainer {
     grid-template-columns: var(--left-sidebar-width) 1fr;
