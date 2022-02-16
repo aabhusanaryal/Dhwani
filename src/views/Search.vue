@@ -3,7 +3,7 @@
   <h4 v-if="searchResults.songs.length==0 && searchResults.artists.length==0">Not found! Please enter another keyword!</h4>
   <h3 v-if="searchResults.songs.length!=0">Songs</h3>
   <ul v-for="(song, index) in searchResults.songs" :key="index">
-    <li @click="playSong">{{song.name}}</li>
+    <li :id="index" @click="playSong($event)">{{song.name}}</li>
   </ul>
   <h3 v-if="searchResults.artists.length!=0">Artists</h3>
   <ul v-for="(song, index) in searchResults.artists" :key="index">
@@ -18,7 +18,9 @@ export default {
   name: "Search",
   props:['playlists'],
   methods:{
-
+    playSong(event){
+      this.$emit("playSong",this.searchResults.songs[event.srcElement.id])
+    }
   },
   computed: {
     query() {
