@@ -60,6 +60,7 @@ h1 {
 .chips {
   width: 70px;
   height: 30px;
+  user-select: none; /* Making the text unselectable */
   line-height: 30px;
   text-align: center;
   background: white;
@@ -67,7 +68,7 @@ h1 {
   padding: 10px;
   border-radius: 50px;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: 0.1s ease;
   font-family: "Roboto", sans-serif;
 }
 .chips:hover {

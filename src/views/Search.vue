@@ -99,14 +99,16 @@ export default {
   margin-bottom: 2rem;
 }
 .card {
-  width: 220px;
-  height: 220px;
+  min-width: 220px;
+  min-height: 220px;
+  flex-grow: 1;
   border-radius: 30px;
   position: relative;
   display: flex;
   justify-content: center;
   cursor: pointer;
 }
+
 h3 {
   margin-bottom: 1rem;
 }
