@@ -176,7 +176,7 @@ label::before {
   left:-30px;
   top: -10px;
   transform: scale(0) rotateZ(180deg);
-  transition: all 0.5s cubic-bezier(0.54,0.01,0,1.49);
+  transition: all 0.3s cubic-bezier(0.54,0.01,0,1.49);
 }
 
 input[type="checkbox"]:checked + label::before{
