@@ -1,15 +1,13 @@
 <template>
   <div class="list-container">
-    <button @click="sortascending" class="sort" >Ascending</button>
-    <button @click="sortdescending" class="sort">Desending</button>
-    <button @click="sortname" class="sort">Name</button>
-    <button @click="sortnamerev" class = "sort">Rev</button>
+
     <table class="playlist-table">
       <thead>
         <tr>
-          <th>Title</th>
+          <th>Title <button @click="sortname" class="sort">Asc</button><button @click="sortnamerev" class = "sort">Des</button></th>
           <th>Artist</th>
-          <th>Duration</th>
+          <th>Duration <button @click="sortascending" class="sort" >Asc</button>
+    <button @click="sortdescending" class="sort">Des</button></th>
         </tr>
       </thead>
       <tbody>
