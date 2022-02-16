@@ -1,6 +1,7 @@
 <template>
   <div class="center-container">
     <button class="play" @click="play">Play</button>
+    <button @click="sortthelist" class="sort" >Sort</button>
   </div>
 
   <div class= "playlist-container">
@@ -23,6 +24,9 @@ export default {
       console.log("Playing ", this.name);
       this.$emit("playPlaylist", this.name);
     },
+    sortthelist(){
+      this.$emit("sortPlaylist", this.name);
+    }
   },
   computed: {
     name() {

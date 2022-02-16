@@ -169,6 +169,7 @@ label::before{
     position: absolute;
 }
 
+/*MEDIA QUERIES*/
 @media screen and (max-width: 1445px){
   /* form {
     font-size:18px ;
