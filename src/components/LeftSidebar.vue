@@ -1,5 +1,16 @@
 <template>
-  <div class="left-sidebar" role="navigation">
+  <div class="mobile" role="navigation">
+    <div class="mobile-nav">
+      <center>
+        <div id="logo">
+          <router-link to="/"
+            ><img src="../assets/logo.svg" alt="Dhwani Logo"
+          /></router-link>
+        </div>
+      </center>
+    </div>
+  </div>
+  <div class="left-sidebar desktop" role="navigation">
     <center>
       <div id="logo">
         <router-link to="/"
@@ -110,5 +121,29 @@ export default {
   padding-left: 35px;
   /* font-weight: bold; */
   color: white;
+}
+@media (max-width: 768px) {
+  /* Mobile view */
+  .desktop {
+    display: none;
+  }
+  #logo {
+    height: 100%;
+  }
+  #logo img {
+    margin: 10px;
+    height: 70px;
+  }
+  .mobile {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 10px;
+    background: white;
+  }
+}
+@media (min-width: 769px) {
+  .mobile {
+    display: none;
+  }
 }
 </style>

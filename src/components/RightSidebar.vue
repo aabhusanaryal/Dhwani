@@ -40,7 +40,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .right-sidebar {
   width: 100%;
   min-height: 100vh;
@@ -53,6 +53,9 @@ export default {
   flex-wrap: wrap;
   justify-content: space-around;
   margin-top: 20px;
+}
+h1 {
+  font-size: 3.3rem;
 }
 .chips {
   width: 70px;
@@ -71,7 +74,8 @@ export default {
   background: rgb(241, 240, 240);
 }
 .active-chips {
-  background: rgb(158, 158, 158) !important;
+  background: var(--active-gradient) !important;
+  color: white;
 }
 .sidebar-wrapper {
   margin: 30px 25px;

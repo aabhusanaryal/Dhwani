@@ -178,22 +178,21 @@ export default {
       let j=mid+1
       let k=0;
       const temp = [];
-      while(i<=mid && j<=end){
-          if(arr[i].duration < arr[j].duration){
-              temp[k++] = arr[i++];
-          }
-          else{
-              temp[k++] = arr[j++];
-          }
+      while (i <= mid && j <= end) {
+        if (arr[i].duration < arr[j].duration) {
+          temp[k++] = arr[i++];
+        } else {
+          temp[k++] = arr[j++];
+        }
       }
-      while(i<=mid){
-          temp[k++] = arr[i++]
+      while (i <= mid) {
+        temp[k++] = arr[i++];
       }
-      while(j<=end){
-          temp[k++] = arr[j++]
+      while (j <= end) {
+        temp[k++] = arr[j++];
       }
-      for(let i=beg; i<=end; i++){
-          arr[i] = temp[i-beg];
+      for (let i = beg; i <= end; i++) {
+        arr[i] = temp[i - beg];
       }
     },        
 
@@ -201,7 +200,7 @@ export default {
       if (beg<end){                //divide the array into singular elements
         var mid = beg + Math.floor((end-beg)/2);
         this.mergeSort(arr, beg, mid);
-        this.mergeSort(arr, mid+1, end);
+        this.mergeSort(arr, mid + 1, end);
         //merge the elements elements are divided in to singular arrays with one elemets each
         this.merge(arr, beg, mid, end);
       }
@@ -294,7 +293,18 @@ export default {
       isFav: null,
       duration: 200,
     };
-    this.createPlaylist("All Songs", [song1, song2, song3, song4]);
+    let song5 = {
+      name: "Foots",
+      path: "06. Tobu - Roots",
+      artist: "Tobu",
+      cover:
+        "https://lastfm.freetls.fastly.net/i/u/300x300/d55932d44b33e431e68a3c0c4daceb98.png",
+      genres: ["OP", "Hello"],
+      audio: null,
+      isFav: null,
+      duration: 200,
+    };
+    this.createPlaylist("All Songs", [song1, song2, song3, song4, song5]);
     this.createPlaylist("Favourites", []);
     this.createPlaylist("Playlist-2", [song3, song2]);
     this.createPlaylist("Playlist-3", [song4]);
@@ -357,6 +367,16 @@ export default {
 html {
   overflow: hidden; /* Removing scrollbar from the main html element */
 }
+h1 {
+  font-size: 4rem;
+}
+h2 {
+  font-size: 3rem;
+}
+h3 {
+  font-size: 2.5rem;
+}
+
 /* Making the scrollbar look pretty (like myself - Aabhusan) */
 ::-webkit-scrollbar {
   width: 20px;
@@ -391,9 +411,10 @@ html {
     "leftcontainer centercontainer rightcontainer"
     "leftcontainer bottomcontainer rightcontainer";
 }
+
 .leftcontainer {
   grid-area: leftcontainer;
-  height: 100vh;
+  /* height: 100vh; */
 }
 .rightcontainer {
   grid-area: rightcontainer;
@@ -410,7 +431,6 @@ html {
   display: flex;
   justify-content: center;
 }
-
 @media screen and (max-width: 1350px) {
   .maincontainer {
     grid-template-columns: var(--left-sidebar-width) 1fr;
@@ -431,16 +451,14 @@ html {
   }
   .maincontainer {
     grid-template-columns: 100%;
-    grid-template-rows: 10% 65% 25%;
+    grid-template-rows: 80px 10% 65% 25%;
     grid-template-areas:
-      " topcontainer"
+      "leftcontainer"
+      "topcontainer"
       "centercontainer"
       "bottomcontainer";
   }
   .rightcontainer {
-    display: none;
-  }
-  .leftcontainer {
     display: none;
   }
 }
