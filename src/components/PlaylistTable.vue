@@ -45,7 +45,6 @@ export default {
             if(!this.$route.query.genre) {
                 return this.playlist.songs;
             }   
-
             //if genre
             else if (this.$route.query.genre.length != 0){
                 const arr = [];
