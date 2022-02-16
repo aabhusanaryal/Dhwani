@@ -59,7 +59,10 @@ The area is changed using mediaquery -->
         @playPlaylist="playPlaylist"
         @playSong="playSong"
         @addPlaylist="createPlaylist"
-        @sortPlaylist="sortPlaylist"
+        @sortAscending="sortAscending"
+        @sortDescending ="sortDescending"
+        @sortName ="sortName"
+        @sortNameRev="sortNameRev"
         v-if="playlists[0]"
       />
     </div>
@@ -119,17 +122,61 @@ export default {
       this.$refs.playerComponent.playPlaylist(playlistName);
     },
 
-    sortPlaylist(playlistName) {
-      let playlist = this.playlists.filter(
-        (playlist) => playlist.name == playlistName
-      )[0];
-      this.mergeSort(playlist.songs, 0, playlist.songs.length - 1);
+    sortDescending(playlistName){
+      let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
+      this.bubbleSort(playlist.songs, playlist.songs.length);
+      console.log(playlist.songs);
     },
 
-    merge(arr, beg, mid, end) {
-      let i = beg;
-      let j = mid + 1;
-      let k = 0;
+    sortAscending(playlistName) {
+        let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
+        this.mergeSort(playlist.songs, 0, playlist.songs.length - 1);
+    },
+
+    sortName(playlistName) {
+      let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
+      this.insertionSort(playlist.songs, playlist.songs.length);
+    },
+
+    sortNameRev(playlistName){
+      let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
+      this.insertionSortRev(playlist.songs, playlist.songs.length);
+
+    },
+
+    insertionSort(arr, n){
+      let temp
+      let j
+      for(let i=1;i<n;i++){
+        temp=arr[i]
+        j=i-1
+        while(j>=0 && temp.name.localeCompare(arr[j].name)==-1){
+          arr[j+1]=arr[j]
+          j=j-1
+        }
+        arr[j+1]=temp
+      }
+    },
+
+    insertionSortRev(arr, n){
+      console.log("Called rev name")
+      let temp
+      let j
+      for(let i=1;i<n;i++){
+        temp=arr[i]
+        j=i-1
+        while(j>=0 && temp.name.localeCompare(arr[j].name)==1){
+          arr[j+1]=arr[j]
+          j=j-1
+        }
+        arr[j+1]=temp
+      }
+    },
+    
+    merge(arr, beg, mid, end){
+      let i=beg 
+      let j=mid+1
+      let k=0;
       const temp = [];
       while (i <= mid && j <= end) {
         if (arr[i].duration < arr[j].duration) {
@@ -147,15 +194,36 @@ export default {
       for (let i = beg; i <= end; i++) {
         arr[i] = temp[i - beg];
       }
-    },
-    mergeSort(arr, beg, end) {
-      if (beg < end) {
-        //divide the array into singular elements
-        var mid = beg + Math.floor((end - beg) / 2);
+    },        
+
+    mergeSort(arr, beg, end){
+      if (beg<end){                //divide the array into singular elements
+        var mid = beg + Math.floor((end-beg)/2);
         this.mergeSort(arr, beg, mid);
         this.mergeSort(arr, mid + 1, end);
         //merge the elements elements are divided in to singular arrays with one elemets each
         this.merge(arr, beg, mid, end);
+      }
+    },
+
+    swap(arr, i1, i2){
+      let temp = arr[i1];
+      arr[i1] = arr[i2];
+      arr[i2] = temp;
+      console.log(i1+", "+i2);
+
+    },
+
+    bubbleSort(arr, n){
+      console.log("hello")
+      for(let i = 0; i<=n-1; i++){
+        console.log("i= "+i);
+        for(let j = i+1; j<=n-1; j++){
+          console.log("j= "+j)
+          if(arr[i].duration < arr[j].duration){            
+            this.swap(arr, i, j);
+          } 
+        }
       }
     },
 
@@ -177,6 +245,7 @@ export default {
       }
     },
   },
+
   mounted() {
     setTimeout(() => {
       console.log(document.querySelectorAll("input[type='text']"));
