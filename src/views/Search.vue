@@ -20,7 +20,7 @@
       rgba(0, 0, 0, 0.4)
     ), url(${song.cover}); background-repeat: no-repeat; background-size: 100%;`"
       >
-        <div class="info-wrapper">
+        <div @click="playSong(song)" class="info-wrapper">
           {{ song.name }}
         </div>
       </div>
@@ -48,11 +48,11 @@
 <script>
 export default {
   name: "Search",
-  props:['playlists'],
-  methods:{
-    playSong(song){
-      this.$emit("playSong",song)
-    }
+  props: ["playlists"],
+  methods: {
+    playSong(song) {
+      this.$emit("playSong", song);
+    },
   },
   computed: {
     query() {
@@ -70,16 +70,15 @@ export default {
       for (let i = 0; i < n; i++) {
         if (arr[i]?.name.toLowerCase().includes(this.query?.toLowerCase()))
           result.songs.push(arr[i]);
-        if (arr[i]?.artist.toLowerCase().includes(this.query?.toLowerCase())){
-          let flag=1
-          for(let j=0;j<result.artists.length;j++){
-            if(result.artists[j].artist===arr[i].artist){
-              flag=0
-              break
+        if (arr[i]?.artist.toLowerCase().includes(this.query?.toLowerCase())) {
+          let flag = 1;
+          for (let j = 0; j < result.artists.length; j++) {
+            if (result.artists[j].artist === arr[i].artist) {
+              flag = 0;
+              break;
             }
           }
-          if(flag)
-            result.artists.push(arr[i]);
+          if (flag) result.artists.push(arr[i]);
         }
       }
       return result;

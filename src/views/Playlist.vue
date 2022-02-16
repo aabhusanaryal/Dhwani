@@ -5,10 +5,12 @@
 
   <div class= "playlist-container">
     <PlaylistTable :playlist = "currentPlaylist" 
-    @sortAscending="sortascending" 
-    @sortDescending="sortdescending" 
-    @sortName ="sortname "
-    @sortNameRev="sortnamerev"
+      @sortAscending="sortascending" 
+      @sortDescending="sortdescending" 
+      @sortName ="sortname "
+      @sortNameRev="sortnamerev"
+      @sortArtist="sortartist"
+      @sortArtistRev="sortartistrev"
     >
     </PlaylistTable>
   </div>
@@ -37,6 +39,12 @@ export default {
     },
     sortnamerev(){
       this.$emit("sortNameRev", this.name);
+    },
+    sortartist(){
+      this.$emit("sortArtist", this.name);
+    },
+    sortartistrev(){
+      this.$emit("sortArtistRev", this.name);
     }
   },
 

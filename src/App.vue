@@ -63,6 +63,8 @@ The area is changed using mediaquery -->
         @sortDescending ="sortDescending"
         @sortName ="sortName"
         @sortNameRev="sortNameRev"
+        @sortArtist="sortArtist"
+        @sortArtistRev="sortArtistRev"
         v-if="playlists[0]"
       />
     </div>
@@ -129,8 +131,8 @@ export default {
     },
 
     sortAscending(playlistName) {
-        let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
-        this.mergeSort(playlist.songs, 0, playlist.songs.length - 1);
+      let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
+      this.mergeSort(playlist.songs, 0, playlist.songs.length - 1);
     },
 
     sortName(playlistName) {
@@ -141,9 +143,68 @@ export default {
     sortNameRev(playlistName){
       let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
       this.insertionSortRev(playlist.songs, playlist.songs.length);
-
+    },
+    
+    sortArtist(playlistName){
+      let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
+      this.selectionSort(playlist.songs, playlist.songs.length);
+    },
+    
+    sortArtistRev(playlistName){
+      let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
+      this.selectionSortRev(playlist.songs, playlist.songs.length);
     },
 
+    //performs shell sort on the array arr of the size n
+    selectionSortRev(arr, n){
+      console.log("selectionnsortcalled")
+      console.log(arr);
+      for(let k = 0; k<=n-1; k++){
+        let pos = this.largest(arr, k, n-1 );
+        this.swap(arr, k, pos);
+      }
+    },
+
+    //returns the smallest value in the array from the given range (k, n)
+    smallest(arr, k, n){
+      let small = arr[k];
+      console.log(small.artist)
+      let pos = k;
+      for(let j = k+1; j<=n; j++){
+        console.log(arr[j].artist);
+        if (small.artist.localeCompare(arr[j].artist)==1){
+          small = arr[j];
+          pos = j;
+        } 
+      }
+      return pos
+    },
+
+    //returns the largest value in the array from the given range (k, n)
+    largest(arr, k, n){
+      let small = arr[k];
+      console.log(small.artist)
+      let pos = k;
+      for(let j = k+1; j<=n; j++){
+        console.log(arr[j].artist);
+        if (small.artist.localeCompare(arr[j].artist)==-1){
+          small = arr[j];
+          pos = j;
+        } 
+      }
+      return pos
+    },
+
+    //performs selection sort on the array arr of the size n
+    selectionSort(arr, n){
+      console.log(arr);
+      for(let k = 0; k<=n-1; k++){
+        let pos = this.smallest(arr, k, n-1 );
+        this.swap(arr, k, pos);
+      }
+    },
+
+    //performs insertion sort on the array of size n
     insertionSort(arr, n){
       let temp
       let j
@@ -158,8 +219,8 @@ export default {
       }
     },
 
+    //performs insertion sort in the reverse order on the array of size n
     insertionSortRev(arr, n){
-      console.log("Called rev name")
       let temp
       let j
       for(let i=1;i<n;i++){
@@ -173,6 +234,7 @@ export default {
       }
     },
     
+    //function to merge the partitioned arrays
     merge(arr, beg, mid, end){
       let i=beg 
       let j=mid+1
@@ -196,6 +258,7 @@ export default {
       }
     },        
 
+    //function to perform merge sort
     mergeSort(arr, beg, end){
       if (beg<end){                //divide the array into singular elements
         var mid = beg + Math.floor((end-beg)/2);
@@ -206,6 +269,7 @@ export default {
       }
     },
 
+    //function to swap arr elements of the positions i1 and i2
     swap(arr, i1, i2){
       let temp = arr[i1];
       arr[i1] = arr[i2];
@@ -214,6 +278,7 @@ export default {
 
     },
 
+    //performs bubble sort on array of size n
     bubbleSort(arr, n){
       console.log("hello")
       for(let i = 0; i<=n-1; i++){
@@ -404,7 +469,7 @@ h3 {
   display: grid;
   height: 100vh;
   width: 100vw;
-  grid-template-rows: 10% 70% 20%;
+  grid-template-rows: 10% 65% 25%;
   grid-template-columns: var(--left-sidebar-width) 1fr 350px;
   grid-template-areas:
     "leftcontainer topcontainer rightcontainer"
