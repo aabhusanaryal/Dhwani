@@ -356,7 +356,27 @@ export default {
       isFav: null,
       duration: 200,
     };
-    this.createPlaylist("All Songs", [song1, song2, song3, song4, song5]);
+    let song6 = {
+    name: "Babbage",
+    path: "02. Paul Flint - Savage",
+    artist: "Paul Flint",
+    cover: "https://i1.sndcdn.com/artworks-000178640584-kie7ij-t500x500.jpg",
+    genres: ["Chill", "LoFi"],
+    audio: null,
+    isFav: null,
+    duration: 132,
+  };
+    let song7 = {
+    name: "Cabbage",
+    path: "02. Paul Flint - Savage",
+    artist: "Paul Flint",
+    cover: "https://i1.sndcdn.com/artworks-000178640584-kie7ij-t500x500.jpg",
+    genres: ["Chill", "LoFi"],
+    audio: null,
+    isFav: null,
+    duration: 132,
+  };
+    this.createPlaylist("All Songs", [song1, song2, song3, song4, song5, song6, song7]);
     this.createPlaylist("Favourites", []);
     this.createPlaylist("Playlist-2", [song3, song2]);
     this.createPlaylist("Playlist-3", [song4]);
