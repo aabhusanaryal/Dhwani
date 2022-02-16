@@ -70,8 +70,17 @@ export default {
       for (let i = 0; i < n; i++) {
         if (arr[i].name.toLowerCase().includes(this.query.toLowerCase()))
           result.songs.push(arr[i]);
-        else if (arr[i].artist.toLowerCase().includes(this.query.toLowerCase()))
-          result.artists.push(arr[i]);
+        if (arr[i].artist.toLowerCase().includes(this.query.toLowerCase())){
+          let flag=1
+          for(let j=0;j<result.artists.length;j++){
+            if(result.artists[j].artist===arr[i].artist){
+              flag=0
+              break
+            }
+          }
+          if(flag)
+            result.artists.push(arr[i]);
+        }
       }
       return result;
     },
@@ -97,6 +106,7 @@ export default {
   position: relative;
   display: flex;
   justify-content: center;
+  cursor: pointer;
 }
 h3 {
   margin-bottom: 1rem;
