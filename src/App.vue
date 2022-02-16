@@ -224,7 +224,18 @@ export default {
       isFav: null,
       duration: 200,
     };
-    this.createPlaylist("All Songs", [song1, song2, song3, song4]);
+    let song5 = {
+      name: "Foots",
+      path: "06. Tobu - Roots",
+      artist: "Tobu",
+      cover:
+        "https://lastfm.freetls.fastly.net/i/u/300x300/d55932d44b33e431e68a3c0c4daceb98.png",
+      genres: ["OP", "Hello"],
+      audio: null,
+      isFav: null,
+      duration: 200,
+    };
+    this.createPlaylist("All Songs", [song1, song2, song3, song4, song5]);
     this.createPlaylist("Favourites", []);
     this.createPlaylist("Playlist-2", [song3, song2]);
     this.createPlaylist("Playlist-3", [song4]);
@@ -286,6 +297,15 @@ export default {
 }
 html {
   overflow: hidden; /* Removing scrollbar from the main html element */
+}
+h1 {
+  font-size: 4rem;
+}
+h2 {
+  font-size: 3rem;
+}
+h3 {
+  font-size: 2.5rem;
 }
 
 /* Making the scrollbar look pretty (like myself - Aabhusan) */
