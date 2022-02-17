@@ -117,12 +117,15 @@ export default {
   font-size: 23px;
   background: var(--white);
   width: 100%;
+  overflow-y: hidden;
   overflow-x: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 table {
   color: #646569;
-  border-spacing: 20px;
+  border-spacing: 3px 20px;
 }
 tbody {
   display: block;
@@ -150,6 +153,8 @@ th {
 .uparrow {
   position: absolute;
   left: 0;
+}
+.uparrow {
   display: inline-block;
   height: 0;
   width: 0;
@@ -181,10 +186,9 @@ th {
 .arrow {
   cursor: pointer;
 }
-
-@media screen and (min-width: 768px) {
+/* @media (max-size: 768px) {
   .downarrow {
     margin-bottom: 2px;
   }
-}
+} */
 </style>
