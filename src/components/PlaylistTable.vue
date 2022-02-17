@@ -134,7 +134,9 @@ thead {
 }
 td,
 th {
+  vertical-align: middle;
   width: 300px;
+  text-align: left;
 }
 th {
   color: #84898f;
@@ -148,8 +150,6 @@ th {
 .uparrow {
   position: absolute;
   left: 0;
-}
-.uparrow {
   display: inline-block;
   height: 0;
   width: 0;
