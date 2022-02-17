@@ -359,36 +359,62 @@ export default {
       duration: 200,
     };
     let song5 = {
-      name: "Foots",
+      name: "Dreaming of Me",
+      path: "06. Tobu - Roots",
+      artist: "Jack Shore",
+      cover:
+        "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/033/325x325/dreaming-of-me-1635854432-lB4hOLMPWe.jpg",
+      genres: ["Indie"],
+      audio: null,
+      isFav: null,
+      duration: 199,
+    };
+    let song6 = {
+      name: "Phoenix",
+      path: "06. Tobu - Roots",
+      artist: "Halvorsen",
+      cover:
+        "https://linkstorage.linkfire.com/medialinks/images/7438735b-7816-415a-b3bb-985b6a3f930b/artwork-440x440.jpg",
+      genres: ["Indie"],
+      audio: null,
+      isFav: null,
+      duration: 238,
+    };
+    let song7 = {
+      name: "Cloud9",
       path: "06. Tobu - Roots",
       artist: "Tobu",
       cover:
-        "https://lastfm.freetls.fastly.net/i/u/300x300/d55932d44b33e431e68a3c0c4daceb98.png",
-      genres: ["OP", "Hello"],
+        "https://linkstorage.linkfire.com/medialinks/images/4670ee7b-68e1-4d08-a52d-4db36daca1e1/artwork-440x440.jpg",
+      genres: ["EDM"],
       audio: null,
       isFav: null,
-      duration: 200,
+      duration: 275,
     };
-    let song6 = {
-      name: "Babbage",
-      path: "02. Paul Flint - Savage",
-      artist: "Paul Flint",
-      cover: "https://i1.sndcdn.com/artworks-000178640584-kie7ij-t500x500.jpg",
-      genres: ["Chill", "LoFi"],
+    let song8 = {
+      name: "Canon in D",
+      path: "06. Tobu - Roots",
+      artist: "Pachelbel",
+      cover:
+        "https://halleonard-coverimages.s3.amazonaws.com/wl/14024794-wl.jpg",
+      genres: ["Piano"],
       audio: null,
       isFav: null,
-      duration: 132,
+      duration: 228,
     };
-    let song7 = {
-      name: "Cabbage",
-      path: "02. Paul Flint - Savage",
-      artist: "Paul Flint",
-      cover: "https://i1.sndcdn.com/artworks-000178640584-kie7ij-t500x500.jpg",
-      genres: ["Chill", "LoFi"],
+    let song9 = {
+      name: "Canon in D",
+      path: "06. Tobu - Roots",
+      artist: "Pachelbel",
+      cover:
+        "https://halleonard-coverimages.s3.amazonaws.com/wl/14024794-wl.jpg",
+      genres: ["Piano"],
       audio: null,
       isFav: null,
-      duration: 132,
+      duration: 228,
     };
+    
+    
     this.createPlaylist("All Songs", [
       song1,
       song2,
@@ -397,6 +423,8 @@ export default {
       song5,
       song6,
       song7,
+      song8,
+      song9
     ]);
     this.createPlaylist("Favourites", []);
     this.createPlaylist("Playlist-2", [song3, song2]);
