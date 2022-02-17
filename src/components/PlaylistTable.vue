@@ -126,7 +126,7 @@ export default {
 table {
   text-align: center;
   color: #646569;
-  border-spacing: 1px 20px;
+  border-spacing: 20px;
 }
 tbody {
   display: block;
