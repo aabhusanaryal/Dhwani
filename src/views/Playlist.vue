@@ -109,6 +109,7 @@ export default {
 h2 {
   margin-bottom: 20px;
   background-image: var(--heading-gradient);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

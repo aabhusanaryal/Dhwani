@@ -424,6 +424,7 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap");
 /* Setting variables */
 :root {
+  --table-cell-height: 60px;
   --left-sidebar-width: 350px;
   --cyan: #35e6da;
   --blue: #0496ff;

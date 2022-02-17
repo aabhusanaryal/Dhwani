@@ -27,7 +27,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(song, index) in genresongs" :key="index">
+        <tr
+          v-for="(song, index) in genresongs"
+          :key="index"
+          @click="playSong(song)"
+        >
           <td>{{ song.name }}</td>
           <td>{{ song.artist }}</td>
           <td>{{ secondsToMinutes(song.duration) }}</td>
@@ -73,6 +77,9 @@ export default {
     },
     sortArtistDesc() {
       this.$emit("sortArtistDesc", this.name);
+    },
+    playSong(song) {
+      this.$emit("playSong", song);
     },
   },
   computed: {
@@ -179,7 +186,8 @@ td {
 tr {
   border: 1px solid red;
   border-radius: 30px;
-  height: 60px;
+  height: var(--table-cell-height);
+  position: relative;
 }
 /* Making the tr's borders curvy on hover */
 tr td:first-child {
@@ -199,6 +207,31 @@ tbody > tr:hover {
   background: white;
 }
 
+tbody > tr::after {
+  /* Contains the play icon that is visible on hover */
+  /* To change the play icon size, change the value of --scale */
+  --scale: 0.75; /* The play icon will be scale * height of cell */
+  font-family: "Font Awesome 6 Free";
+  background: var(--merged-gradient);
+  background-size: 200%;
+  background-position: left;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+  margin: auto auto;
+  content: "\f144";
+  position: absolute;
+  left: 15px;
+  cursor: pointer;
+  /* pointer-events: all; */
+  /* Resizing and positioning the play icon */
+  font-size: calc(var(--scale) * var(--table-cell-height));
+  /* To position the item vertically center in a cell, the mergin top should be
+  (cell height - icon height)/2 = (cell height - scale * cell height)/2 
+  = cell height * (1- scale)/2*/
+  margin-top: calc(var(--table-cell-height) * (1 - var(--scale)) / 2);
+}
 .downarrow:hover {
   border-top-color: #5b5e62;
   transform: scale(1.25);

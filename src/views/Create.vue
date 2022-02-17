@@ -86,7 +86,7 @@ export default {
         useGrouping: false,
       });
       return `${minutes}:${seconds}`;
-    }
+    },
   },
 };
 </script>
@@ -104,6 +104,7 @@ form {
 h2 {
   margin-bottom: 0.5rem;
   background-image: var(--heading-gradient);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -218,14 +219,14 @@ label::after {
   width: 20px;
   height: 20px;
   position: absolute;
-  top: -12px; 
+  top: -12px;
   border-radius: 100%;
 }
 
 /*MEDIA QUERIES*/
 @media screen and (max-width: 1350px) {
   .center-container {
-    width: 85% ;
+    width: 85%;
   }
   .name-input {
     font-size: 35px;
