@@ -20,17 +20,15 @@
         <table>
           <thead>
             <tr>
-              <th class="sn">#</th>
+              <th class="sn"></th>
               <th>Name</th>
               <th>Artist</th>
+              <th>Duration</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(song, index) in playlists[0].songs" :key="index">
-              <td class="sn">{{ index + 1 }}</td>
-              <td>{{ song.name }}</td>
-              <td>{{ song.artist }}</td>
-              <td class="checkbox-wrapper">
+              <td class="sn">
                 <input
                   type="checkbox"
                   :value="song"
@@ -41,6 +39,9 @@
                 <!-- Label required for styling checkbox -->
                 <label :for="index"></label>
               </td>
+              <td>{{ song.name }}</td>
+              <td>{{ song.artist }}</td>
+              <td>{{ secondsToMinutes(song.duration) }}</td>
             </tr>
           </tbody>
         </table>
@@ -71,6 +72,21 @@ export default {
         } else this.errMsg = "Please enter a name!";
       } else this.errMsg = "Please select at least one song!";
     },
+    secondsToMinutes(seconds) {
+      // Takes in seconds as parameter and returns a string of the format "mm:ss"
+      let minutes;
+      minutes = Math.floor(seconds / 60);
+      seconds -= minutes * 60;
+      minutes = minutes.toLocaleString("en-US", {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      });
+      seconds = Math.floor(seconds).toLocaleString("en-US", {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      });
+      return `${minutes}:${seconds}`;
+    }
   },
 };
 </script>
@@ -196,8 +212,7 @@ label::before {
   width: 25px;
   height: 25px;
   position: absolute;
-  left: -30px;
-  top: -10px;
+  top: -12px;
   transform: scale(0) rotateZ(180deg);
   transition: all 0.3s cubic-bezier(0.54, 0.01, 0, 1.49);
 }
@@ -216,8 +231,7 @@ label::after {
   width: 20px;
   height: 20px;
   position: absolute;
-  left: -30px;
-  top: -10px;
+  top: -12px; 
   border-radius: 100%;
 }
 
