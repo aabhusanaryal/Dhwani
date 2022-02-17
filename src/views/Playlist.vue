@@ -1,25 +1,29 @@
 <template>
   <div class="center-container">
-    <button class="play" @click="play">Play</button>
-  </div>
-
-  <div class= "playlist-container">
-    <PlaylistTable :playlist = "currentPlaylist" 
-      @sortDurationAsc="sortDurationAsc" 
-      @sortDurationDesc="sortDurationDesc" 
-      @sortTitleAsc ="sortTitleAsc"
-      @sortTitleDesc="sortTitleDesc"
-      @sortArtistAsc="sortArtistAsc"
-      @sortArtistDesc="sortArtistDesc"
-    >
-    </PlaylistTable>
+    <div>
+      <h2>{{ currentPlaylist.name }}</h2>
+      <div class="btn" @click="play" role="button">
+        <span class="text">Play</span>
+      </div>
+      <div class="playlist-container">
+        <PlaylistTable
+          :playlist="currentPlaylist"
+          @sortDurationAsc="sortDurationAsc"
+          @sortDurationDesc="sortDurationDesc"
+          @sortTitleAsc="sortTitleAsc"
+          @sortTitleDesc="sortTitleDesc"
+          @sortArtistAsc="sortArtistAsc"
+          @sortArtistDesc="sortArtistDesc"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import PlaylistTable from '../components/PlaylistTable.vue';
+import PlaylistTable from "../components/PlaylistTable.vue";
 export default {
-  components: {PlaylistTable},
+  components: { PlaylistTable },
   name: "Playlist",
   props: ["playlists"],
 
@@ -28,24 +32,24 @@ export default {
       console.log("Playing ", this.name);
       this.$emit("playPlaylist", this.name);
     },
-    sortDurationAsc(){
+    sortDurationAsc() {
       this.$emit("sortDurationAsc", this.name);
     },
-    sortDurationDesc(){
+    sortDurationDesc() {
       this.$emit("sortDurationDesc", this.name);
     },
-    sortTitleAsc(){
+    sortTitleAsc() {
       this.$emit("sortTitleAsc", this.name);
     },
-    sortTitleDesc(){
+    sortTitleDesc() {
       this.$emit("sortTitleDesc", this.name);
     },
-    sortArtistAsc(){
+    sortArtistAsc() {
       this.$emit("sortArtistAsc", this.name);
     },
-    sortArtistDesc(){
+    sortArtistDesc() {
       this.$emit("sortArtistDesc", this.name);
-    }
+    },
   },
 
   computed: {
@@ -60,9 +64,49 @@ export default {
 </script>
 
 <style scoped>
-.playlist-container {
-  
- width: 100%;
- height: 25rem;
+.center-container {
+  width: 75%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+@media (max-width: 1350px) {
+  .center-container {
+    width: 80%;
+  }
+}
+@media (max-width: 768px) {
+  .center-container {
+    width: 90%;
+  }
+}
+.btn {
+  font-family: "Roboto", sans-serif;
+  font-size: 25px;
+  width: 100px;
+  height: 50px;
+  background-image: var(--merged-gradient);
+  background-size: 200%;
+  background-position: left;
+  border-radius: 10px;
+  /* Centers the text inside the card vertically. The value should be same as height */
+  line-height: 50px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.btn:hover,
+.btn:focus {
+  background-position: right;
+  /* background: var(--hover-gradient); */
+}
+.text {
+  display: block;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  /* font-weight: bold; */
+  color: white;
+}
+h2 {
+  margin-bottom: 20px;
 }
 </style>

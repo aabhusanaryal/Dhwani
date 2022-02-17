@@ -1,45 +1,48 @@
 <template>
-  <form @submit.prevent="addPlaylist">
-    <div class="main-wrapper">
-      <input
-        type="text"
-        placeholder="Enter Playlist Name"
-        v-model="playlistName"
-        class="name-input"
-      />
-      <button class="add" type="submit">+</button>
-      <br />
-      <span id="error-msg">
-        {{ errMsg }}
-      </span>
-      <table>
-        <thead>
-          <tr>
-            <th class="sn">#</th>
-            <th>Name</th>
-            <th>Artist</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(song, index) in playlists[0].songs" :key="index">
-            <td class="sn">{{ index + 1 }}</td>
-            <td>{{ song.name }}</td>
-            <td>{{ song.artist }}</td>
-            <td class="checkbox-wrapper">
-              <input
-                type="checkbox"
-                :value="song"
-                v-model="addedSongs"
-                name="songCheckbox"
-                :id="index"
-              />
-              <label :for="index"></label>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </form>
+  <div class="center-container">
+    <h2>Create Playlist</h2>
+    <form @submit.prevent="addPlaylist">
+      <div class="main-wrapper">
+        <input
+          type="text"
+          placeholder="Enter Playlist Name"
+          v-model="playlistName"
+          class="name-input"
+        />
+        <button class="add" type="submit">+</button>
+        <br />
+        <span id="error-msg">
+          {{ errMsg }}
+        </span>
+        <table>
+          <thead>
+            <tr>
+              <th class="sn">#</th>
+              <th>Name</th>
+              <th>Artist</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(song, index) in playlists[0].songs" :key="index">
+              <td class="sn">{{ index + 1 }}</td>
+              <td>{{ song.name }}</td>
+              <td>{{ song.artist }}</td>
+              <td class="checkbox-wrapper">
+                <input
+                  type="checkbox"
+                  :value="song"
+                  v-model="addedSongs"
+                  name="songCheckbox"
+                  :id="index"
+                />
+                <label :for="index" tabindex="1"></label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -73,16 +76,32 @@ form {
   width: fit-content;
   margin: 0 auto;
   font-size: 23px;
-  font-family: "Roboto", sans-serif;
 }
-.main-wrapper {
-  padding-left: 50px;
+.center-container {
+  width: 75%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+@media (max-width: 1350px) {
+  .center-container {
+    width: 80%;
+  }
+}
+@media (max-width: 768px) {
+  .center-container {
+    width: 90%;
+  }
+}
+h2 {
+  margin-bottom: 0.5rem;
+  background-image: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .name-input {
   font-family: Roboto;
   font-style: normal;
-  background-color: rgb(244, 245, 254);
-  color: #4c4e52;
+  background-color: rgba(0, 0, 0, 0);
   /* border:none; */
   height: fit-content;
   font-size: 40px;
@@ -90,7 +109,7 @@ form {
   border-right: none;
   border-left: none;
   border-bottom-width: 5px;
-  border-image: var(--primary-gradient) 100;
+  border-image: var(--primary-gradient) 90;
   border-image-width: 0 0 3px 0;
 }
 .name-input:focus-visible {
@@ -159,11 +178,11 @@ th {
 .checkbox-wrapper {
   width: 50px;
 }
-input[type="checkbox"]{
-  display:none;
+input[type="checkbox"] {
+  display: none;
 }
-label{
-    position: relative;
+label {
+  position: relative;
 }
 label::before {
   content: "";
@@ -173,23 +192,24 @@ label::before {
   width: 25px;
   height: 25px;
   position: absolute;
-  left:-30px;
+  left: -30px;
   top: -10px;
   transform: scale(0) rotateZ(180deg);
-  transition: all 0.3s cubic-bezier(0.54,0.01,0,1.49);
+  transition: all 0.3s cubic-bezier(0.54, 0.01, 0, 1.49);
 }
 
-input[type="checkbox"]:checked + label::before{
+input[type="checkbox"]:checked + label::before {
   transform: scale(1) rotateZ(0);
 }
-input[type="checkbox"]:checked + label::after{
+
+input[type="checkbox"]:checked + label::after {
   transform: scale(0) rotateZ(180deg);
 }
 
-label::after{
+label::after {
   content: "";
   border: 2px solid #35e6da;
-  width:20px;
+  width: 20px;
   height: 20px;
   position: absolute;
   left: -30px;
@@ -199,9 +219,6 @@ label::after{
 
 /*MEDIA QUERIES*/
 @media screen and (max-width: 1350px) {
-  .main-wrapper {
-    padding-left: 30px;
-  }
   .name-input {
     font-size: 35px;
     border-bottom-width: 4px;
@@ -224,13 +241,18 @@ label::after{
   th {
     width: 270px;
   }
+  .name-input {
+    font-size: 30px;
+    margin: 0;
+  }
+  .add {
+    margin: 0;
+    transform: scale(0.9);
+  }
 }
 @media screen and (max-width: 768px) {
   form {
     font-size: 18px;
-  }
-  .main-wrapper {
-    padding-left: 20px;
   }
   table {
     border-spacing: 0 27px;
@@ -238,6 +260,13 @@ label::after{
   td,
   th {
     max-width: 200px;
+  }
+  .name-input {
+    transform: scale(0.85);
+    margin: 0;
+  }
+  .add {
+    margin: 0;
   }
 }
 </style>

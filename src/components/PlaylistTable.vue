@@ -6,22 +6,22 @@
           <th>
             Title
             <div class="sort-icon">
-              <div @click="sortTitleAsc" class="uparrow"></div>
-              <div @click="sortTitleDesc" class="downarrow"></div>
+              <div @click="sortTitleAsc" class="arrow uparrow"></div>
+              <div @click="sortTitleDesc" class="arrow downarrow"></div>
             </div>
           </th>
           <th>
             Artist
             <div class="sort-icon">
-              <div @click="sortArtistAsc" class="uparrow"></div>
-              <div @click="sortArtistDesc" class="downarrow"></div>
+              <div @click="sortArtistAsc" class="arrow uparrow"></div>
+              <div @click="sortArtistDesc" class="arrow downarrow"></div>
             </div>
           </th>
           <th>
             Duration
             <div class="sort-icon">
-              <div @click="sortDurationAsc" class="uparrow"></div>
-              <div @click="sortDurationDesc" class="downarrow"></div>
+              <div @click="sortDurationAsc" class="arrow uparrow"></div>
+              <div @click="sortDurationDesc" class="arrow downarrow"></div>
             </div>
           </th>
         </tr>
@@ -114,7 +114,7 @@ export default {
 }
 
 .list-container {
-  font-size: 1.82rem;
+  font-size: 23px;
   background: var(--white);
   width: 100%;
   overflow-y: hidden;
@@ -124,7 +124,6 @@ export default {
 }
 
 table {
-  text-align: center;
   color: #646569;
   border-spacing: 1px 20px;
 }
@@ -138,7 +137,6 @@ thead {
 }
 td,
 th {
-  text-align: center !important;
   vertical-align: middle;
   width: 300px;
   text-align: left;
@@ -184,5 +182,8 @@ th {
   border-top-color: #5b5e62;
   transform: scale(1.25);
   transition: ease-in-out;
+}
+.arrow {
+  cursor: pointer;
 }
 </style>
