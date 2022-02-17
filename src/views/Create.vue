@@ -1,8 +1,9 @@
 <template>
   <div class="center-container">
-    <h2>Create Playlist</h2>
+    <h2>Create</h2>
     <form @submit.prevent="addPlaylist">
       <div class="main-wrapper">
+        <!-- Input field and button for entering playlist name -->
         <input
           type="text"
           placeholder="Enter Playlist Name"
@@ -11,9 +12,11 @@
         />
         <button class="add" type="submit">+</button>
         <br />
+        <!-- Error Message -->
         <span id="error-msg">
           {{ errMsg }}
         </span>
+        <!-- Table for all songs -->
         <table>
           <thead>
             <tr>
@@ -35,7 +38,8 @@
                   name="songCheckbox"
                   :id="index"
                 />
-                <label :for="index" tabindex="1"></label>
+                <!-- Label required for styling checkbox -->
+                <label :for="index"></label>
               </td>
             </tr>
           </tbody>

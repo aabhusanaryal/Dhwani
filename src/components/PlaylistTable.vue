@@ -117,15 +117,12 @@ export default {
   font-size: 23px;
   background: var(--white);
   width: 100%;
-  overflow-y: hidden;
   overflow-x: hidden;
-  display: flex;
-  justify-content: center;
 }
 
 table {
   color: #646569;
-  border-spacing: 1px 20px;
+  border-spacing: 20px;
 }
 tbody {
   display: block;
@@ -137,9 +134,7 @@ thead {
 }
 td,
 th {
-  vertical-align: middle;
   width: 300px;
-  text-align: left;
 }
 th {
   color: #84898f;
@@ -185,5 +180,11 @@ th {
 }
 .arrow {
   cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .downarrow {
+    margin-bottom: 2px;
+  }
 }
 </style>

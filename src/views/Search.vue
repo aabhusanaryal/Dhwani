@@ -1,5 +1,4 @@
 <template>
-  <!-- <PlaylistTable :playlist='searchResults' /> -->
   <div class="container">
     <h4
       v-if="
@@ -59,20 +58,21 @@ export default {
       return this.$route.params.searchQuery;
     },
     searchResults() {
-      //performing linear search in playlist
       let result = {
         name: "Search Results",
         songs: [],
         artists: [],
       };
-      let n = this.playlists[0].songs.length; //number of songs in "all songs"
-      let arr = [...this.playlists[0].songs]; //songs array of "all songs" playlist
+      let n = this.playlists[0].songs.length; //number of songs in "All Songs"
+      let arr = [...this.playlists[0].songs]; //array of song objects of "All Songs"
+      //performing linear search in "All Songs" playlist
       for (let i = 0; i < n; i++) {
         if (arr[i]?.name.toLowerCase().includes(this.query?.toLowerCase()))
-          result.songs.push(arr[i]);
+          result.songs.push(arr[i]); //pushing whole song object, not only name 
         if (arr[i]?.artist.toLowerCase().includes(this.query?.toLowerCase())) {
           let flag = 1;
-          for (let j = 0; j < result.artists.length; j++) {
+          //looping through result.artists array to prevent duplicate artist entry
+          for (let j = 0; j < result.artists.length; j++) { 
             if (result.artists[j].artist === arr[i].artist) {
               flag = 0;
               break;
