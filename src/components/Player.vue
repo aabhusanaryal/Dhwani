@@ -336,7 +336,10 @@ export default {
       ) {
         // Only executing the kb shortcuts if no text field is focused
         // Play pause with spacebar start
-        if (e.code == "Space") this.paused ? this.play() : this.pause();
+        if (e.code == "Space") {
+          e.preventDefault(); // Disabling scroll on pressing space
+          this.paused ? this.play() : this.pause();
+        }
         // Play pause with spacebar end
 
         // Volume up and down with Ctrl + UP / DOWN start
@@ -557,14 +560,19 @@ export default {
   height: calc(var(--left-sidebar-width) - 85px);
   border-radius: 8%;
 }
-
+.song-info-container {
+  font-family: "Roboto", sans-serif;
+}
 #song-info {
   padding-left: 5px;
 }
 #song-name {
   font-size: 24px;
+  font-weight: 500;
 }
-
+#artist-name {
+  font-weight: 400;
+}
 .song-info-container-mobile {
   display: none;
 }
