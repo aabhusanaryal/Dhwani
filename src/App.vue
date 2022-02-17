@@ -446,8 +446,7 @@ export default {
       isFav: null,
       duration: 227,
     };
-    
-    
+
     this.createPlaylist("All Songs", [
       song1,
       song2,
@@ -540,7 +539,12 @@ h2 {
 h3 {
   font-size: 2.5rem;
 }
-
+.gradient-text {
+  background-image: var(--heading-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 /* Making the scrollbar look pretty (like myself - Aabhusan) */
 ::-webkit-scrollbar {
   width: 20px;

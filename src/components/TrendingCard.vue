@@ -1,7 +1,7 @@
 <template>
   <div class="trending-container">
     <div class="trending-wrapper">
-      <h3>Trending<span class="no-bg">🔥</span></h3>
+      <h2><span class="gradient-text">Trending</span>🔥</h2>
       <div
         class="trending-card-wrapper"
         :style="`background: linear-gradient(
@@ -10,7 +10,7 @@
     ), url(${song.cover});`"
       >
         <div class="content-wrapper">
-          <h2 id="artist">{{ song ? song.artist : "" }}</h2>
+          <h3 id="artist">{{ song ? song.artist : "" }}</h3>
           <h1 id="song-name">{{ song ? song.name : "" }}</h1>
           <button id="play" @click="playSong">Play</button>
         </div>
@@ -39,6 +39,7 @@ export default {
 .trending-wrapper {
   padding: 2.7rem;
   padding-top: 0rem;
+  padding-bottom: 0.5rem;
 }
 
 .trending-card-wrapper {
@@ -50,7 +51,7 @@ export default {
   height: 16rem;
   border-radius: 1.5rem;
   color: white;
-  margin-top: 0.6rem;
+  margin-top: 0.5rem;
   display: flex;
   align-items: center;
 }
@@ -59,12 +60,15 @@ export default {
   padding-top: 1rem;
 }
 h3 {
-  font-size: 2.5rem;
-}
-h2 {
   font-size: 1.5rem;
   color: var(--light-grey);
   font-weight: 200;
+}
+.gradient-text {
+  background-image: var(--heading-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 h1 {
   font-size: 5rem;

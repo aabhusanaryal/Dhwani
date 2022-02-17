@@ -1,6 +1,10 @@
 <template>
   <TrendingCard v-if="randomSong" :song="randomSong" @playSong="playSong" />
   <div class="center-container">
+    <h2>All Songs</h2>
+    <div class="btn" role="button" @click="playAllSongs">
+      <span class="text">Play</span>
+    </div>
     <PlaylistTable
       :playlist="playlists[0]"
       @sortDurationAsc="sortDurationAsc"
@@ -52,6 +56,9 @@ export default {
     sortArtistDesc() {
       this.$emit("sortArtistDesc", this.playlists[0].name);
     },
+    playAllSongs() {
+      this.$emit("playPlaylist", this.playlists[0].name);
+    },
   },
   mounted() {
     // Setting randomSong
@@ -63,6 +70,39 @@ export default {
 </script>
 
 <style scoped>
+h2 {
+  background-image: var(--heading-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.btn {
+  font-family: "Roboto", sans-serif;
+  font-size: 25px;
+  width: 100px;
+  height: 50px;
+  background-image: var(--merged-gradient);
+  background-size: 200%;
+  background-position: left;
+  border-radius: 10px;
+  /* Centers the text inside the card vertically. The value should be same as height */
+  line-height: 50px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.btn:hover,
+.btn:focus {
+  background-position: right;
+  /* background: var(--hover-gradient); */
+}
+.text {
+  display: block;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  /* font-weight: bold; */
+  color: white;
+}
 .center-container {
   font-size: 25px;
   max-height: 100vh;

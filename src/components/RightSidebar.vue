@@ -1,7 +1,7 @@
 <template>
   <div class="right-sidebar">
     <div class="sidebar-wrapper">
-      <h1>Genre</h1>
+      <h2 class="gradient-text">Genre</h2>
       <div class="chips-container">
         <div
           class="chips"
