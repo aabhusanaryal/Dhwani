@@ -101,16 +101,6 @@ form {
   margin: 0 auto;
   margin-top: 20px;
 }
-@media (max-width: 1350px) {
-  .center-container {
-    width: 85% ;
-  }
-}
-@media (max-width: 768px) {
-  .center-container {
-    width: 90%;
-  }
-}
 h2 {
   margin-bottom: 0.5rem;
   background-image: var(--heading-gradient);
@@ -237,6 +227,9 @@ label::after {
 
 /*MEDIA QUERIES*/
 @media screen and (max-width: 1350px) {
+  .center-container {
+    width: 85% ;
+  }
   .name-input {
     font-size: 35px;
     border-bottom-width: 4px;
@@ -269,6 +262,9 @@ label::after {
   }
 }
 @media screen and (max-width: 768px) {
+  .center-container {
+    width: 90%;
+  }
   form {
     font-size: 18px;
   }
