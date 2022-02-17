@@ -20,7 +20,7 @@
         <table>
           <thead>
             <tr>
-              <th class="sn"></th>
+              <th class="checkbox-wrapper"></th>
               <th>Name</th>
               <th>Artist</th>
               <th>Duration</th>
@@ -28,7 +28,7 @@
           </thead>
           <tbody>
             <tr v-for="(song, index) in playlists[0].songs" :key="index">
-              <td class="sn">
+              <td class="checkbox-wrapper">
                 <input
                   type="checkbox"
                   :value="song"
@@ -181,11 +181,8 @@ th {
   color: #84898f;
   font-weight: lighter;
 }
-.sn {
-  width: 100px;
-}
 .checkbox-wrapper {
-  width: 50px;
+  width: 100px;
 }
 input[type="checkbox"] {
   display: none;
