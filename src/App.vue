@@ -359,36 +359,95 @@ export default {
       duration: 200,
     };
     let song5 = {
-      name: "Foots",
-      path: "06. Tobu - Roots",
-      artist: "Tobu",
+      name: "Dreaming of Me",
+      path: "07. Jack Shore - Dreaming of Me",
+      artist: "Jack Shore",
       cover:
-        "https://lastfm.freetls.fastly.net/i/u/300x300/d55932d44b33e431e68a3c0c4daceb98.png",
-      genres: ["OP", "Hello"],
+        "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/033/325x325/dreaming-of-me-1635854432-lB4hOLMPWe.jpg",
+      genres: ["Indie"],
       audio: null,
       isFav: null,
-      duration: 200,
+      duration: 199,
     };
     let song6 = {
-      name: "Babbage",
-      path: "02. Paul Flint - Savage",
-      artist: "Paul Flint",
-      cover: "https://i1.sndcdn.com/artworks-000178640584-kie7ij-t500x500.jpg",
-      genres: ["Chill", "LoFi"],
+      name: "Phoenix",
+      path: "08. Halvorsen - Phoenix",
+      artist: "Halvorsen",
+      cover:
+        "https://linkstorage.linkfire.com/medialinks/images/7438735b-7816-415a-b3bb-985b6a3f930b/artwork-440x440.jpg",
+      genres: ["Indie"],
       audio: null,
       isFav: null,
-      duration: 132,
+      duration: 238,
     };
     let song7 = {
-      name: "Cabbage",
-      path: "02. Paul Flint - Savage",
-      artist: "Paul Flint",
-      cover: "https://i1.sndcdn.com/artworks-000178640584-kie7ij-t500x500.jpg",
-      genres: ["Chill", "LoFi"],
+      name: "Cloud9",
+      path: "09. Tobu - Cloud9",
+      artist: "Tobu",
+      cover:
+        "https://linkstorage.linkfire.com/medialinks/images/4670ee7b-68e1-4d08-a52d-4db36daca1e1/artwork-440x440.jpg",
+      genres: ["EDM"],
       audio: null,
       isFav: null,
-      duration: 132,
+      duration: 275,
     };
+    let song8 = {
+      name: "Canon in D",
+      path: "10. Pachelbel - Canon in D",
+      artist: "Pachelbel",
+      cover:
+        "https://halleonard-coverimages.s3.amazonaws.com/wl/14024794-wl.jpg",
+      genres: ["Piano"],
+      audio: null,
+      isFav: null,
+      duration: 228,
+    };
+    let song9 = {
+      name: "Chains",
+      path: "11. Alina Renae - Chains",
+      artist: "Alina Renae",
+      cover:
+        "https://linkstorage.linkfire.com/medialinks/images/2401d934-83be-4849-9fcd-9d31990e7ca9/artwork-440x440.jpg",
+      genres: ["Chill"],
+      audio: null,
+      isFav: null,
+      duration: 194,
+    };
+    let song10 = {
+      name: "Symphony",
+      path: "12. Arc North - Symphony",
+      artist: "Arc North",
+      cover:
+        "https://linkstorage.linkfire.com/medialinks/images/6da8f4d1-115c-44f7-8b14-94bd2e46d0b1/artwork-440x440.jpg",
+      genres: ["Chill"],
+      audio: null,
+      isFav: null,
+      duration: 190,
+    };
+    let song11 = {
+      name: "What You Like",
+      path: "13. Curbi - What You Like",
+      artist: "Curbi",
+      cover:
+        "https://linkstorage.linkfire.com/medialinks/images/f4a06b83-8acb-484f-becc-a752d6ecc611/artwork-440x440.jpg",
+      genres: ["Bass"],
+      audio: null,
+      isFav: null,
+      duration: 158,
+    };
+    let song12 = {
+      name: "New Style",
+      path: "14. Droptek - New Style",
+      artist: "Droptek",
+      cover:
+        "https://linkstorage.linkfire.com/medialinks/images/93d156a9-31cc-403d-9433-932c4b6622b1/artwork-440x440.jpg",
+      genres: ["Bass"],
+      audio: null,
+      isFav: null,
+      duration: 227,
+    };
+    
+    
     this.createPlaylist("All Songs", [
       song1,
       song2,
@@ -397,6 +456,11 @@ export default {
       song5,
       song6,
       song7,
+      song8,
+      song9,
+      song10,
+      song11,
+      song12,
     ]);
     this.createPlaylist("Favourites", []);
     this.createPlaylist("Playlist-2", [song3, song2]);
