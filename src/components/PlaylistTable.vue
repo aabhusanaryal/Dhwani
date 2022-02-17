@@ -126,7 +126,9 @@ export default {
 table {
   color: #646569;
   border-spacing: 0px 20px;
+  border-collapse: separate;
 }
+
 tbody {
   display: block;
   overflow-y: scroll;
@@ -149,10 +151,15 @@ th {
 .sort-icon {
   display: inline-block;
   position: relative;
+  font-size: 0.9em;
 }
 .uparrow {
   position: absolute;
   left: 0;
+}
+th,
+td {
+  padding: 0 10%;
 }
 .uparrow {
   display: inline-block;
@@ -177,9 +184,27 @@ th {
   transform: scale(1.25);
   transition: ease-in-out;
 }
-
-tbody>tr:hover{
+tr {
+  border: 1px solid red;
+  border-radius: 30px;
+  height: 60px;
+}
+/* Making the tr's borders curvy on hover */
+tr td:first-child {
+  border-top-left-radius: 10px;
+}
+tr td:last-child {
+  border-top-right-radius: 10px;
+}
+tr td:first-child {
+  border-bottom-left-radius: 10px;
+}
+tr td:last-child {
+  border-bottom-right-radius: 10px;
+}
+tbody > tr:hover {
   color: black;
+  background: white;
 }
 
 .downarrow:hover {
@@ -190,5 +215,4 @@ tbody>tr:hover{
 .arrow {
   cursor: pointer;
 }
-
 </style>
