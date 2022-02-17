@@ -14,6 +14,7 @@
           @sortTitleDesc="sortTitleDesc"
           @sortArtistAsc="sortArtistAsc"
           @sortArtistDesc="sortArtistDesc"
+          @playSong="playSong"
         />
       </div>
     </div>
@@ -29,7 +30,6 @@ export default {
 
   methods: {
     play() {
-      console.log("Playing ", this.name);
       this.$emit("playPlaylist", this.name);
     },
     sortDurationAsc() {
@@ -49,6 +49,9 @@ export default {
     },
     sortArtistDesc() {
       this.$emit("sortArtistDesc", this.name);
+    },
+    playSong(song) {
+      this.$emit("playSong", song);
     },
   },
 

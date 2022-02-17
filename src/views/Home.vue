@@ -1,16 +1,17 @@
 <template>
   <TrendingCard v-if="randomSong" :song="randomSong" @playSong="playSong" />
   <div class="center-container">
-  <PlaylistTable
-    :playlist="playlists[0]"
-      @sortDurationAsc="sortDurationAsc" 
-      @sortDurationDesc="sortDurationDesc" 
-      @sortTitleAsc ="sortTitleAsc"
+    <PlaylistTable
+      :playlist="playlists[0]"
+      @sortDurationAsc="sortDurationAsc"
+      @sortDurationDesc="sortDurationDesc"
+      @sortTitleAsc="sortTitleAsc"
       @sortTitleDesc="sortTitleDesc"
       @sortArtistAsc="sortArtistAsc"
       @sortArtistDesc="sortArtistDesc"
-  >
-  </PlaylistTable>
+      @playSong="playSong"
+    >
+    </PlaylistTable>
   </div>
 </template>
 
@@ -33,24 +34,24 @@ export default {
     playSong(song) {
       this.$emit("playSong", song);
     },
-    sortDurationAsc(){
+    sortDurationAsc() {
       this.$emit("sortDurationAsc", this.playlists[0].name);
     },
-    sortDurationDesc(){
+    sortDurationDesc() {
       this.$emit("sortDurationDesc", this.playlists[0].name);
     },
-    sortTitleAsc(){
+    sortTitleAsc() {
       this.$emit("sortTitleAsc", this.playlists[0].name);
     },
-    sortTitleDesc(){
+    sortTitleDesc() {
       this.$emit("sortTitleDesc", this.playlists[0].name);
     },
-    sortArtistAsc(){
+    sortArtistAsc() {
       this.$emit("sortArtistAsc", this.playlists[0].name);
     },
-    sortArtistDesc(){
+    sortArtistDesc() {
       this.$emit("sortArtistDesc", this.playlists[0].name);
-    }
+    },
   },
   mounted() {
     // Setting randomSong

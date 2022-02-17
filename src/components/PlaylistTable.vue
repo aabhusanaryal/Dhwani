@@ -3,6 +3,7 @@
     <table class="playlist-table">
       <thead>
         <tr>
+          <th class="first-col"></th>
           <th>
             Title
             <div class="sort-icon">
@@ -27,11 +28,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr
-          v-for="(song, index) in genresongs"
-          :key="index"
-          @click="playSong(song)"
-        >
+        <tr v-for="(song, index) in genresongs" :key="index">
+          <td class="first-col">
+            <span class="playBtn" @click="playSong(song)"
+              ><i class="fa-solid fa-circle-play"></i
+            ></span>
+          </td>
           <td>{{ song.name }}</td>
           <td>{{ song.artist }}</td>
           <td>{{ secondsToMinutes(song.duration) }}</td>
@@ -142,11 +144,13 @@ th {
   width: 300px;
   text-align: left;
 }
+.first-col {
+  width: 100px !important;
+}
 th {
   color: #84898f;
   font-weight: lighter;
 }
-
 .sort-icon {
   display: inline-block;
   position: relative;
@@ -158,7 +162,7 @@ th {
 }
 th,
 td {
-  padding: 0 10%;
+  /* padding: 0 10%; */
 }
 .uparrow {
   display: inline-block;
@@ -206,11 +210,18 @@ tbody > tr:hover {
   color: black;
   background: white;
 }
+tbody tr:hover .playBtn {
+  visibility: visible;
+}
 
-tbody > tr::after {
+tbody tr .playBtn {
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
   /* Contains the play icon that is visible on hover */
   /* To change the play icon size, change the value of --scale */
   --scale: 0.75; /* The play icon will be scale * height of cell */
+  /* padding-left: 10px; */
   font-family: "Font Awesome 6 Free";
   background: var(--merged-gradient);
   background-size: 200%;
@@ -221,17 +232,17 @@ tbody > tr::after {
   font-weight: 900;
   margin: auto auto;
   content: "\f144";
-  position: absolute;
-  left: 15px;
   cursor: pointer;
   /* pointer-events: all; */
   /* Resizing and positioning the play icon */
   font-size: calc(var(--scale) * var(--table-cell-height));
-  /* To position the item vertically center in a cell, the mergin top should be
-  (cell height - icon height)/2 = (cell height - scale * cell height)/2 
-  = cell height * (1- scale)/2*/
-  margin-top: calc(var(--table-cell-height) * (1 - var(--scale)) / 2);
 }
+
+tbody tr:hover .playBtn:hover {
+  transition: 0.3s ease;
+  background-position: right;
+}
+
 .downarrow:hover {
   border-top-color: #5b5e62;
   transform: scale(1.25);
