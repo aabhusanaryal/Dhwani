@@ -65,8 +65,6 @@ export default {
 <style scoped>
 .center-container {
   font-size: 25px;
-  overflow-y: scroll;
-  overflow-x: hidden;
   max-height: 100vh;
 }
 .center-container {

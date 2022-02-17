@@ -1,52 +1,54 @@
 <template>
   <div class="center-container">
-    <h2>Create</h2>
-    <form @submit.prevent="addPlaylist">
-      <div class="main-wrapper">
-        <!-- Input field and button for entering playlist name -->
-        <input
-          type="text"
-          placeholder="Enter Playlist Name"
-          v-model="playlistName"
-          class="name-input"
-        />
-        <button class="add" type="submit">+</button>
-        <br />
-        <!-- Error Message -->
-        <span id="error-msg">
-          {{ errMsg }}
-        </span>
-        <!-- Table for all songs -->
-        <table>
-          <thead>
-            <tr>
-              <th class="checkbox-wrapper"></th>
-              <th>Name</th>
-              <th>Artist</th>
-              <th>Duration</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(song, index) in playlists[0].songs" :key="index">
-              <td class="checkbox-wrapper">
-                <input
-                  type="checkbox"
-                  :value="song"
-                  v-model="addedSongs"
-                  name="songCheckbox"
-                  :id="index"
-                />
-                <!-- Label required for styling checkbox -->
-                <label :for="index"></label>
-              </td>
-              <td>{{ song.name }}</td>
-              <td>{{ song.artist }}</td>
-              <td>{{ secondsToMinutes(song.duration) }}</td>
-            </tr>
-          </tbody>
-        </table>
+    <div>
+      <h2>Create</h2>
+      <div class="list-container">
+        <form @submit.prevent="addPlaylist">
+          <input
+            type="text"
+            placeholder="Enter Playlist Name"
+            v-model="playlistName"
+            class="name-input"
+          />
+          <button class="add" type="submit">+</button>
+          <br />
+          <!-- Error Message -->
+          <span id="error-msg">
+            {{ errMsg }}
+          </span>
+          <table class="playlist-table">
+            <thead>
+              <tr>
+                <th class="first-col"></th>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Duration</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(song, index) in playlists[0].songs" :key="index">
+                <td class="first-col">
+                  <div class="flex-center">
+                    <input
+                      type="checkbox"
+                      :value="song"
+                      v-model="addedSongs"
+                      name="songCheckbox"
+                      :id="index"
+                    />
+                    <!-- Label required for styling checkbox -->
+                    <label :for="index"></label>
+                  </div>
+                </td>
+                <td>{{ song.name }}</td>
+                <td>{{ song.artist }}</td>
+                <td>{{ secondsToMinutes(song.duration) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -92,21 +94,34 @@ export default {
 </script>
 
 <style scoped>
-form {
-  width: fit-content;
-  font-size: 23px;
-}
 .center-container {
-  width: 80%;
+  width: 75%;
   margin: 0 auto;
   margin-top: 20px;
 }
+@media (max-width: 1350px) {
+  .center-container {
+    width: 80%;
+  }
+}
+@media (max-width: 768px) {
+  .center-container {
+    width: 90%;
+  }
+}
 h2 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 20px;
   background-image: var(--heading-gradient);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/*  */
+
+form {
+  width: fit-content;
+  font-size: 23px;
 }
 .name-input {
   font-family: Roboto;
@@ -156,35 +171,7 @@ input::placeholder {
 #error-msg {
   color: red;
 }
-table {
-  color: #646569;
-  display: block;
-  border-collapse: separate;
-  border-spacing: 0 20px;
-}
-tbody {
-  display: block;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  max-height: 550px;
-}
-thead {
-  display: block;
-  height: 50px;
-}
-td,
-th {
-  text-align: left !important;
-  width: 400px;
-  text-align: left;
-}
-th {
-  color: #84898f;
-  font-weight: lighter;
-}
-.checkbox-wrapper {
-  width: 100px;
-}
+
 input[type="checkbox"] {
   display: none;
 }
@@ -223,62 +210,103 @@ label::after {
   border-radius: 100%;
 }
 
-/*MEDIA QUERIES*/
-@media screen and (max-width: 1350px) {
-  .center-container {
-    width: 85%;
-  }
-  .name-input {
-    font-size: 35px;
-    border-bottom-width: 4px;
-  }
-  .add {
-    font-size: 25px;
-    width: 45px;
-    height: 45px;
-    margin: 8px 20px;
-    border-radius: 30px;
-    transition: 0.5s;
-  }
-  table {
-    border-spacing: 0 20px;
-  }
-  thead {
-    height: 45px;
-  }
-  td,
-  th {
-    width: 270px;
-  }
-  .name-input {
-    font-size: 30px;
-    margin: 0;
-  }
-  .add {
-    margin: 0;
-    transform: scale(0.9);
-  }
+/* 
+
+*/
+
+.playlist-title {
+  padding: 15px;
+  color: var(--blue);
+  font-size: 2.25rem;
 }
-@media screen and (max-width: 768px) {
-  .center-container {
-    width: 90%;
-  }
-  form {
-    font-size: 18px;
-  }
-  table {
-    border-spacing: 0 27px;
-  }
-  td,
-  th {
-    max-width: 200px;
-  }
-  .name-input {
-    transform: scale(0.85);
-    margin: 0;
-  }
-  .add {
-    margin: 0;
-  }
+
+.list-container {
+  font-size: 23px;
+  background: var(--white);
+  width: 100%;
+  overflow: hidden !important;
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  color: #646569;
+  border-spacing: 0px 20px;
+  border-collapse: separate;
+}
+
+td,
+th {
+  vertical-align: middle;
+  width: 300px;
+  text-align: left;
+}
+.first-col {
+  width: 100px !important;
+}
+.flex-center {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+th {
+  color: #84898f;
+  font-weight: lighter;
+}
+
+tr {
+  border: 1px solid red;
+  border-radius: 30px;
+  height: var(--table-cell-height);
+  position: relative;
+}
+/* Making the tr's borders curvy on hover */
+tr td:first-child {
+  border-top-left-radius: 10px;
+}
+tr td:last-child {
+  border-top-right-radius: 10px;
+}
+tr td:first-child {
+  border-bottom-left-radius: 10px;
+}
+tr td:last-child {
+  border-bottom-right-radius: 10px;
+}
+tbody > tr:hover {
+  color: black;
+  background: white;
+}
+tbody tr:hover .playBtn {
+  visibility: visible;
+}
+
+tbody tr .playBtn {
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  /* Contains the play icon that is visible on hover */
+  /* To change the play icon size, change the value of --scale */
+  --scale: 0.75; /* The play icon will be scale * height of cell */
+  /* padding-left: 10px; */
+  font-family: "Font Awesome 6 Free";
+  background: var(--merged-gradient);
+  background-size: 200%;
+  background-position: left;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+  margin: auto auto;
+  content: "\f144";
+  cursor: pointer;
+  /* pointer-events: all; */
+  /* Resizing and positioning the play icon */
+  font-size: calc(var(--scale) * var(--table-cell-height));
+}
+
+tbody tr:hover .playBtn:hover {
+  transition: 0.3s ease;
+  background-position: right;
 }
 </style>

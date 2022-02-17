@@ -82,6 +82,13 @@ export default {
     width: 90%;
   }
 }
+h2 {
+  margin-bottom: 20px;
+  background-image: var(--heading-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .btn {
   font-family: "Roboto", sans-serif;
   font-size: 25px;
@@ -108,12 +115,5 @@ export default {
   transform: translateX(-50%);
   /* font-weight: bold; */
   color: white;
-}
-h2 {
-  margin-bottom: 20px;
-  background-image: var(--heading-gradient);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 </style>
