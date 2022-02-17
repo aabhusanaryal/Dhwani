@@ -129,14 +129,6 @@ table {
   border-collapse: separate;
 }
 
-tbody {
-  display: block;
-  overflow-y: scroll;
-}
-thead {
-  display: block;
-  height: 50px;
-}
 td,
 th {
   vertical-align: middle;
