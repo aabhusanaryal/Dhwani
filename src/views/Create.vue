@@ -1,6 +1,7 @@
 <template>
   <form @submit.prevent="addPlaylist">
     <div class="main-wrapper">
+      <!-- Input field and button for entering playlist name -->
       <input
         type="text"
         placeholder="Enter Playlist Name"
@@ -9,9 +10,11 @@
       />
       <button class="add" type="submit">+</button>
       <br />
+      <!-- Error Message -->
       <span id="error-msg">
         {{ errMsg }}
       </span>
+      <!-- Table for all songs -->
       <table>
         <thead>
           <tr>
@@ -33,6 +36,7 @@
                 name="songCheckbox"
                 :id="index"
               />
+              <!-- Label required for styling checkbox -->
               <label :for="index"></label>
             </td>
           </tr>
@@ -83,7 +87,6 @@ form {
   font-style: normal;
   background-color: rgb(244, 245, 254);
   color: #4c4e52;
-  /* border:none; */
   height: fit-content;
   font-size: 40px;
   border-top: none;

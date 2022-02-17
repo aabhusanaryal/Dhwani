@@ -10,20 +10,23 @@ class NODE {
 export default class DLL {
   constructor() {
     this.start = null;
-    this.end = this.start;
-    this.dataNo = 0;
-    this.totalNo = 0;
-    this.looping = false;
-    this.shuffling = false;
-    this.head1 = null;
+    this.end = null;
+    this.dataNo = 0; //assigned to the id of a node, increased everytime a data is added
+    this.totalNo = 0; //total number of nodes in the DLL
+    this.looping = false; //linear DLL when false, circular DLL when true
+    this.shuffling = false; //randomises the position of nodes when true
+    this.head1 = null; //movable pointer
     this.initialArr=[];
   }
-  insertBeg(data) {
+
+  //function to insert node at the beginning
+  insertBeginning(data) {
     ++this.totalNo;
     let temp = this.start;
     this.start = new NODE(data);
     this.start.id = ++this.dataNo;
     this.start.next = temp;
+    // node inserted for circular DLL
     if (temp != null) {
       temp.prev = this.start;
       if (this.totalNo == 2) {
@@ -32,15 +35,19 @@ export default class DLL {
       this.end.next = this.start;
       this.start.prev = this.end;
     }
-    this.head1 = this.start;
-    if(!this.looping)
+    this.head1 = this.start; //movable pointer points to start by default
+    // DLL made linear if this.looping is false
+    if(!this.looping) 
       this.unloop();
   }
+
+  //function to insert node at the end
   insertEnd(data) {
     ++this.totalNo;
     let input = new NODE(data);
     input.id = ++this.dataNo;
     let ptr = this.start;
+    //if start is null, data inserted at start
     if (ptr == null) {
       this.start = input;
       this.end = this.start;
@@ -57,16 +64,19 @@ export default class DLL {
     input.prev = ptr;
     this.start.prev = input;
     this.end = input;
-    this.head1 = this.start;
+    this.head1 = this.start; //movable pointer points to start by default
+    // DLL made linear if this.looping is false
     if(!this.looping)
       this.unloop();
   }
-  //can add an array of songs to the linked list, where array contains an array of audios
+
+  //function to add an array of data
   addArray(array) {
     for (let i = 0; i < array.length; i++) {
       this.insertEnd(array[i]);
     }
   }
+
   //returns all the items of the linked list as an array of objects. {id:...,data:...}
   getArray() {
     let obj = {};
@@ -88,24 +98,33 @@ export default class DLL {
     arr.push(obj);
     return arr;
   }
+
+  //returns current head position
+  head() {
+    return this.head1.data;
+  }
+
+  // moves head to the next node and returns it
   next() {
-    // returns what's next and sets that as the new head
     if (this.head1.next != null) this.head1 = this.head1.next;
     return this.head1.data;
   }
+
+  // moves head to the previous node and returns it
   previous() {
     if (this.head1.prev != null) this.head1 = this.head1.prev;
     return this.head1.data;
   }
-  head() {
-    return this.head1.data;
-  }
+
+  // clears all data of the DLL
   clear() {
     this.totalNo -= this.getArray().length;
     this.start = null;
     this.head1=null;
     this.shuffling=false;
   }
+
+  // randomises position of nodes
   shuffle() {
     let arr = this.getArray();
     let arr2 = [...this.getArray()];
@@ -126,6 +145,7 @@ export default class DLL {
     this.addArray(arr);
     this.shuffling=true;
   }
+
   unshuffle(){
     this.clear();
     for(let i=0;i<this.initialArr.length;i++){
@@ -134,6 +154,8 @@ export default class DLL {
     this.addArray(this.initialArr);
     this.shuffling=false;
   }
+
+  // function to make DLL circular from linear
   loop() {
     if (this.start.next != null) {
       this.end.next = this.start;
@@ -141,6 +163,8 @@ export default class DLL {
     }
     this.looping = true;
   }
+
+  // function to make DLL linear from circular
   unloop() {
     if (this.start.next != null) {
       this.end.next = null;
@@ -149,51 +173,3 @@ export default class DLL {
     this.looping = false;
   }
 }
-
-// Make array of next song dekhi last song samma
-// Clear DLL
-// sort that array
-// this.addArray([array])
-
-// deleteId(id) {
-//   --this.totalNo;
-//   let ptr = this.start;
-//   while (ptr.id != id) {
-//     ptr = ptr.next;
-//   }
-//   if (ptr.next == null || ptr.next == ptr) {
-//     this.start = null;
-//     this.end = null;
-//     return;
-//   }
-//   ptr.prev.next = ptr.next;
-//   ptr.next.prev = ptr.prev;
-//   if (ptr == this.start) {
-//     this.start = ptr.next;
-//   } else if (ptr == this.end) {
-//     this.end = ptr.prev;
-//   }
-//   ptr = null;
-// }
-//insert after a specific id
-// insertAfter(id, data) {
-//   ++this.totalNo;
-//   let ptr = this.start;
-//   let temp = new NODE(data);
-//   while (ptr.id != id) {
-//     if (ptr.next == this.start) {
-//       console.log("Data not found");
-//       return;
-//     } else ptr = ptr.next;
-//   }
-//   if (ptr.next == this.start || ptr.next == null) {
-//     --this.totalNo;
-//     this.insertEnd(data);
-//     return;
-//   } else ptr.next.prev = temp;
-//   temp.next = ptr.next;
-//   temp.prev = ptr;
-//   ptr.next = temp;
-//   temp.id = ++this.dataNo;
-//   this.head1 = this.start;
-// }
