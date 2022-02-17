@@ -125,7 +125,7 @@ export default {
 
 table {
   color: #646569;
-  border-spacing: 3px 20px;
+  border-spacing: 0px 20px;
 }
 tbody {
   display: block;
