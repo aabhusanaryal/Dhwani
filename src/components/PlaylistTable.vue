@@ -178,6 +178,10 @@ th {
   transition: ease-in-out;
 }
 
+tbody>tr:hover{
+  color: black;
+}
+
 .downarrow:hover {
   border-top-color: #5b5e62;
   transform: scale(1.25);
@@ -186,9 +190,5 @@ th {
 .arrow {
   cursor: pointer;
 }
-/* @media (max-size: 768px) {
-  .downarrow {
-    margin-bottom: 2px;
-  }
-} */
+
 </style>

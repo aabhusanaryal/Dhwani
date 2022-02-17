@@ -491,9 +491,6 @@ export default {
   height: 12px;
   width: 12px;
 }
-.slider::-moz-range-progress {
-  background-color: #43e5f7;
-}
 .icon {
   width: 20px;
   height: 20px;
