@@ -1,7 +1,7 @@
 <template>
   <div class="trending-container">
     <div class="trending-wrapper">
-      <h3>Trending🔥</h3>
+      <h3>Trending<span class="no-bg">🔥</span></h3>
       <div
         class="trending-card-wrapper"
         :style="`background: linear-gradient(
@@ -74,12 +74,15 @@ button {
   border-radius: 1rem;
   width: 6.3rem;
   height: 2.7rem;
-  background: white;
+  background-image: var(--grey-gradient);
+  background-size: 200%;
+  background-position: left;
+  transition: 0.4s;
   font-size: 1.3rem;
   padding: 0.4rem 0.2rem;
   cursor: pointer;
 }
 button:hover {
-  background: var(--light-grey);
+  background-position: right;
 }
 </style>

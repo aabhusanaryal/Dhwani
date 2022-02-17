@@ -98,7 +98,7 @@ form {
 }
 h2 {
   margin-bottom: 0.5rem;
-  background-image: var(--primary-gradient);
+  background-image: var(--heading-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -187,6 +187,7 @@ input[type="checkbox"] {
 }
 label {
   position: relative;
+  cursor: pointer;
 }
 label::before {
   content: "";

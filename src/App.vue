@@ -59,9 +59,9 @@ The area is changed using mediaquery -->
         @playPlaylist="playPlaylist"
         @playSong="playSong"
         @addPlaylist="createPlaylist"
-        @sortDurationAsc="sortDurationAsc" 
-        @sortDurationDesc="sortDurationDesc" 
-        @sortTitleAsc ="sortTitleAsc"
+        @sortDurationAsc="sortDurationAsc"
+        @sortDurationDesc="sortDurationDesc"
+        @sortTitleAsc="sortTitleAsc"
         @sortTitleDesc="sortTitleDesc"
         @sortArtistAsc="sortArtistAsc"
         @sortArtistDesc="sortArtistDesc"
@@ -124,113 +124,125 @@ export default {
       this.$refs.playerComponent.playPlaylist(playlistName);
     },
 
-    sortDurationDesc(playlistName){
-      let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
+    sortDurationDesc(playlistName) {
+      let playlist = this.playlists.filter(
+        (playlist) => playlist.name == playlistName
+      )[0];
       this.bubbleSort(playlist.songs, playlist.songs.length);
     },
 
     sortDurationAsc(playlistName) {
-      let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
+      let playlist = this.playlists.filter(
+        (playlist) => playlist.name == playlistName
+      )[0];
       this.mergeSort(playlist.songs, 0, playlist.songs.length - 1);
     },
 
     sortTitleAsc(playlistName) {
-      let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
+      let playlist = this.playlists.filter(
+        (playlist) => playlist.name == playlistName
+      )[0];
       this.insertionSort(playlist.songs, playlist.songs.length);
     },
 
-    sortTitleDesc(playlistName){
-      let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
+    sortTitleDesc(playlistName) {
+      let playlist = this.playlists.filter(
+        (playlist) => playlist.name == playlistName
+      )[0];
       this.insertionSortRev(playlist.songs, playlist.songs.length);
     },
-    
-    sortArtistAsc(playlistName){
-      let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
+
+    sortArtistAsc(playlistName) {
+      let playlist = this.playlists.filter(
+        (playlist) => playlist.name == playlistName
+      )[0];
       this.selectionSort(playlist.songs, playlist.songs.length);
     },
-    
-    sortArtistDesc(playlistName){
-      let playlist = this.playlists.filter((playlist) => playlist.name == playlistName)[0];
+
+    sortArtistDesc(playlistName) {
+      let playlist = this.playlists.filter(
+        (playlist) => playlist.name == playlistName
+      )[0];
       this.selectionSortRev(playlist.songs, playlist.songs.length);
     },
 
     //performs shell sort on the array arr of the size n
-    selectionSortRev(arr, n){
-      for(let k = 0; k<=n-1; k++){
-        let pos = this.largest(arr, k, n-1 );
+    selectionSortRev(arr, n) {
+      for (let k = 0; k <= n - 1; k++) {
+        let pos = this.largest(arr, k, n - 1);
         this.swap(arr, k, pos);
       }
     },
 
     //returns the smallest value in the array from the given range (k, n)
-    smallest(arr, k, n){
+    smallest(arr, k, n) {
       let small = arr[k];
       let pos = k;
-      for(let j = k+1; j<=n; j++){
-        if (small.artist.localeCompare(arr[j].artist)==1){
+      for (let j = k + 1; j <= n; j++) {
+        if (small.artist.localeCompare(arr[j].artist) == 1) {
           small = arr[j];
           pos = j;
-        } 
+        }
       }
-      return pos
+      return pos;
     },
 
     //returns the largest value in the array from the given range (k, n)
-    largest(arr, k, n){
+    largest(arr, k, n) {
       let small = arr[k];
       let pos = k;
-      for(let j = k+1; j<=n; j++){
-        if (small.artist.localeCompare(arr[j].artist)==-1){
+      for (let j = k + 1; j <= n; j++) {
+        if (small.artist.localeCompare(arr[j].artist) == -1) {
           small = arr[j];
           pos = j;
-        } 
+        }
       }
-      return pos
+      return pos;
     },
 
     //performs selection sort on the array arr of the size n
-    selectionSort(arr, n){
-      for(let k = 0; k<=n-1; k++){
-        let pos = this.smallest(arr, k, n-1 );
+    selectionSort(arr, n) {
+      for (let k = 0; k <= n - 1; k++) {
+        let pos = this.smallest(arr, k, n - 1);
         this.swap(arr, k, pos);
       }
     },
 
     //performs insertion sort on the array of size n
-    insertionSort(arr, n){
-      let temp
-      let j
-      for(let i=1;i<n;i++){
-        temp=arr[i]
-        j=i-1
-        while(j>=0 && temp.name.localeCompare(arr[j].name)==-1){
-          arr[j+1]=arr[j]
-          j=j-1
+    insertionSort(arr, n) {
+      let temp;
+      let j;
+      for (let i = 1; i < n; i++) {
+        temp = arr[i];
+        j = i - 1;
+        while (j >= 0 && temp.name.localeCompare(arr[j].name) == -1) {
+          arr[j + 1] = arr[j];
+          j = j - 1;
         }
-        arr[j+1]=temp
+        arr[j + 1] = temp;
       }
     },
 
     //performs insertion sort in the reverse order on the array of size n
-    insertionSortRev(arr, n){
-      let temp
-      let j
-      for(let i=1;i<n;i++){
-        temp=arr[i]
-        j=i-1
-        while(j>=0 && temp.name.localeCompare(arr[j].name)==1){
-          arr[j+1]=arr[j]
-          j=j-1
+    insertionSortRev(arr, n) {
+      let temp;
+      let j;
+      for (let i = 1; i < n; i++) {
+        temp = arr[i];
+        j = i - 1;
+        while (j >= 0 && temp.name.localeCompare(arr[j].name) == 1) {
+          arr[j + 1] = arr[j];
+          j = j - 1;
         }
-        arr[j+1]=temp
+        arr[j + 1] = temp;
       }
     },
-    
+
     //function to merge the partitioned arrays
-    merge(arr, beg, mid, end){
-      let i=beg 
-      let j=mid+1
-      let k=0;
+    merge(arr, beg, mid, end) {
+      let i = beg;
+      let j = mid + 1;
+      let k = 0;
       const temp = [];
       while (i <= mid && j <= end) {
         if (arr[i].duration < arr[j].duration) {
@@ -248,12 +260,13 @@ export default {
       for (let i = beg; i <= end; i++) {
         arr[i] = temp[i - beg];
       }
-    },        
+    },
 
     //function to perform merge sort
-    mergeSort(arr, beg, end){
-      if (beg<end){                //divide the array into singular elements
-        var mid = beg + Math.floor((end-beg)/2);
+    mergeSort(arr, beg, end) {
+      if (beg < end) {
+        //divide the array into singular elements
+        var mid = beg + Math.floor((end - beg) / 2);
         this.mergeSort(arr, beg, mid);
         this.mergeSort(arr, mid + 1, end);
         //merge the elements elements are divided in to singular arrays with one elemets each
@@ -262,19 +275,19 @@ export default {
     },
 
     //function to swap arr elements of the positions i1 and i2
-    swap(arr, i1, i2){
+    swap(arr, i1, i2) {
       let temp = arr[i1];
       arr[i1] = arr[i2];
       arr[i2] = temp;
     },
 
     //performs bubble sort on array of size n
-    bubbleSort(arr, n){
-      for(let i = 0; i<=n-1; i++){
-        for(let j = i+1; j<=n-1; j++){
-          if(arr[i].duration < arr[j].duration){            
+    bubbleSort(arr, n) {
+      for (let i = 0; i <= n - 1; i++) {
+        for (let j = i + 1; j <= n - 1; j++) {
+          if (arr[i].duration < arr[j].duration) {
             this.swap(arr, i, j);
-          } 
+          }
         }
       }
     },
@@ -357,26 +370,34 @@ export default {
       duration: 200,
     };
     let song6 = {
-    name: "Babbage",
-    path: "02. Paul Flint - Savage",
-    artist: "Paul Flint",
-    cover: "https://i1.sndcdn.com/artworks-000178640584-kie7ij-t500x500.jpg",
-    genres: ["Chill", "LoFi"],
-    audio: null,
-    isFav: null,
-    duration: 132,
-  };
+      name: "Babbage",
+      path: "02. Paul Flint - Savage",
+      artist: "Paul Flint",
+      cover: "https://i1.sndcdn.com/artworks-000178640584-kie7ij-t500x500.jpg",
+      genres: ["Chill", "LoFi"],
+      audio: null,
+      isFav: null,
+      duration: 132,
+    };
     let song7 = {
-    name: "Cabbage",
-    path: "02. Paul Flint - Savage",
-    artist: "Paul Flint",
-    cover: "https://i1.sndcdn.com/artworks-000178640584-kie7ij-t500x500.jpg",
-    genres: ["Chill", "LoFi"],
-    audio: null,
-    isFav: null,
-    duration: 132,
-  };
-    this.createPlaylist("All Songs", [song1, song2, song3, song4, song5, song6, song7]);
+      name: "Cabbage",
+      path: "02. Paul Flint - Savage",
+      artist: "Paul Flint",
+      cover: "https://i1.sndcdn.com/artworks-000178640584-kie7ij-t500x500.jpg",
+      genres: ["Chill", "LoFi"],
+      audio: null,
+      isFav: null,
+      duration: 132,
+    };
+    this.createPlaylist("All Songs", [
+      song1,
+      song2,
+      song3,
+      song4,
+      song5,
+      song6,
+      song7,
+    ]);
     this.createPlaylist("Favourites", []);
     this.createPlaylist("Playlist-2", [song3, song2]);
     this.createPlaylist("Playlist-3", [song4]);
@@ -430,6 +451,12 @@ export default {
     rgba(63, 50, 77, 0.83) 0.98%,
     #004b81 119.65%
   );
+  --heading-gradient: linear-gradient(
+    93.64deg,
+    rgba(63, 50, 77, 0.83) 0.98%,
+    #004b81 119.65%
+  );
+  --grey-gradient: linear-gradient(315deg, #788599 0%, #f5f7fa 74%);
 }
 /* Removing margin and padding from all elements */
 * {
