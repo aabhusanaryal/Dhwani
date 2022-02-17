@@ -68,11 +68,11 @@ export default {
       //performing linear search in "All Songs" playlist
       for (let i = 0; i < n; i++) {
         if (arr[i]?.name.toLowerCase().includes(this.query?.toLowerCase()))
-          result.songs.push(arr[i]); //pushing whole song object, not only name 
+          result.songs.push(arr[i]); //pushing whole song object, not only name
         if (arr[i]?.artist.toLowerCase().includes(this.query?.toLowerCase())) {
           let flag = 1;
           //looping through result.artists array to prevent duplicate artist entry
-          for (let j = 0; j < result.artists.length; j++) { 
+          for (let j = 0; j < result.artists.length; j++) {
             if (result.artists[j].artist === arr[i].artist) {
               flag = 0;
               break;
@@ -99,8 +99,9 @@ export default {
   margin-bottom: 2rem;
 }
 .card {
-  min-width: 220px;
-  min-height: 220px;
+  min-width: 200px;
+  max-width: 270px;
+  aspect-ratio: 1;
   flex-grow: 1;
   border-radius: 30px;
   position: relative;

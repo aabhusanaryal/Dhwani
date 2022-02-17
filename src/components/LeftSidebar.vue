@@ -95,6 +95,7 @@ export default {
 .playlist-card {
   font-family: "Roboto", sans-serif;
   font-size: 25px;
+  font-weight: 500;
   width: 80%;
   background-image: var(--merged-gradient);
   background-size: 200%;
