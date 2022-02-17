@@ -141,7 +141,6 @@ th {
   text-align: center !important;
   vertical-align: middle;
   width: 300px;
-  text-align: left;
 }
 th {
   color: #84898f;
@@ -185,4 +184,11 @@ th {
   transform: scale(1.25);
   transition: ease-in-out;
 }
+
+@media screen and (min-width: 768px){
+  .downarrow{
+    margin-bottom: 2px;
+  }
+}
+
 </style>
