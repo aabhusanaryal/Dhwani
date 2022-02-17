@@ -78,17 +78,16 @@ export default {
 <style scoped>
 form {
   width: fit-content;
-  margin: 0 auto;
   font-size: 23px;
 }
 .center-container {
-  width: 75%;
+  width: 80%;
   margin: 0 auto;
   margin-top: 20px;
 }
 @media (max-width: 1350px) {
   .center-container {
-    width: 80%;
+    width: 85% ;
   }
 }
 @media (max-width: 768px) {
