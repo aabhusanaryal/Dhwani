@@ -1,5 +1,6 @@
 <template>
   <TrendingCard v-if="randomSong" :song="randomSong" @playSong="playSong" />
+  <div class="center-container">
   <PlaylistTable
     :playlist="playlists[0]"
       @sortDurationAsc="sortDurationAsc" 
@@ -10,6 +11,7 @@
       @sortArtistDesc="sortArtistDesc"
   >
   </PlaylistTable>
+  </div>
 </template>
 
 <script>
@@ -65,5 +67,20 @@ export default {
   overflow-y: scroll;
   overflow-x: hidden;
   max-height: 100vh;
+}
+.center-container {
+  width: 75%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+@media (max-width: 1350px) {
+  .center-container {
+    width: 80%;
+  }
+}
+@media (max-width: 768px) {
+  .center-container {
+    width: 90%;
+  }
 }
 </style>

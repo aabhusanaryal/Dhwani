@@ -449,7 +449,7 @@ export default {
 </script>
 <style>
 /* Importing fonts */
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap");
 /* Setting variables */
 :root {
   --left-sidebar-width: 350px;
@@ -541,6 +541,7 @@ h3 {
 
 .leftcontainer {
   grid-area: leftcontainer;
+  z-index: 1;
   /* height: 100vh; */
 }
 .rightcontainer {
