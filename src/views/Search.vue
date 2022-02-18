@@ -1,13 +1,20 @@
 <template>
   <div class="container">
-    <h4
-      v-if="
-        searchResults.songs.length == 0 && searchResults.artists.length == 0
-      "
-    >
-      Not found! Please enter another keyword!
-    </h4>
-    <h3 v-if="searchResults.songs.length != 0">Songs</h3>
+    <div class="message-wrapper">
+      <h2 v-if="query" class="gradient-text">Search results for {{ query }}</h2>
+      <h4 v-if="query" id="num-of-results">
+        {{ searchResults.songs.length + searchResults.artists.length }} result{{
+          searchResults.songs.length + searchResults.artists.length > 1
+            ? "s"
+            : ""
+        }}
+      </h4>
+    </div>
+    <!-- <h4 v-if="!searchResults.songs.length && !searchResults.artists.length">
+      0 results found!
+    </h4> -->
+
+    <h3 class="gradient-text" v-if="searchResults.songs.length != 0">Songs</h3>
     <div class="cards-container">
       <div
         class="card"
@@ -19,18 +26,20 @@
       rgba(0, 0, 0, 0.4)
     ), url(${song.cover}); background-repeat: no-repeat; background-size: 100%;`"
       >
-        <div @click="playSong(song)" class="info-wrapper">
+        <div class="info-wrapper">
           {{ song.name }}
         </div>
       </div>
     </div>
-    <h3 v-if="searchResults.artists.length != 0">Artists</h3>
+    <h3 class="gradient-text" v-if="searchResults.artists.length != 0">
+      Artists
+    </h3>
     <div class="cards-container">
       <div
         class="card"
         v-for="(song, index) in searchResults.artists"
         :key="index"
-        @click="playSong"
+        @click="playSong(song)"
         :style="`background: linear-gradient(
       rgba(0, 0, 0, 0.4),
       rgba(0, 0, 0, 0.4)
@@ -119,5 +128,13 @@ h3 {
   font-size: 1.6rem;
   position: absolute;
   bottom: 10px;
+}
+.message-wrapper {
+  margin-bottom: 1.2rem;
+}
+#num-of-results {
+  font-weight: 300;
+  margin-top: 5px;
+  padding-left: 5px;
 }
 </style>

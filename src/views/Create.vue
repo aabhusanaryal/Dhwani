@@ -13,7 +13,7 @@
           <button class="add" type="submit">+</button>
           <br />
           <!-- Error Message -->
-          <span id="error-msg">
+          <span class="err">
             {{ errMsg }}
           </span>
           <table class="playlist-table">
@@ -189,10 +189,6 @@ input::placeholder {
 .add:hover {
   background-position: right;
   cursor: pointer;
-}
-#error-msg {
-  color: red;
-  font-size: 1.3rem;
 }
 
 input[type="checkbox"] {
