@@ -34,7 +34,7 @@
         :style="`background: linear-gradient(
       rgba(0, 0, 0, 0.4),
       rgba(0, 0, 0, 0.4)
-    ), url(${song.cover}); background-repeat: no-repeat; background-size: 100%;`"
+    ), url(${song.artistCover}); background-repeat: no-repeat; background-size: 100%;`"
       >
         <div class="info-wrapper">
           {{ song.artist }}
