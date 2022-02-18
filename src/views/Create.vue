@@ -39,6 +39,7 @@
                       v-model="addedSongs"
                       name="songCheckbox"
                       :id="index"
+                      @click="addSong(song)"
                     />
                     <!-- Label required for styling checkbox -->
                     <label :for="index"></label>
@@ -130,7 +131,11 @@ export default {
 }
 @media (max-width: 768px) {
   .center-container {
-    width: 90%;
+    width: 98%;
+  }
+
+  .playlist-table {
+    font-size: 1.6rem !important;
   }
 }
 h2 {
@@ -195,6 +200,7 @@ input::placeholder {
 
 input[type="checkbox"] {
   display: none;
+  pointer-events: all;
 }
 label {
   position: relative;
@@ -268,7 +274,7 @@ th {
 .flex-center {
   width: 100%;
   display: flex;
-  justify-content: center;
+  padding-left: 1rem;
 }
 th {
   color: #84898f;

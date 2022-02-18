@@ -5,6 +5,8 @@
     <div class="btn" role="button" @click="playAllSongs">
       <span class="text">Play</span>
     </div>
+  </div>
+  <div class="center-container wider">
     <PlaylistTable
       :playlist="playlists[0]"
       @sortDurationAsc="sortDurationAsc"
@@ -14,8 +16,7 @@
       @sortArtistAsc="sortArtistAsc"
       @sortArtistDesc="sortArtistDesc"
       @playSong="playSong"
-    >
-    </PlaylistTable>
+    />
   </div>
 </template>
 
@@ -108,9 +109,12 @@ h2 {
   max-height: 100vh;
 }
 .center-container {
-  width: 75%;
+  width: 80%;
   margin: 0 auto;
   margin-top: 20px;
+}
+.wider {
+  width: 94% !important;
 }
 @media (max-width: 1350px) {
   .center-container {

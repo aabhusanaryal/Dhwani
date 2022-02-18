@@ -79,7 +79,7 @@ export default {
 }
 @media (max-width: 768px) {
   .center-container {
-    width: 90%;
+    width: 95%;
   }
 }
 h2 {

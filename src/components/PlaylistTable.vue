@@ -250,4 +250,13 @@ tbody tr:hover .playBtn:hover {
 .arrow {
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  .playlist-table {
+    font-size: 1.6rem !important;
+  }
+  .sort-icon {
+    font-size: 1.15em !important;
+  }
+}
 </style>
