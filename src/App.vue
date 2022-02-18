@@ -485,7 +485,7 @@ export default {
       song12,
     ]);
     this.createPlaylist("Favourites", []);
-    this.createPlaylist("Playlist-2", [song3, song2]);
+    this.createPlaylist("Playlist", [song3, song2]);
     this.createPlaylist("Playlist-3", [song4]);
     // Populating this.genres
     let allSongs = this.playlists[0].songs;
