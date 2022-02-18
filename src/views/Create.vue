@@ -94,7 +94,9 @@ export default {
     },
     addSong(song) {
       // This function is used to add songs by clicking to the table row, and not just the checkbox
-      this.addedSongs.push(song);
+      if (!this.addedSongs.includes(song)) this.addedSongs.push(song);
+      // If the song already exists in the array, removing it
+      else this.addedSongs = this.addedSongs.filter((s) => s != song);
     },
     secondsToMinutes(seconds) {
       // Takes in seconds as parameter and returns a string of the format "mm:ss"

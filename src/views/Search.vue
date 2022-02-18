@@ -76,8 +76,9 @@ export default {
       let arr = [...this.playlists[0].songs]; //array of song objects of "All Songs"
       //performing linear search in "All Songs" playlist
       for (let i = 0; i < n; i++) {
-        if (arr[i]?.name.toLowerCase().includes(this.query?.toLowerCase()))
+        if (arr[i]?.name.toLowerCase().includes(this.query?.toLowerCase())) {
           result.songs.push(arr[i]); //pushing whole song object, not only name
+        }
         if (arr[i]?.artist.toLowerCase().includes(this.query?.toLowerCase())) {
           let flag = 1;
           //looping through result.artists array to prevent duplicate artist entry
