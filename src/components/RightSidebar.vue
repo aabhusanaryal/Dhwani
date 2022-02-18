@@ -5,7 +5,7 @@
       <div class="chips-container">
         <div
           class="chips"
-          :class="filter.includes(genre) ? 'active-chips' : ''"
+          :class="filterGenres.includes(genre) ? 'active-chips' : ''"
           v-for="(genre, index) in genres"
           :key="index"
           @click="filterGenre(genre)"
@@ -23,18 +23,24 @@ export default {
   props: ["genres"],
   data() {
     return {
-      filter: [],
+      filterGenres: [],
     };
   },
   methods: {
     filterGenre(genre) {
       // Toggling the filter on/ off
-      if (this.filter.includes(genre)) {
+      if (this.filterGenres.includes(genre)) {
         // If the filter already exists, removing the filter
-        this.filter = this.filter.filter((el) => el != genre); // This line removes genre from this.filter
-      } else this.filter.push(genre); // If the filter doesn't already exist in this.filter, appending it
+        this.filterGenres = this.filterGenres.filter((el) => el != genre); // This line removes genre from this.filter
+      } else this.filterGenres.push(genre); // If the filter doesn't already exist in this.filter, appending it
       // Updating the query params in URL
-      this.$router.push({ query: { genre: this.filter } });
+      this.$router.push({ query: { genre: this.filterGenres } });
+    },
+  },
+  watch: {
+    $route(to, from) {
+      // Removing the filters when the route is changed
+      if (to.path != from.path) this.filterGenres = [];
     },
   },
 };
