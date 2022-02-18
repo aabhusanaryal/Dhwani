@@ -52,7 +52,12 @@
           tabindex="0"
         >
           <span class="text">
-            {{ playlist.name }}
+            <!-- Only showing the first 12 chars of playlist.name followed by a ... if needed -->
+            {{
+              playlist.name.length > 15
+                ? `${playlist.name.slice(0, 15)}...`
+                : `${playlist.name}`
+            }}
           </span>
         </div>
       </router-link>
