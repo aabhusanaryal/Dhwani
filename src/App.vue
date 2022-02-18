@@ -317,7 +317,7 @@ export default {
     }, 1000);
     // Creating fake playlists
     // FIXME: Add proper genre to songs
-    let song1 = {
+    let savage = {
       name: "Savage",
       path: "02. Paul Flint - Savage",
       artist: "Paul Flint",
@@ -329,7 +329,7 @@ export default {
       isFav: null,
       duration: 132,
     };
-    let song2 = {
+    let puzzle = {
       name: "Puzzle",
       path: "03. Retrovision - Puzzle",
       artist: "Retrovision",
@@ -341,7 +341,7 @@ export default {
       isFav: null,
       duration: 245,
     };
-    let song3 = {
+    let feelgood = {
       name: "Feel Good",
       path: "04. Syn Cole - Feel Good",
       artist: "Syn Cole",
@@ -353,7 +353,7 @@ export default {
       isFav: null,
       duration: 189,
     };
-    let song4 = {
+    let roots = {
       name: "Roots",
       path: "06. Tobu - Roots",
       artist: "Tobu",
@@ -366,7 +366,7 @@ export default {
       isFav: null,
       duration: 200,
     };
-    let song5 = {
+    let dreamingofme = {
       name: "Dreaming of Me",
       path: "07. Jack Shore - Dreaming of Me",
       artist: "Jack Shore",
@@ -379,7 +379,7 @@ export default {
       isFav: null,
       duration: 199,
     };
-    let song6 = {
+    let phoenix = {
       name: "Phoenix",
       path: "08. Halvorsen - Phoenix",
       artist: "Halvorsen",
@@ -392,7 +392,7 @@ export default {
       isFav: null,
       duration: 238,
     };
-    let song7 = {
+    let cloud9 = {
       name: "Cloud9",
       path: "09. Tobu - Cloud9",
       artist: "Tobu",
@@ -405,7 +405,7 @@ export default {
       isFav: null,
       duration: 275,
     };
-    let song8 = {
+    let canonind = {
       name: "Canon in D",
       path: "10. Pachelbel - Canon in D",
       artist: "Pachelbel",
@@ -417,7 +417,7 @@ export default {
       isFav: null,
       duration: 228,
     };
-    let song9 = {
+    let chains = {
       name: "Chains",
       path: "11. Alina Renae - Chains",
       artist: "Alina Renae",
@@ -430,7 +430,7 @@ export default {
       isFav: null,
       duration: 194,
     };
-    let song10 = {
+    let symphony = {
       name: "Symphony",
       path: "12. Arc North - Symphony",
       artist: "Arc North",
@@ -443,7 +443,7 @@ export default {
       isFav: null,
       duration: 190,
     };
-    let song11 = {
+    let whatyoulike = {
       name: "What You Like",
       path: "13. Curbi - What You Like",
       artist: "Curbi",
@@ -456,7 +456,7 @@ export default {
       isFav: null,
       duration: 158,
     };
-    let song12 = {
+    let newstyle = {
       name: "New Style",
       path: "14. Droptek - New Style",
       artist: "Droptek",
@@ -471,22 +471,22 @@ export default {
     };
 
     this.createPlaylist("All Songs", [
-      song1,
-      song2,
-      song3,
-      song4,
-      song5,
-      song6,
-      song7,
-      song8,
-      song9,
-      song10,
-      song11,
-      song12,
+      savage,
+      puzzle,
+      feelgood,
+      roots,
+      dreamingofme,
+      phoenix,
+      cloud9,
+      canonind,
+      chains,
+      symphony,
+      whatyoulike,
+      newstyle,
     ]);
     this.createPlaylist("Favourites", []);
-    this.createPlaylist("Playlist", [song3, song2]);
-    this.createPlaylist("Playlist-3", [song4]);
+    this.createPlaylist("Sunshine & Rain", []);
+    this.createPlaylist("Playlist-3", []);
     // Populating this.genres
     let allSongs = this.playlists[0].songs;
     allSongs.forEach((song) => {

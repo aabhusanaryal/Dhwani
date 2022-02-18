@@ -28,7 +28,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(song, index) in genresongs" :key="index">
+        <tr v-for="(song, index) in filteredSongs" :key="index">
           <td class="first-col">
             <span class="playBtn" @click="playSong(song)"
               ><i class="fa-solid fa-circle-play"></i
@@ -85,21 +85,22 @@ export default {
     },
   },
   computed: {
-    genresongs: function () {
+    filterGenres: function () {
+      return this.$route.query.genre;
+    },
+    filteredSongs: function () {
       //if genre is not loaded, show all songs of the playlist
-      if (!this.$route.query.genre) {
+      if (!this.filterGenres) {
         return this.playlist.songs;
       }
       //if genre
-      else if (this.$route.query.genre.length != 0) {
+      else if (this.filterGenres.length != 0) {
         const arr = [];
         for (let i = 0; i < this.playlist.songs.length; i++) {
-          for (let j = 0; j < this.$route.query.genre.length; j++) {
+          for (let j = 0; j < this.filterGenres.length; j++) {
             //check genre of playlist.songs[i] with genre query's list
             if (
-              this.playlist.songs[i].genres.includes(
-                this.$route.query.genre[j]
-              ) &&
+              this.playlist.songs[i].genres.includes(this.filterGenres[j]) &&
               !arr.includes(this.playlist.songs[i])
             ) {
               arr.push(this.playlist.songs[i]);
