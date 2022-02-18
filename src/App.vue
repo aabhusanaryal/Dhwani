@@ -324,7 +324,7 @@ export default {
       artistCover:
         "https://ncsmusic.s3.eu-west-1.amazonaws.com/artists/000/000/352/325x325/1597165641_NFWo1NewLF_Paul-Flint.png",
       cover: "https://i1.sndcdn.com/artworks-000178640584-kie7ij-t500x500.jpg",
-      genres: ["Chill", "LoFi"],
+      genres: ["Dubstep", "Energetic", "EDM"],
       audio: null,
       isFav: null,
       duration: 132,
@@ -336,7 +336,7 @@ export default {
       artistCover:
         "https://ncsmusic.s3.eu-west-1.amazonaws.com/artists/000/000/377/325x325/1597166077_RAHYVPaDfQ_RetroVision.png",
       cover: "https://i1.sndcdn.com/artworks-000196908840-gcl3jn-t500x500.jpg",
-      genres: ["EDM"],
+      genres: ["House", "Energetic", "EDM"],
       audio: null,
       isFav: null,
       duration: 245,
@@ -348,7 +348,7 @@ export default {
       artistCover:
         "https://ncsmusic.s3.eu-west-1.amazonaws.com/artists/000/000/434/325x325/1597179223_bgwJeQP8Gl_Syn-Cole.png",
       cover: "https://i1.sndcdn.com/artworks-000149107009-m881ek-t500x500.jpg",
-      genres: ["Pop"],
+      genres: ["House", "Hopeful", "EDM"],
       audio: null,
       isFav: null,
       duration: 189,
@@ -361,7 +361,7 @@ export default {
         "https://ncsmusic.s3.eu-west-1.amazonaws.com/artists/000/000/456/325x325/1597179629_uqJjm9Uuiw_Tobu.png",
       cover:
         "https://lastfm.freetls.fastly.net/i/u/300x300/d55932d44b33e431e68a3c0c4daceb98.png",
-      genres: ["OP", "Hello"],
+      genres: ["EDM"],
       audio: null,
       isFav: null,
       duration: 200,
@@ -374,7 +374,7 @@ export default {
         "https://ncsmusic.s3.eu-west-1.amazonaws.com/artists/000/000/693/325x325/1642341501_yCYJidAFba_129896948_885396732024883_8614097797124242129_n.jpg",
       cover:
         "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/033/325x325/dreaming-of-me-1635854432-lB4hOLMPWe.jpg",
-      genres: ["Indie"],
+      genres: ["Indie", "EDM"],
       audio: null,
       isFav: null,
       duration: 199,
@@ -387,7 +387,7 @@ export default {
         "https://ncsmusic.s3.eu-west-1.amazonaws.com/artists/000/000/171/325x325/1597150417_n2EhsQtFlT_Halvorsen.png",
       cover:
         "https://linkstorage.linkfire.com/medialinks/images/7438735b-7816-415a-b3bb-985b6a3f930b/artwork-440x440.jpg",
-      genres: ["Indie"],
+      genres: ["Indie", "EDM"],
       audio: null,
       isFav: null,
       duration: 238,
@@ -400,7 +400,7 @@ export default {
         "https://ncsmusic.s3.eu-west-1.amazonaws.com/artists/000/000/456/325x325/1597179629_uqJjm9Uuiw_Tobu.png",
       cover:
         "https://linkstorage.linkfire.com/medialinks/images/4670ee7b-68e1-4d08-a52d-4db36daca1e1/artwork-440x440.jpg",
-      genres: ["EDM"],
+      genres: ["House", "EDM"],
       audio: null,
       isFav: null,
       duration: 275,
@@ -412,7 +412,7 @@ export default {
       artistCover:
         "https://images.genius.com/bd5981d30b874051a096701fb418de27.278x396x1.jpg",
       cover: "https://i.imgur.com/MxKbJ68.jpeg",
-      genres: ["Piano"],
+      genres: ["Piano", "Hopeful"],
       audio: null,
       isFav: null,
       duration: 228,
@@ -451,7 +451,7 @@ export default {
         "https://ncsmusic.s3.eu-west-1.amazonaws.com/artists/000/000/094/325x325/1597148713_Owam2tOH4a_Curbi.png",
       cover:
         "https://linkstorage.linkfire.com/medialinks/images/f4a06b83-8acb-484f-becc-a752d6ecc611/artwork-440x440.jpg",
-      genres: ["Bass"],
+      genres: ["Bass", "EDM"],
       audio: null,
       isFav: null,
       duration: 158,
@@ -464,7 +464,7 @@ export default {
         "https://ncsmusic.s3.eu-west-1.amazonaws.com/artists/000/000/122/325x325/1597149758_Imed6OA39w_Droptek.png",
       cover:
         "https://linkstorage.linkfire.com/medialinks/images/93d156a9-31cc-403d-9433-932c4b6622b1/artwork-440x440.jpg",
-      genres: ["Bass"],
+      genres: ["Bass", "EDM"],
       audio: null,
       isFav: null,
       duration: 227,
