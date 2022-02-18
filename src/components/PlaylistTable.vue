@@ -46,6 +46,9 @@
 <script>
 export default {
   props: ["playlist"],
+  data() {
+    return {};
+  },
   methods: {
     secondsToMinutes(seconds) {
       // Takes in seconds as parameter and returns a string of the format "mm:ss"
@@ -83,6 +86,9 @@ export default {
     playSong(song) {
       this.$emit("playSong", song);
     },
+  },
+  mounted() {
+    this.loaded = !this.loaded;
   },
   computed: {
     filterGenres: function () {

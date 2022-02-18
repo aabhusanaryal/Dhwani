@@ -7,7 +7,7 @@
       placeholder="Search"
       v-model="searchQuery"
       @keypress="search"
-      @keydown.backspace="backspace"
+      @keydown.backspace="search"
       autocomplete="off"
     />
   </div>
@@ -32,24 +32,14 @@ export default {
         });
       }, 0);
     },
-    backspace() {
-      if (this.searchQuery && this.searchQuery.length != 1) {
-        this.search();
-      }
-    },
   },
 
   watch: {
     $route(to, from) {
-      // console.log(to.name, )
       if (to.name != from.name) {
         this.pastRoute = from;
-        console.log(this.pastRoute);
       }
       if (to.name != "Search") this.searchQuery = "";
-    },
-    searchQuery(query) {
-      if (!query) this.$router.push(this.pastRoute);
     },
   },
 };

@@ -293,8 +293,6 @@ export default {
     },
 
     playSong(songName) {
-      console.log(111);
-      console.log(songName);
       this.$refs.playerComponent.playSong(songName);
     },
     updateFavourites(song) {
@@ -312,11 +310,8 @@ export default {
   },
 
   mounted() {
-    setTimeout(() => {
-      console.log(document.querySelectorAll("input[type='text']"));
-    }, 1000);
     // Creating fake playlists
-    // FIXME: Add proper genre to songs
+
     let savage = {
       name: "Savage",
       path: "02. Paul Flint - Savage",

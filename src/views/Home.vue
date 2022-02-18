@@ -63,8 +63,8 @@ export default {
   },
   mounted() {
     // Setting randomSong
+    console.log("Home");
     let rand = Math.floor(Math.random() * this.playlists[0].songs.length);
-    console.log(rand);
     this.randomSong = this.playlists[0].songs[rand];
   },
 };
