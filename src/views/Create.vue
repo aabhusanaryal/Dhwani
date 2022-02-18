@@ -26,7 +26,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(song, index) in playlists[0].songs" :key="index">
+              <tr
+                v-for="(song, index) in playlists[0].songs"
+                :key="index"
+                @click="addSong(song)"
+              >
                 <td class="first-col">
                   <div class="flex-center">
                     <input
@@ -67,12 +71,30 @@ export default {
   },
   methods: {
     addPlaylist() {
-      if (this.addedSongs.length != 0) {
-        if (this.playlistName) {
-          this.$emit("addPlaylist", this.playlistName, this.addedSongs);
-          this.$router.push("/");
-        } else this.errMsg = "Please enter a name!";
-      } else this.errMsg = "Please select at least one song!";
+      if (this.addedSongs.length == 0) {
+        this.errMsg = "Please add at least one song!";
+        return;
+      }
+      if (!this.playlistName) {
+        this.errMsg = "Playlist name can't be empty.";
+        return;
+      }
+      let sameName = false;
+      this.playlists.forEach((playlist) => {
+        if (playlist.name.toLowerCase() == this.playlistName.toLowerCase()) {
+          sameName = true;
+        }
+      });
+      if (sameName) {
+        this.errMsg = "A playlist with the same name already exists.";
+        return;
+      }
+      this.$emit("addPlaylist", this.playlistName, this.addedSongs);
+      this.$router.push("/");
+    },
+    addSong(song) {
+      // This function is used to add songs by clicking to the table row, and not just the checkbox
+      this.addedSongs.push(song);
     },
     secondsToMinutes(seconds) {
       // Takes in seconds as parameter and returns a string of the format "mm:ss"
@@ -170,6 +192,7 @@ input::placeholder {
 }
 #error-msg {
   color: red;
+  font-size: 1.3rem;
 }
 
 input[type="checkbox"] {
@@ -276,6 +299,7 @@ tr td:last-child {
 tbody > tr:hover {
   color: black;
   background: white;
+  cursor: pointer;
 }
 tbody tr:hover .playBtn {
   visibility: visible;
