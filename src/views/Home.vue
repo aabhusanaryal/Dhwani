@@ -1,10 +1,12 @@
 <template>
   <TrendingCard v-if="randomSong" :song="randomSong" @playSong="playSong" />
   <div class="center-container">
-    <h2>All Songs</h2>
-    <div class="btn" role="button" @click="playAllSongs">
-      <span class="text">Play</span>
-    </div>
+    <h2>
+      All Songs
+      <span class="playBtn" role="button" @click="playAllSongs"
+        ><i class="fa-solid fa-circle-play"></i
+      ></span>
+    </h2>
   </div>
   <div class="center-container wider">
     <PlaylistTable
@@ -77,19 +79,24 @@ h2 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.btn {
-  font-family: "Roboto", sans-serif;
-  font-size: 25px;
-  width: 100px;
-  height: 50px;
-  background-image: var(--merged-gradient);
+
+.playBtn {
+  font-family: "Font Awesome 6 Free";
+  background: var(--merged-gradient);
   background-size: 200%;
   background-position: left;
-  border-radius: 10px;
-  /* Centers the text inside the card vertically. The value should be same as height */
-  line-height: 50px;
-  transition: 0.5s;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+  margin: auto auto;
   cursor: pointer;
+  transition: 0.3s ease;
+  font-smooth: auto;
+}
+
+.playBtn:hover {
+  background-position: right;
 }
 
 .btn:hover,
