@@ -446,6 +446,107 @@ export default {
       isFav: null,
       duration: 227,
     };
+    let song13 = {
+      name: "Props",
+      path: "Backyard Moon - Props",
+      artist: "Backyard Moon",
+      cover:
+        "https://is3-ssl.mzstatic.com/image/thumb/Music125/v4/9c/08/b3/9c08b349-2045-ec29-4a2c-e89e3ea72270/5059806887495_cover.jpg/400x400cc.jpg",
+      genres: ["Bass"],
+      audio: null,
+      isFav: null,
+      duration: 227,
+    };
+    let song14 = {
+      name: "On & On",
+      path: "Cartoon - On & On",
+      artist: "Cartoon",
+      cover:
+        "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/152/1000x0/on-on-feat-daniel-levi-1586947008-oeI24in2Ga.jpg",
+      genres: ["Bass"],
+      audio: null,
+      isFav: null,
+      duration: 227,
+    };
+    let song15 = {
+      name: "Invincible",
+      path: "DEAF KEV - Invincible",
+      artist: "DEAV KEV",
+      cover:
+        "https://i1.sndcdn.com/artworks-000224592805-nhfd2x-t500x500.jpg",
+      genres: ["Bass"],
+      audio: null,
+      isFav: null,
+      duration: 227,
+    };
+    let song16 = {
+      name: "My Heart",
+      path: "My Heart",
+      artist: "Different Heaven & EH!DE",
+      cover:
+        "https://i1.sndcdn.com/artworks-000372362241-tdudx0-t500x500.jpg",
+      genres: ["Bass"],
+      audio: null,
+      isFav: null,
+      duration: 227,
+    };
+    let song17 = {
+      name: "Flowers",
+      path: "Flowers - Sakura Girl",
+      artist: "Sakura Girl",
+      cover:
+        "https://i.scdn.co/image/ab67616d0000b273ed63305d487d528ab8495be9",
+      genres: ["Bass"],
+      audio: null,
+      isFav: null,
+      duration: 227,
+    };
+    let song18 = {
+      name: "Heroes Tonight",
+      path: "Janji - Heroes Tonight",
+      artist: "Janji",
+      cover:
+        "https://i1.sndcdn.com/artworks-000119717450-w3zyh8-t500x500.jpg",
+      genres: ["Bass"],
+      audio: null,
+      isFav: null,
+      duration: 227,
+    };
+    let song19 = {
+      name: "Broke In Summer",
+      path: "Since That Summer Began - Broke in Summer",
+      artist: "Since That Summer Began",
+      cover:
+        "https://brokeinsummer.com/wp-content/uploads/Since-that-summer-began-Cover-1080x1080.jpg",
+      genres: ["Bass"],
+      audio: null,
+      isFav: null,
+      duration: 227,
+    };
+    let song20 = {
+      name: "Sunrise In Your Eyes",
+      path: "Sunrise In Your Eyes - Scandinavianz",
+      artist: "Scandinavianz",
+      cover:
+        "https://i1.sndcdn.com/artworks-pTLJ0ROg3lXumjdC-68qOqA-t500x500.jpg",
+      genres: ["Bass"],
+      audio: null,
+      isFav: null,
+      duration: 227,
+    };
+    let song21 = {
+      name: "Sunset Dreams",
+      path: "Sunset Dreams - Cheel",
+      artist: "Cheel",
+      cover:
+        "https://i1.sndcdn.com/artworks-qWWKONMyNiDLBvxQ-Rpkyxw-t500x500.jpg",
+      genres: ["Bass"],
+      audio: null,
+      isFav: null,
+      duration: 227,
+    };
+  
+
 
     this.createPlaylist("All Songs", [
       song1,
@@ -460,6 +561,15 @@ export default {
       song10,
       song11,
       song12,
+      song13,
+      song14,
+      song15,
+      song16,
+      song17,
+      song18,
+      song19,
+      song20,
+      song21
     ]);
     this.createPlaylist("Favourites", []);
     this.createPlaylist("Playlist-2", [song3, song2]);
