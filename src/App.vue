@@ -579,20 +579,20 @@ export default {
     };
 
     this.createPlaylist("All Songs", [
-      savage,
-      puzzle,
+      onandon,
       feelgood,
-      roots,
       dreamingofme,
       phoenix,
       cloud9,
+      savage,
       canonind,
       chains,
+      roots,
       symphony,
       whatyoulike,
+      puzzle,
       newstyle,
       backyardmoon,
-      onandon,
       invincible,
       myheart,
       flowers,
@@ -602,8 +602,18 @@ export default {
       sunsetdreams,
     ]);
     this.createPlaylist("Favourites", []);
-    this.createPlaylist("Sunshine & Rain", []);
-    this.createPlaylist("Playlist-3", []);
+    this.createPlaylist("Sunshine & Rain", [
+      onandon,
+      feelgood,
+      symphony,
+      heroestonight,
+    ]);
+    this.createPlaylist("Midnight Sunshine", [
+      canonind,
+      onandon,
+      sunsetdreams,
+      chains,
+    ]);
     // Populating this.genres
     let allSongs = this.playlists[0].songs;
     allSongs.forEach((song) => {
