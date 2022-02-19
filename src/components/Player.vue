@@ -163,7 +163,7 @@ export default {
       seekSliderPosition: 0, // between 0 to seekBarMaxRange
       currentTime: 0, // audio duration in seconds
       seekBarMaxRange: 1000, // higher the better
-      volume: 5,
+      volume: 30,
       audioArr: [],
     };
   },
