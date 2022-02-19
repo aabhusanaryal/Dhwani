@@ -468,19 +468,21 @@ export default {
       name: "Backyard Moon",
       path: "Backyard Moon - Props",
       artist: "Props",
-      artistCover:"https://is3-ssl.mzstatic.com/image/thumb/Music125/v4/9c/08/b3/9c08b349-2045-ec29-4a2c-e89e3ea72270/5059806887495_cover.jpg/400x400cc.jpg",
+      artistCover:
+        "https://is3-ssl.mzstatic.com/image/thumb/Music125/v4/9c/08/b3/9c08b349-2045-ec29-4a2c-e89e3ea72270/5059806887495_cover.jpg/400x400cc.jpg",
       cover:
         "https://is3-ssl.mzstatic.com/image/thumb/Music125/v4/9c/08/b3/9c08b349-2045-ec29-4a2c-e89e3ea72270/5059806887495_cover.jpg/400x400cc.jpg",
-      genres: ["Indie"],
+      genres: ["Indie", "LoFi"],
       audio: null,
       isFav: null,
       duration: 157,
     };
     let onandon = {
-      name: "On & On",
+      name: "On & On (Itro Remix)",
       path: "Cartoon - On & On",
       artist: "Cartoon",
-      artistCover:"https://ncsmusic.s3.eu-west-1.amazonaws.com/artists/000/000/073/325x325/1597148402_SavquoNo8D_Cartoon.png",
+      artistCover:
+        "https://ncsmusic.s3.eu-west-1.amazonaws.com/artists/000/000/073/325x325/1597148402_SavquoNo8D_Cartoon.png",
       cover:
         "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/152/1000x0/on-on-feat-daniel-levi-1586947008-oeI24in2Ga.jpg",
       genres: ["Dreamy", "EDM"],
@@ -492,9 +494,9 @@ export default {
       name: "Invincible",
       path: "DEAF KEV - Invincible",
       artist: "DEAV KEV",
-      artistCover: "https://ncsmusic.s3.eu-west-1.amazonaws.com/artists/000/000/103/325x325/1597148851_NLkqcNRLl3_DEAF-KEV.png",
-      cover:
-        "https://i1.sndcdn.com/artworks-000224592805-nhfd2x-t500x500.jpg",
+      artistCover:
+        "https://ncsmusic.s3.eu-west-1.amazonaws.com/artists/000/000/103/325x325/1597148851_NLkqcNRLl3_DEAF-KEV.png",
+      cover: "https://i1.sndcdn.com/artworks-000224592805-nhfd2x-t500x500.jpg",
       genres: ["Dubstep", "Hopeful"],
       audio: null,
       isFav: null,
@@ -504,9 +506,9 @@ export default {
       name: "My Heart",
       path: "My Heart",
       artist: "Different Heaven & EH!DE",
-      artistCover: "https://ncsmusic.s3.eu-west-1.amazonaws.com/artists/000/000/110/325x325/1597149100_6jB4ktu67O_Different-Heaven.png",
-      cover:
-        "https://i1.sndcdn.com/artworks-000372362241-tdudx0-t500x500.jpg",
+      artistCover:
+        "https://ncsmusic.s3.eu-west-1.amazonaws.com/artists/000/000/110/325x325/1597149100_6jB4ktu67O_Different-Heaven.png",
+      cover: "https://i1.sndcdn.com/artworks-000372362241-tdudx0-t500x500.jpg",
       genres: ["Energetic"],
       audio: null,
       isFav: null,
@@ -516,9 +518,9 @@ export default {
       name: "Flowers",
       path: "Flowers - Sakura Girl",
       artist: "Sakura Girl",
-      artistCover: "https://i.scdn.co/image/ab67616d0000b273ed63305d487d528ab8495be9",
-      cover:
+      artistCover:
         "https://i.scdn.co/image/ab67616d0000b273ed63305d487d528ab8495be9",
+      cover: "https://i.scdn.co/image/ab67616d0000b273ed63305d487d528ab8495be9",
       genres: ["Chill", "Happy"],
       audio: null,
       isFav: null,
@@ -528,9 +530,9 @@ export default {
       name: "Heroes Tonight",
       path: "Janji - Heroes Tonight",
       artist: "Janji",
-      artistCover: "https://ncsmusic.s3.eu-west-1.amazonaws.com/artists/000/000/198/325x325/janji-1586942350-QUHR3pfFSM.jpg",
-      cover:
-        "https://i1.sndcdn.com/artworks-000119717450-w3zyh8-t500x500.jpg",
+      artistCover:
+        "https://ncsmusic.s3.eu-west-1.amazonaws.com/artists/000/000/198/325x325/janji-1586942350-QUHR3pfFSM.jpg",
+      cover: "https://i1.sndcdn.com/artworks-000119717450-w3zyh8-t500x500.jpg",
       genres: ["House", "Hopeful", "Energetic"],
       audio: null,
       isFav: null,
@@ -540,10 +542,11 @@ export default {
       name: "Since That Summer Began",
       path: "Since That Summer Began - Broke in Summer",
       artist: "Broke in Summer",
-      artistCover:"https://brokeinsummer.com/wp-content/uploads/Since-that-summer-began-Cover-1080x1080.jpg",
+      artistCover:
+        "https://brokeinsummer.com/wp-content/uploads/Since-that-summer-began-Cover-1080x1080.jpg",
       cover:
         "https://brokeinsummer.com/wp-content/uploads/Since-that-summer-began-Cover-1080x1080.jpg",
-      genres: ["Chill"],
+      genres: ["Chill", "LoFi"],
       audio: null,
       isFav: null,
       duration: 125,
@@ -552,7 +555,8 @@ export default {
       name: "Sunrise In Your Eyes",
       path: "Sunrise In Your Eyes - Scandinavianz",
       artist: "Scandinavianz",
-      artistCover: "https://i1.sndcdn.com/artworks-pTLJ0ROg3lXumjdC-68qOqA-t500x500.jpg",
+      artistCover:
+        "https://i1.sndcdn.com/artworks-pTLJ0ROg3lXumjdC-68qOqA-t500x500.jpg",
       cover:
         "https://i1.sndcdn.com/artworks-pTLJ0ROg3lXumjdC-68qOqA-t500x500.jpg",
       genres: ["Chill", "Happy"],
@@ -564,7 +568,8 @@ export default {
       name: "Sunset Dreams",
       path: "Sunset Dreams - Cheel",
       artist: "Cheel",
-      artistCover: "https://i1.sndcdn.com/artworks-qWWKONMyNiDLBvxQ-Rpkyxw-t500x500.jpg", 
+      artistCover:
+        "https://i1.sndcdn.com/artworks-qWWKONMyNiDLBvxQ-Rpkyxw-t500x500.jpg",
       cover:
         "https://i1.sndcdn.com/artworks-qWWKONMyNiDLBvxQ-Rpkyxw-t500x500.jpg",
       genres: ["Indie"],
@@ -572,8 +577,6 @@ export default {
       isFav: null,
       duration: 161,
     };
-  
-
 
     this.createPlaylist("All Songs", [
       savage,
