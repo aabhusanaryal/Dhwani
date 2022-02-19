@@ -124,7 +124,8 @@ export default {
   min-width: 200px;
   max-width: 270px;
   aspect-ratio: 1;
-  flex-grow: 1;
+  flex: 1 1 0;
+  /* flex-grow: 1; */
   border-radius: 30px;
   position: relative;
   display: flex;

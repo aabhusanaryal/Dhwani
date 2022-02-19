@@ -37,7 +37,7 @@
       <router-link
         :to="`/playlist/${playlist.name}`"
         custom
-        v-for="(playlist, index) in playlists"
+        v-for="(playlist, index) in playlists.slice(-7)"
         :key="index"
         v-slot="{ navigate }"
       >
